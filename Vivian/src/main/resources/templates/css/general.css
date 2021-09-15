@@ -1,0 +1,47 @@
+/* This file contains Vivian's styles configuration */
+@import url(../lib.css/buttons.css);
+
+/* Fonts used */
+@import url('https://fonts.googleapis.com/css2?family=Catamaran:wght@100&display=swap'); /* Catamaran -> Para titulos */
+@import url('https://fonts.googleapis.com/css2?family=Assistant:wght@200&display=swap'); /* Assistant -> Para parrafos */
+
+:root {
+    --default-white: #f2f2f2;
+    --default-black: #404040;
+    --default-blue: #1B3C59;
+    --default-green: #9bd4ae;
+    --default-yellow: #F2D5BB;
+    --default-pink: #F2A999;
+    --default-red: #F28177;
+}
+
+html {
+    user-select: none;
+    scroll-behavior: smooth;
+}
+
+img {
+    width: 100%;
+    pointer-events: none;
+    vertical-align: middle;
+}
+
+a, li, ul, ol { 
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    list-style: none;
+}
+
+label {
+    display: block;
+}
+
+input {
+    outline: none;
+    display: block;
+}
+
+h1, h2, h3 {
+    font-family: 'Catamaran';
+}
