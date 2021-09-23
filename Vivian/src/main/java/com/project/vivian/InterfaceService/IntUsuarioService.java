@@ -11,5 +11,4 @@ public interface IntUsuarioService {
 	
 	public int save(Usuario u);
 	public void delete(int id);
-
 }

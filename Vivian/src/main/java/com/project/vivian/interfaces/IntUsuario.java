@@ -4,6 +4,6 @@ import org.springframework.data.repository.CrudRepository;
 
 import com.project.vivian.models.Usuario;
 
-public interface IntUsuario extends CrudRepository<Usuario, Integer>{
+public interface IntUsuario extends CrudRepository<Usuario, Integer> {
 
 }

@@ -1,5 +1,9 @@
 package com.project.vivian.interfaces;
 
-public interface IntProducto {
+import org.springframework.data.repository.CrudRepository;
+
+import com.project.vivian.models.Producto;
+
+public interface IntProducto extends CrudRepository<Producto, Integer> {
 
 }

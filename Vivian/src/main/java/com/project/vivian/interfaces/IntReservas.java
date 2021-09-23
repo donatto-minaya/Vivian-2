@@ -1,5 +1,9 @@
 package com.project.vivian.interfaces;
 
-public interface IntReservas {
+import org.springframework.data.repository.CrudRepository;
+
+import com.project.vivian.models.Reservas;
+
+public interface IntReservas extends CrudRepository<Reservas, Integer> {
 
 }
