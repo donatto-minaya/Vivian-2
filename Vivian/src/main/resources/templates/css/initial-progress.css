@@ -1,0 +1,54 @@
+/* All files .css need the default settings */
+@import url(general.css);
+
+/* Normalize css */
+@import url(../lib.css/normalize.css);
+
+body {
+    background-color: var(--default-white);
+    min-height: 100vh;
+    display: flex;
+}
+
+#fake-aside {
+    min-width: 320px;
+    max-width: 320px;
+    height: 100vh;
+    background-color: var(--default-blue);
+    color: var(--default-white);
+}
+
+#fake-min-aside {
+    width: 95%;
+    margin: auto;
+    height: 100%;
+    display: flex
+}
+
+#fake-min-aside > .min-container {
+    width: 80%;
+}
+
+#fake-min-aside > .min-container-icon {
+    display: flex;
+    justify-content: center;
+    width: 15%;
+}
+
+#fake-min-aside > .min-container-icon ion-icon {
+    margin: 20px 0; 
+    color: var(--default-white);
+    font-size: 40px;
+}
+
+#fake-body {
+    min-width: calc(100vw - 320px);
+    display: flex;
+    justify-content: center;
+}
+
+#fake-min-body {
+    align-self: center;
+    width: 98%;
+    height: 98%;
+}

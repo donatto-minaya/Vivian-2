@@ -2,7 +2,7 @@
 @import url(general.css);
 
 /* Normalize css */
-@import url(normalize.css);
+@import url(../lib.css/normalize.css);
 
 body {
     background-color: var(--default-white);
