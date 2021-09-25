@@ -17,6 +17,11 @@
     --default-red: #F28177;
 }
 
+/* the same color but more clear */
+:root {
+    --white-clear: #fafafa;
+}
+
 html {
     user-select: none;
     scroll-behavior: smooth;
