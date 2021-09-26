@@ -21,6 +21,7 @@ body {
 }
 
 #fake-min-aside {
+    font-family: 'Assistant';
     width: 95%;
     margin: auto;
     height: 100%;
@@ -28,6 +29,8 @@ body {
 }
 
 #fake-min-aside > .min-container {
+    align-self: end;
+    height: calc(100% - 80px);
     width: 85%;
 }
 
@@ -98,4 +101,16 @@ body {
 
 .hader-nav .right {
     justify-content: end;
+}
+
+.min-container .action-block {
+    display: flex;
+    font-size: 16px;
+    margin: 10px;
+    padding: 1em;
+    width: 90%;
+}
+
+.action-block .icon {
+    margin-right: 10px;
 }
