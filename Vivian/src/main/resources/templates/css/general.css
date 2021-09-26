@@ -2,6 +2,7 @@
 @import url(../lib.css/buttons.css);
 @import url(../lib.css/card.css);
 @import url(../lib.css/headers-markdown-github.css);
+@import url(../lib.css/div-cards.css);
 
 /* Fonts used */
 @import url('https://fonts.googleapis.com/css2?family=Catamaran:wght@100&display=swap'); /* Catamaran -> Para titulos */
@@ -12,7 +13,8 @@
     --default-black: #404040;
     --default-blue: #1B3C59;
     --default-green: #9bd4ae;
-    --default-yellow: #F2D5BB;
+    --default-orange: #F2D5BB;
+    --default-yellow: #F0F0A8;
     --default-pink: #F2A999;
     --default-red: #F28177;
 }
@@ -20,6 +22,8 @@
 /* the same color but more clear */
 :root {
     --white-clear: #fafafa;
+    --orange-clear: #ffc999;
+    --yellow-clear: #ffff80;
 }
 
 html {
@@ -50,5 +54,5 @@ input {
 }
 
 h1, h2, h3 {
-    font-family: 'Catamaran';
+    font-family: 'Catamaran' !important;
 }

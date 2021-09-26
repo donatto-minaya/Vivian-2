@@ -71,7 +71,7 @@ body {
 
 #fake-header .header-nav {
     display: flex;
-    width: 95%;
+    width: 100%;
     height: 100%;
     margin: auto;
     font-family: 'Catamaran';
@@ -79,6 +79,7 @@ body {
 
 .header-nav .left {
     width: 20%;
+    margin: 0 20px;
     display: flex;
 }
 
@@ -106,11 +107,46 @@ body {
 .min-container .action-block {
     display: flex;
     font-size: 16px;
-    margin: 10px;
-    padding: 1em;
+    margin: 3em auto;
     width: 90%;
+    transition: color .2s;
 }
 
 .action-block .icon {
     margin-right: 10px;
+}
+
+.action-block .link a {
+    color: var(--default-white);
+    transition: color .2s;
+}
+
+.action-block:hover, .action-block .link a:hover {
+    color: var(--default-orange);
+}
+
+/* Fake body */
+#fake-container-body .structure {
+    display: flex;
+}
+
+#fake-container-body .structure div {
+    min-height: 35vh;
+    max-height: 35vh;
+    word-wrap: break-word;
+    border-radius: 0 8px 8px 0;
+    box-shadow: 0 0 10px -8px var(--default-blue), inset 3px 0 var(--default-blue);
+    background-color: var(--white-clear);
+    width: 30%;
+    margin: 20px auto;
+}
+
+#fake-container-body .structure2 .central {
+    word-wrap: break-word;
+    border-radius: 8px;
+    box-shadow: 0 0 10px -8px var(--default-blue);
+    background-color: var(--white-clear);
+    width: 96.5%;
+    margin: 10px auto;
+    min-height: 45vh;
 }
