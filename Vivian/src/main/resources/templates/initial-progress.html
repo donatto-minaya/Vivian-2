@@ -21,7 +21,7 @@
                     </div>
 
                     <div class="link">
-                        <a href="">Resumen General</a>
+                        <a href="initial-progress.html">Resumen General</a>
                     </div>
                 </div>
 
@@ -77,6 +77,16 @@
 
                 <div class="action-block">
                     <div class="icon">
+                        <ion-icon name="analytics"></ion-icon>
+                    </div>
+
+                    <div class="link">
+                        <a href="">Nuestras métricas</a>
+                    </div>
+                </div>
+
+                <div class="action-block">
+                    <div class="icon">
                         <ion-icon name="construct"></ion-icon>
                     </div>
 
@@ -113,10 +123,76 @@
             <div id="fake-container-body">
                 <div class="structure">
                     <div class="first">
+                        <div class="description">
+                            <div class="header-h3-github">
+                                Los productos más vendidos y solicitados
+                            </div>
 
+                            <div class="progress">
+                                <div class="products">
+                                    <div class="prod">
+                                        <span>Producto:</span> <p>hola</p>
+                                    </div>
+                                    
+                                    <div class="prod">
+                                        <span>Precio:</span> <p>hola</p>
+                                    </div>
+                                    
+                                    <div class="prod">
+                                        <span>Última Venta:</span> <p>hola</p>
+                                    </div>
+                                    
+                                    <div class="prod">
+                                        <span>Ganancias:</span> <p>hola</p>
+                                    </div>
+                                </div>
+
+                                <div class="products">
+                                    <div class="prod">
+                                        <span>Producto:</span> <p>hola</p>
+                                    </div>
+                                    
+                                    <div class="prod">
+                                        <span>Precio:</span> <p>hola</p>
+                                    </div>
+                                    
+                                    <div class="prod">
+                                        <span>Última Venta:</span> <p>hola</p>
+                                    </div>
+                                    
+                                    <div class="prod">
+                                        <span>Ganancias:</span> <p>hola</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <button class="ghostly">Ver completo</button>
+                        </div>
                     </div>
-                    <div class="second"></div>
-                    <div class="third"></div>
+
+                    <div class="second">
+                        <div class="description">
+                            <div class="header-h3-github">
+                                Reservaciones totales
+                            </div>
+
+                            <div class="progress">
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="third">
+                        <div class="description">
+                            <div class="header-h3-github">
+                                Solicitudes de Delivery
+                            </div>
+
+                            <div class="progress">
+
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="structure2">
@@ -128,10 +204,15 @@
         </div>
     </div>
 
+    <!-- Jquery CDN -->
+    <script src="js/jquery-3.6.0.js"></script>
+
     <script>
         function toggleMenu() {
-            
+            document.getElementById('fake-aside').classList.toggle('active');
         }
+
+        toggleMenu();
     </script>
     
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>

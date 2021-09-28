@@ -48,7 +48,7 @@ body {
 }
 
 #fake-body {
-    min-width: calc(100vw - 320px);
+    width: 100%;
     justify-content: center;
 }
 
@@ -59,6 +59,7 @@ body {
 }
 
 #fake-header {
+    position: relative;
     background-color: var(--white-clear);
     width: 100%;
     height: 80px;
@@ -66,10 +67,22 @@ body {
 }
 
 #fake-container-body {
+    overflow-y: scroll;
     height: calc(100% - 80px);
 }
 
+#fake-container-body::-webkit-scrollbar {
+    width: 10px;
+    background-color: var(--default-white);
+}
+
+#fake-container-body::-webkit-scrollbar-thumb {
+    background-color: var(--default-blue);
+    border-radius: 10px;
+}
+
 #fake-header .header-nav {
+    z-index: 9;
     display: flex;
     width: 100%;
     height: 100%;
@@ -128,16 +141,16 @@ body {
 /* Fake body */
 #fake-container-body .structure {
     display: flex;
+    flex-wrap: wrap;
 }
 
-#fake-container-body .structure div {
+#fake-container-body > .structure > div {
     min-height: 35vh;
-    max-height: 35vh;
     word-wrap: break-word;
     border-radius: 0 8px 8px 0;
     box-shadow: 0 0 10px -8px var(--default-blue), inset 3px 0 var(--default-blue);
     background-color: var(--white-clear);
-    width: 30%;
+    width: 61vh;
     margin: 20px auto;
 }
 
@@ -149,4 +162,36 @@ body {
     width: 96.5%;
     margin: 10px auto;
     min-height: 45vh;
+}
+
+.active {
+    margin-left: -260px;
+}
+
+.structure > div .description {
+    width: 85%;
+    margin: 20px auto;
+    justify-content: flex-end;
+}
+
+.structure > div .description .progress {
+    display: flex;
+    font-family: 'Assistant';   
+}
+
+.progress .products {
+    width: 50%;
+    margin: 1em auto;
+}
+
+.products > div {
+    margin: 1em 0;
+}
+
+.products span {
+    font-weight: bold;
+}
+
+.products p {
+    display: inline;
 }
