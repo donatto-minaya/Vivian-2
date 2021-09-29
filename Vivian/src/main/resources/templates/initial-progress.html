@@ -9,6 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="img/corazon.jpg" type="image/x-icon">
     <link rel="stylesheet" href="css/initial-progress.css">
+    <script src="js/jquery.min.js"></script>
     <title>Vivian &#124; Sala de Progreso</title>
 </head>
 <body>
@@ -31,7 +32,7 @@
                     </div>
 
                     <div class="link">
-                        <a href="">Ver Registro de Ventas</a>
+                        <a id="registro-servicios">Ver Registro de Servicios</a>
                     </div>
                 </div>
 
@@ -41,7 +42,17 @@
                     </div>
 
                     <div class="link">
-                        <a href="">Ver Productos</a>
+                        <a id="productos">Ver Productos</a>
+                    </div>
+                </div>
+
+                <div class="action-block">
+                    <div class="icon">
+                        <ion-icon name="bicycle"></ion-icon>
+                    </div>
+
+                    <div class="link">
+                        <a id="delivery">Ver solicitudes de Delivery</a>
                     </div>
                 </div>
 
@@ -91,7 +102,7 @@
                     </div>
 
                     <div class="link">
-                        <a href="">Datos de Vivian</a>
+                        <a id="datos-vivian">Datos de Vivian</a>
                     </div>
                 </div>
             </div>
@@ -122,7 +133,7 @@
 
             <div id="fake-container-body">
                 <div class="structure">
-                    <div class="first">
+                    <div class="simple-div-card">
                         <div class="description">
                             <div class="header-h3-github">
                                 Los productos más vendidos y solicitados
@@ -166,11 +177,11 @@
                                 </div>
                             </div>
 
-                            <button class="ghostly">Ver completo</button>
+                            <button id="productos2" class="ghostly">Ver completo</button>
                         </div>
                     </div>
 
-                    <div class="second">
+                    <div class="simple-div-card">
                         <div class="description">
                             <div class="header-h3-github">
                                 Reservaciones totales
@@ -182,7 +193,7 @@
                         </div>
                     </div>
 
-                    <div class="third">
+                    <div class="simple-div-card">
                         <div class="description">
                             <div class="header-h3-github">
                                 Solicitudes de Delivery
@@ -196,7 +207,7 @@
                 </div>
 
                 <div class="structure2">
-                    <div class="central">
+                    <div class="longest-div-card">
 
                     </div>
                 </div>
@@ -206,6 +217,9 @@
 
     <!-- Jquery CDN -->
     <script src="js/jquery-3.6.0.js"></script>
+
+    <!-- Management JS -->
+    <script src="js/management.js"></script>
 
     <script>
         function toggleMenu() {

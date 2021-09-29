@@ -32,6 +32,12 @@ body {
     align-self: end;
     height: calc(100% - 80px);
     width: 85%;
+    overflow-y: scroll;
+}
+
+#fake-min-aside > .min-container::-webkit-scrollbar,
+#fake-min-aside > .min-container::-webkit-scrollbar-thumb  {
+    background-color: var(--default-blue);
 }
 
 #fake-min-aside > .min-container-icon {
@@ -142,16 +148,6 @@ body {
 #fake-container-body .structure {
     display: flex;
     flex-wrap: wrap;
-}
-
-#fake-container-body > .structure > div {
-    min-height: 35vh;
-    word-wrap: break-word;
-    border-radius: 0 8px 8px 0;
-    box-shadow: 0 0 10px -8px var(--default-blue), inset 3px 0 var(--default-blue);
-    background-color: var(--white-clear);
-    width: 61vh;
-    margin: 20px auto;
 }
 
 #fake-container-body .structure2 .central {

@@ -10,3 +10,24 @@
 	}
 } */
 
+// NO CAMBIAR NUNCA
+function mostrar(id, archivo) {
+	$(id).on('click', function() {
+		$('body, html').animate({
+			scrollTop : '0px'
+		}, 050);
+
+		$("#fake-container-body").load(archivo).hide().fadeIn();
+		return false;
+	});
+}
+
+$(document).ready(function() {
+
+	mostrar('#productos', 'products.html');
+	mostrar('#productos2', 'products.html');
+
+	mostrar('#delivery', 'delivery.html');
+
+	mostrar('#datos-vivian', 'datos-vivian.html');
+});
