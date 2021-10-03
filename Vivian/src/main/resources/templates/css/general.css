@@ -3,6 +3,7 @@
 @import url(../lib.css/card.css);
 @import url(../lib.css/headers-markdown-github.css);
 @import url(../lib.css/div-cards.css);
+@import url(../lib.css/swal.css);
 
 /* Fonts used */
 @import url('https://fonts.googleapis.com/css2?family=Catamaran:wght@100&display=swap'); /* Catamaran -> Para titulos */
@@ -17,6 +18,8 @@
     --default-yellow: #F0F0A8;
     --default-pink: #F2A999;
     --default-red: #F28177;
+    --default-shadow-gray: #a6a6a6;
+
 }
 
 /* the same color but more clear */
@@ -44,6 +47,10 @@ a, li, ul, ol {
     list-style: none;
 }
 
+a {
+    cursor: pointer !important;
+}
+
 label {
     display: block;
 }
@@ -53,6 +60,51 @@ input {
     display: block;
 }
 
-/* h1, h2, h3 {
+h1, h2, h3 {
     font-family: 'Catamaran' !important;
-} */
+} 
+
+.icons-menu {
+    display: flex;
+    font-size: 32px;
+    color: var(--default-black);
+}
+
+.icons-menu .icon {
+    cursor: pointer;
+    padding: 10px;
+    display: flex;
+    align-self: center;
+    margin: 0 10px;
+    transition: box-shadow .3s;
+    border-radius: 4px;
+}
+
+#profile {
+    justify-content: flex-end;
+    width: 200px;
+    display: flex;
+}
+
+#profile div {
+    margin: 0 10px;
+    display: flex;
+    align-self: center;
+    justify-content:flex-end;
+}
+
+.name-profile {
+    width: 60%;
+}
+
+#profile .photo {
+    width: 70px;
+}
+
+.photo img {
+    border-radius: 50%;
+}
+
+.icon:hover {
+    box-shadow: 0 3px 5px -2px var(--default-shadow-gray);
+}

@@ -104,9 +104,12 @@ body {
 
 .header-nav .right {
     width: 80%;
+    margin: 0 40px;
+    display: flex;
+    justify-content: end;
 }
 
-.header-nav .left, .header-nav .company, .header.nav .right {
+.header-nav .left, .header-nav .company, .header-nav .right {
     align-self: center;
 }
 
@@ -145,20 +148,6 @@ body {
 }
 
 /* Fake body */
-#fake-container-body .structure {
-    display: flex;
-    flex-wrap: wrap;
-}
-
-#fake-container-body .structure2 .central {
-    word-wrap: break-word;
-    border-radius: 8px;
-    box-shadow: 0 0 10px -8px var(--default-blue);
-    background-color: var(--white-clear);
-    width: 96.5%;
-    margin: 10px auto;
-    min-height: 45vh;
-}
 
 .active {
     margin-left: -260px;
