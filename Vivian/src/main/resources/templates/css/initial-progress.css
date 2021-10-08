@@ -8,16 +8,17 @@ body {
     background-color: var(--default-white);
     min-height: 100vh;
     max-height: 100vh;
- 
     display: flex;
 }
 
 #fake-aside {
+    margin-left: -260px;
     min-width: 320px;
     max-width: 320px;
     height: 100vh;
     background-color: var(--default-blue);
     color: var(--default-white);
+    transition: margin .2s;
 }
 
 #fake-min-aside {
@@ -150,7 +151,7 @@ body {
 /* Fake body */
 
 .active {
-    margin-left: -260px;
+    margin-left: 0 !important;
 }
 
 .structure > div .description {
