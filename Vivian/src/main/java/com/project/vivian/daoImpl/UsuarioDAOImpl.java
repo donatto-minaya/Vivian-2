@@ -1,11 +1,9 @@
-package com.project.vivian.InterfaceService;
+package com.project.vivian.daoImpl;
 
 import java.util.List;
 import java.util.Optional;
 
-import com.project.vivian.models.Usuario;
-
-public interface IntUsuarioService {
+public interface UsuarioDAOImpl {
 	public List<Usuario> listarUsuarios();
 	public Optional<Usuario> listarUsuarioPorId(int id);
 	

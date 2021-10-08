@@ -1,18 +1,17 @@
-package com.project.vivian.services;
+package com.project.vivian.service;
 
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.project.vivian.InterfaceService.IntUsuarioService;
-import com.project.vivian.interfaces.IntUsuario;
-import com.project.vivian.models.Usuario;
+import com.project.vivian.daoImpl.UsuarioDAOImpl;
+import com.project.vivian.dao.UsuarioDAO;
 
-public class UsuarioService implements IntUsuarioService {
+public class UsuarioService implements UsuarioDAOImpl {
 	
 	@Autowired
-	private IntUsuario data;
+	private UsuarioDAO data;
 
 	@Override
 	public List<Usuario> listarUsuarios() {		

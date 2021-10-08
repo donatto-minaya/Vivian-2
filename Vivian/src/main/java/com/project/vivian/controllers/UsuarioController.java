@@ -8,15 +8,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.project.vivian.InterfaceService.IntUsuarioService;
-import com.project.vivian.models.Usuario;
+import com.project.vivian.daoImpl.UsuarioDAOImpl;
 
 @Controller
 @RequestMapping
 public class UsuarioController {
 	
 	@Autowired
-	private IntUsuarioService service;
+	private UsuarioDAOImpl service;
 	
 	@GetMapping("/listar")
 	public String listar(Model model) {
