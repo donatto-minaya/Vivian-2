@@ -10,5 +10,8 @@ import org.springframework.stereotype.Repository;
 public interface UsuarioDAO extends JpaRepository<Usuario,Integer> {
 
     @Query(value = "{call vUsuario(:email, :clave)}",nativeQuery = true)
-    Usuario findByEmail(@Param("email") String email, @Param("clave") String clave);
+    Usuario findByEmailPassword(@Param("email") String email, @Param("clave") String clave);
+
+    @Query(value = "SELECT * FROM Usuario where email=:email", nativeQuery = true)
+    Usuario findByEmail(@Param("email") String email);
 }

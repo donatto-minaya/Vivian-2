@@ -8,8 +8,8 @@ import java.util.List;
 
 public interface UsuarioService {
     public List<Usuario> findAll();
-    Usuario findByEmail(String email, String clave) throws Exception;
-
+    Usuario findByEmailPassword(String email, String clave) throws Exception;
+    Usuario findByEmail(String email);
     public Usuario getById(Integer integer);
     public boolean deleteById(Integer integer);
     public <S extends Usuario> S save(S entity);

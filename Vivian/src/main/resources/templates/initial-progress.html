@@ -7,11 +7,11 @@
     <meta name="description" content="Página administrativa de Vivian">
     <meta name="keywords" content="Restaurante Recetas Comida">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="../static/img/corazon.jpg" type="image/x-icon">
-    <link rel="stylesheet" href="../static/css/initial-progress.css">
+    <link rel="icon" th:href="@{/img/corazon.jpg}" type="image/x-icon">
+    <link rel="stylesheet" th:href="@{/css/initial-progress.css}">
     <!-- Swal -->
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="../static/js/jquery.min.js"></script>
+    <script th:src="@{/js/jquery.min.js}"></script>
     <title>Vivian &#124; Sala de Progreso</title>
 </head>
 <body>
@@ -108,7 +108,7 @@
                     </div>
                 </div>
             </div>
-    
+
             <div class="min-container-icon" onclick="toggleMenu()">
                 <ion-icon name="menu"></ion-icon>
             </div>
@@ -121,7 +121,7 @@
                 <div class="header-nav">
                     <div class="left">
                         <div class="logo">
-                            <img src="../static/img/corazon.jpg" alt="logo">
+                            <img th:src="@{/img/corazon.jpg}" alt="logo">
                         </div>
 
                         <div class="company">
@@ -141,7 +141,7 @@
                             <div class="icon">
                                 <ion-icon name="contrast"></ion-icon>
                             </div>
-                            
+
                             <div class="icon" onclick="window.location.href='https\://slack.com/intl/es-pe/'">
                                 <ion-icon name="logo-slack"></ion-icon>
                             </div>
@@ -175,15 +175,15 @@
                                     <div class="prod">
                                         <span>Producto:</span> <p>hola</p>
                                     </div>
-                                    
+
                                     <div class="prod">
                                         <span>Precio:</span> <p>hola</p>
                                     </div>
-                                    
+
                                     <div class="prod">
                                         <span>Última Venta:</span> <p>hola</p>
                                     </div>
-                                    
+
                                     <div class="prod">
                                         <span>Ganancias:</span> <p>hola</p>
                                     </div>
@@ -193,15 +193,15 @@
                                     <div class="prod">
                                         <span>Producto:</span> <p>hola</p>
                                     </div>
-                                    
+
                                     <div class="prod">
                                         <span>Precio:</span> <p>hola</p>
                                     </div>
-                                    
+
                                     <div class="prod">
                                         <span>Última Venta:</span> <p>hola</p>
                                     </div>
-                                    
+
                                     <div class="prod">
                                         <span>Ganancias:</span> <p>hola</p>
                                     </div>
@@ -237,7 +237,7 @@
                     </div>
                 </div>
 
-               
+
 
                 <div class="structure">
                     <div class="longest-div-card">
@@ -249,22 +249,22 @@
     </div>
 
     <!-- Swal js -->
-    <script src="../static/js/swal.js"></script>
+    <script th:src="@{/js/swal.js}"></script>
 
     <!-- Jquery CDN -->
-    <script src="../static/js/jquery-3.6.0.js"></script>
+    <script th:src="@{/js/jquery-3.6.0.js}"></script>
 
     <!-- Management JS -->
-    <script src="../static/js/management.js"></script>
+    <script th:src="@{/js/management.js}"></script>
 
     <script>
         function toggleMenu() {
             document.getElementById('fake-aside').classList.toggle('active');
         }
 
-        
+
     </script>
-    
+
     <script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
 </body>
 </html>
