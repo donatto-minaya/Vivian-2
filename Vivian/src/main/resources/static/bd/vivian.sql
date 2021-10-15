@@ -56,6 +56,36 @@ insert into Usuario(idUsuario, dni, nombresUsuario, apellidosUsuario, email, cla
 -- -----------------------------------------------------
 ## Tabla Turno
 -- -----------------------------------------------------
+create table if not exists usuario_spring (
+	idUsuario int not null,
+    dni char(8) not null, -- unique
+    nombresUsuario varchar(45) not null,
+    apellidosUsuario varchar(45) not null,
+    username varchar(100) not null, -- unique
+    password varchar(255) not null,
+    telefono char(9) not null,
+    fechaRegistro date not null,
+    idTipo int default 1 not null, -- tipo
+    activo bit default 1 not null
+) engine = InnoDB  default charset = utf8mb4 auto_increment 1;
+
+alter table usuario_spring add constraint pk_usuario_spring primary key(idUsuario);
+alter table usuario_spring modify column `idUsuario` int auto_increment;
+alter table usuario_spring add constraint uq_dni_spring unique(dni);
+alter table usuario_spring add constraint uq_username_spring unique(username);
+
+-- fk_tipo
+alter table usuario_spring add constraint fk_Tipo_spring
+foreign key(idTipo) references Tipo(idTipo)
+on delete cascade on update cascade;
+
+insert into usuario_spring(idUsuario, dni, nombresUsuario, apellidosUsuario, username, password, telefono, fechaRegistro, idTipo, activo) values
+	(1, 12312312, 'Donatto', 'Minaya', 'ottanod22@gmail.com', '$2a$10$vOuBScNDn3XXyBMQO30FZO50Rg/UPuoetvd.XW1iQ47nub9is7dpG', 913242570, '2021-04-01', 3,default);
+
+
+-- -----------------------------------------------------
+## Tabla Turno
+-- -----------------------------------------------------
 create table if not exists Turno (
 	idTurno varchar(30) not null,
     descripcion varchar(35) not null

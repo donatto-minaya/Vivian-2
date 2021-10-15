@@ -1,45 +1,60 @@
 package com.project.vivian.controller;
 
-import com.project.vivian.entidad.Usuario;
-import com.project.vivian.service.UsuarioService;
+import com.project.vivian.entidad.UsuarioSpring;
+import com.project.vivian.service.UsuarioSpringService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
 @RequestMapping
 public class UsuarioController {
-	
-	@Autowired
-	private UsuarioService usuarioService;
 
-	// METODO PARA PROBAR EL SERVER
+	@Autowired
+	private UsuarioSpringService usuarioSpringService;
+
+	// ENDPOINT PARA PROBAR EL SERVER
 	@GetMapping("/usuarios")
 	public String listar(Model model) {
-		List<Usuario> usuarios = usuarioService.findAll();
+		List<UsuarioSpring> usuarios = usuarioSpringService.findAll();
 		model.addAttribute("usuarios", usuarios);
 		return "pruebausuarios";
 	}
 
-	@PostMapping("/principal")
-	public String login(Model model, @RequestParam("email") String email, @RequestParam("clave")String clave, RedirectAttributes redirectAttributes){
-		try{
-			Usuario usuario = usuarioService.findByEmailPassword(email, clave);
-			if (usuario != null && usuario.getIdTipo().getId() == 3){
-				return "initial-progress";
-			}
-//			redirectAttributes.addFlashAttribute("errorMsg","Usuario y/o contraseña incorrectos");
-			model.addAttribute("errorMsg","Usuario y/o contraseña incorrectos");
-			model.addAttribute("email",email);
+	@GetMapping({"/","/login"})
+	public String login(HttpServletRequest request, HttpServletResponse response) {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		if (auth.getName().equals("anonymousUser")){
 			return "index";
-		}catch (Exception ex){
-			System.out.println(ex.getMessage());
-			return "index";
+		}else{
+			return "redirect:/principal";
 		}
+	}
 
+	@GetMapping("/principal")
+	public String principal(Model model) {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		System.out.println(auth);
+		return "initial-progress";
+	}
+
+	@GetMapping(value="/logout")
+	public String logoutPage (HttpServletRequest request, HttpServletResponse response) {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		System.out.println(auth);
+		if (auth != null){
+			new SecurityContextLogoutHandler().logout(request, response, auth);
+		}
+		return "redirect:/login?logout";
 	}
 }

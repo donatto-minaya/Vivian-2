@@ -251,3 +251,11 @@ begin
 	select idUsuario, dni, nombresUsuario, apellidosUsuario, email, clave, telefono, fechaRegistro, idTipo, activo from usuario;
 end /
 
+Delimiter %
+drop procedure if exists Vivian.vUsuarioSpring %
+create procedure vUsuarioSpring (thisEmail varchar(100), thisClave varchar(255))
+begin
+	select idUsuario, dni, nombresUsuario, apellidosUsuario, email, clave, telefono, fechaRegistro, idTipo, activo 
+    from Usuario_spring where email = thisEmail and clave = thisClave;
+end %
+

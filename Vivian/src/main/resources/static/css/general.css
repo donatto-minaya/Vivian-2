@@ -1,9 +1,9 @@
 /* This file contains Vivian's styles configuration */
-@import url(../lib.css/buttons.css);
-@import url(../lib.css/card.css);
-@import url(../lib.css/headers-markdown-github.css);
-@import url(../lib.css/div-cards.css);
-@import url(../lib.css/swal.css);
+@import url(libcss/buttons.css);
+@import url(libcss/card.css);
+@import url(libcss/headers-markdown-github.css);
+@import url(libcss/div-cards.css);
+@import url(libcss/swal.css);
 
 /* Fonts used */
 @import url('https://fonts.googleapis.com/css2?family=Catamaran:wght@100&display=swap'); /* Catamaran -> Para titulos */

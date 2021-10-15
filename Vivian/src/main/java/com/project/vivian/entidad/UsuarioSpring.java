@@ -1,13 +1,14 @@
 package com.project.vivian.entidad;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 
-@Table(name = "usuario", indexes = {
-        @Index(name = "uq_dni", columnList = "dni", unique = true),
-        @Index(name = "uq_email", columnList = "email", unique = true)
+@Table(name = "usuario_spring", indexes = {
+        @Index(name = "uq_dni_spring", columnList = "dni", unique = true),
+        @Index(name = "uq_username_spring", columnList = "username", unique = true)
 })
 @Entity
-public class Usuario {
+public class UsuarioSpring {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idUsuario", nullable = false)
@@ -22,17 +23,17 @@ public class Usuario {
     @Column(name = "apellidosUsuario", nullable = false, length = 45)
     private String apellidosUsuario;
 
-    @Column(name = "email", nullable = false, length = 100)
-    private String email;
+    @Column(name = "username", nullable = false, length = 100)
+    private String username;
 
-    @Column(name = "clave", nullable = false)
-    private String clave;
+    @Column(name = "password", nullable = false)
+    private String password;
 
     @Column(name = "telefono", nullable = false, length = 9)
     private String telefono;
 
     @Column(name = "fechaRegistro", nullable = false)
-    private String fechaRegistro;
+    private LocalDate fechaRegistro;
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "idTipo", nullable = false)
@@ -57,11 +58,11 @@ public class Usuario {
         this.idTipo = idTipo;
     }
 
-    public String getFechaRegistro() {
+    public LocalDate getFechaRegistro() {
         return fechaRegistro;
     }
 
-    public void setFechaRegistro(String fechaRegistro) {
+    public void setFechaRegistro(LocalDate fechaRegistro) {
         this.fechaRegistro = fechaRegistro;
     }
 
@@ -73,20 +74,20 @@ public class Usuario {
         this.telefono = telefono;
     }
 
-    public String getClave() {
-        return clave;
+    public String getPassword() {
+        return password;
     }
 
-    public void setClave(String clave) {
-        this.clave = clave;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
-    public String getEmail() {
-        return email;
+    public String getUsername() {
+        return username;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getApellidosUsuario() {

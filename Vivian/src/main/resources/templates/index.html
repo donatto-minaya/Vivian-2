@@ -7,8 +7,8 @@
     <meta name="description" content="Página administrativa de Vivian">
     <meta name="keywords" content="Restaurante Recetas Comida">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" th:href="@{/css/initial-progress.css}">
-    <link rel="stylesheet" th:href="@{/css/index.css}" >
+    <link rel="stylesheet" th:href="@{/css/initial-progress.css}" href="../static/css/initial-progress.css">
+    <link rel="stylesheet" th:href="@{/css/index.css}" href="../static/css/index.css">
     <title>Bienvenido a Vivian!</title>
 </head>
 <body>
@@ -16,20 +16,20 @@
         <div class="fondo"></div>
         <div class="login">
             <div class="form-login">
-                <form th:action="@{/principal}" method="post">
+                <form th:action="@{/login}" method="post">
                     <div class="block-form">
                         <div>
-                            <img th:src="@{/img/corazon.jpg}" alt="" />
+                            <img src="../static/img/corazon.jpg" th:src="@{/img/corazon.jpg}" alt="" />
                         </div>
                     </div>
                     <div class="block-form">
                         <ion-icon name="person-outline"></ion-icon>
-                        <input type="email" name="email" id="email" th:value="${email}" placeholder="Ingresa tu usuario o correo" minlength="4" maxlength="50" />
+                        <input type="email" name="username" id="username" th:value="${email}" placeholder="Ingresa tu usuario o correo" minlength="4" maxlength="50" />
                     </div>
     
                     <div class="block-form">
                         <ion-icon name="lock-closed-outline"></ion-icon>
-                        <input type="password" name="clave" id="clave" placeholder="Tu contraseña" minlength="4" maxlength="20" />
+                        <input type="password" name="password" id="password" placeholder="Tu contraseña" minlength="4" maxlength="20" />
                     </div>
 
     
@@ -37,7 +37,9 @@
                         <button type="submit" class="principal">INGRESAR</button>
                     </div>
                 </form>
-                <span id="errorMsg" th:if="${errorMsg}" th:text="${errorMsg}"></span>
+                <div id="errorMsg" th:if="${param.error}" class="alert alert-danger" role="alert">
+                    Usuario y/o contraseña inválido.
+                </div>
             </div>
         </div>
     </div>

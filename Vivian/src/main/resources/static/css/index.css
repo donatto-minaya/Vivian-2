@@ -2,7 +2,7 @@
 @import url(general.css);
 
 /* Normalize css */
-@import url(../lib.css/normalize.css);
+@import url(libcss/normalize.css);
 
 body {
     background-color: var(--default-white);
@@ -45,8 +45,9 @@ body {
     margin: 2em;
 }
 
-.block-form:first-child div {
+.block-form div{
     width: 20%;
+    text-align: center;
 }
 
 .block-form input {
