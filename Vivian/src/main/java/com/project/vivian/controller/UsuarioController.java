@@ -20,6 +20,13 @@ public class UsuarioController {
 
 	@Autowired
 	private UsuarioSpringService usuarioSpringService;
+	
+	public void obtenerDatosUsuario(Model model) {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		UsuarioSpring usuarioSpring = usuarioSpringService.obtenerPorEmail(auth.getName());
+		
+		model.addAttribute("nombreCompleto",usuarioSpring.getNombresUsuario() + " " + usuarioSpring.getApellidosUsuario());
+	}
 
 	// ENDPOINT PARA PROBAR EL SERVER
 	@GetMapping("/usuarios")
@@ -39,11 +46,14 @@ public class UsuarioController {
 		}
 	}
 
+	private int codigo = 0;
 	@GetMapping("/principal")
 	public String principal(Model model) {
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		UsuarioSpring usuarioSpring = usuarioSpringService.obtenerPorEmail(auth.getName());
-		model.addAttribute("nombreCompleto",usuarioSpring.getNombresUsuario()+" "+usuarioSpring.getApellidosUsuario());
+		
+		obtenerDatosUsuario(model);
+		
+		codigo = 0;
+		model.addAttribute("verUsuarios", codigo);
 		return "general-summary";
 	}
 
@@ -56,40 +66,17 @@ public class UsuarioController {
 		return "redirect:/login?logout";
 	}
 
+	
 	@GetMapping(value="/adminusers")
 	public String adminUsers(Model model) {
+		obtenerDatosUsuario(model);
+		
 		List<UsuarioSpring> listaAdminUsuarios = usuarioSpringService.obtenerAdminUsuarios();
 		model.addAttribute("adminusers",listaAdminUsuarios);
-		return "admin-users";
+		
+		codigo = 1;
+		
+		model.addAttribute("verUsuarios", codigo);
+		return "general-summary";
 	}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }

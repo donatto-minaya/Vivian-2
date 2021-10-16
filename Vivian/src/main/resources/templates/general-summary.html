@@ -20,95 +20,37 @@
 <!--ESTOS DIVS SON OBLIGATORIOS PARA UTILIZAR LOS FRAGMENTOS-->
 <div id="fake-body">
     <div id="fake-min-body">
-
         <div th:replace="/fragments/navbar :: navbar"></div>
 
-        <div id="fake-container-body">
-            <div class="structure">
-                <div class="simple-div-card">
-                    <div class="description">
-                        <div class="header-h3-github">
-                            Los productos más vendidos y solicitados
-                        </div>
-
-                        <div class="progress">
-                            <div class="products">
-                                <div class="prod">
-                                    <span>Producto:</span> <p>hola</p>
-                                </div>
-
-                                <div class="prod">
-                                    <span>Precio:</span> <p>hola</p>
-                                </div>
-
-                                <div class="prod">
-                                    <span>Última Venta:</span> <p>hola</p>
-                                </div>
-
-                                <div class="prod">
-                                    <span>Ganancias:</span> <p>hola</p>
-                                </div>
-                            </div>
-
-                            <div class="products">
-                                <div class="prod">
-                                    <span>Producto:</span> <p>hola</p>
-                                </div>
-
-                                <div class="prod">
-                                    <span>Precio:</span> <p>hola</p>
-                                </div>
-
-                                <div class="prod">
-                                    <span>Última Venta:</span> <p>hola</p>
-                                </div>
-
-                                <div class="prod">
-                                    <span>Ganancias:</span> <p>hola</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <button id="productos2" class="ghostly">Ver completo</button>
-                    </div>
-                </div>
-
-                <div class="simple-div-card">
-                    <div class="description">
-                        <div class="header-h3-github">
-                            Reservaciones totales
-                        </div>
-
-                        <div class="progress">
-
-                        </div>
-                    </div>
-                </div>
-
-                <div class="simple-div-card">
-                    <div class="description">
-                        <div class="header-h3-github">
-                            Solicitudes de Delivery
-                        </div>
-
-                        <div class="progress">
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-
-
-            <div class="structure">
-                <div class="longest-div-card">
-
-                </div>
-            </div>
-        </div>
+        <!-- <div th:replace="/fragments/gs-fragment :: gs"></div> -->
+        
+        <div th:insert="${verUsuarios == 1} ? 
+        ~{fragments/usuarios :: usuarios} : ~{fragments/gs-fragment :: gs}">
+		</div>
     </div>
 </div>
 <!-- Management JS -->
 <script th:src="@{/js/management.js}"></script>
+
+<!-- Jquery CDN -->
+<script th:src="@{/js/jquery-3.6.0.js}"></script>
+
+<script>
+    	$(document).ready(function() {
+    		let btnVerUsuarios = $("#verUsuario");
+    		
+    		const divContainer = $("#fake-min-body");
+    		
+    		
+    		if(btnVerUsuarios) {
+    			console.log("hola");
+    			
+    			//const divVerUsuario = $('<div th:replace="/fragments/usuarios :: usuarios"></div>');
+    			//divVerUsuario.innerHTML = `<div th:replace="/fragments/usuarios :: usuarios"></div>`;
+    			
+    			//divContainer.append(divVerUsuario);
+    		}
+    	});
+</script>
 </body>
 </html>
