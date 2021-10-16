@@ -24,41 +24,56 @@
 
                 <div class="action-block">
                     <div class="icon">
-                        <ion-icon name="cart"></ion-icon>
+                        <ion-icon name="briefcase"></ion-icon>
                     </div>
 
-                    <div class="link">
-                        <a id="productos">Ver Productos</a>
-                    </div>
-                </div>
-
-                <div class="action-block">
-                    <div class="icon">
-                        <ion-icon name="bicycle"></ion-icon>
-                    </div>
-
-                    <div class="link">
-                        <a onclick="mostrar('#delivery', '../delivery.html')">Ver solicitudes de Delivery</a>
+                    <div class="link combo">
+                        <a id="mantenimientos">Mantenimientos</a>
+                        <ion-icon class = "icon-combo" name="arrow-dropdown"></ion-icon>
                     </div>
                 </div>
 
-                <div class="action-block">
-                    <div class="icon">
-                        <ion-icon name="restaurant"></ion-icon>
-                    </div>
-
-                    <div class="link">
-                        <a href="">Ver Reservaciones</a>
-                    </div>
-                </div>
-
-                <div class="action-block">
-                    <div class="icon">
-                        <ion-icon name="people"></ion-icon>
-                    </div>
-
-                    <div class="link">
-                        <a th:href="@{/adminusers}">Ver Usuarios</a>
+                <div id="fake-combo">
+                    <div id="spacing-combo">
+                        <div class="action-block">
+                            <div class="icon">
+                                <ion-icon name="cart"></ion-icon>
+                            </div>
+        
+                            <div class="link">
+                                <a id="productos">Productos</a>
+                            </div>
+                        </div>
+        
+                        <div class="action-block">
+                            <div class="icon">
+                                <ion-icon name="bicycle"></ion-icon>
+                            </div>
+        
+                            <div class="link">
+                                <a id="delivery">Delivery</a>
+                            </div>
+                        </div>
+        
+                        <div class="action-block">
+                            <div class="icon">
+                                <ion-icon name="restaurant"></ion-icon>
+                            </div>
+        
+                            <div class="link">
+                                <a href="">Reservaciones</a>
+                            </div>
+                        </div>
+        
+                        <div class="action-block">
+                            <div class="icon">
+                                <ion-icon name="people"></ion-icon>
+                            </div>
+        
+                            <div class="link">
+                                <a th:href="@{/adminusers}">Usuarios</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
 

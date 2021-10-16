@@ -20,4 +20,14 @@ $(document).ready(function() {
           $('#fake-aside').addClass('active');
       }
     });
+
+    $('#mantenimientos').click(function (){
+        if ($('#fake-combo').hasClass('active-combo')){
+            $('#fake-combo').removeClass('active-combo');
+        }else{
+            $('#fake-combo').addClass('active-combo');
+        }
+
+        document.getElementById(this.id).classList.toggle('link-active');
+      });
 });

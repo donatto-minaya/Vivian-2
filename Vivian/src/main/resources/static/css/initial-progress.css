@@ -21,6 +21,31 @@ body {
     transition: margin .2s;
 }
 
+/* fake combo */
+.combo {
+    width: 100%;
+}
+
+#fake-combo {
+    margin-inline-start: 2em;
+    padding-left: 1em;
+    box-shadow: -2px 0 0;
+    display: none;
+}
+
+.icon-combo {
+    font-size: 20px; 
+    float: right;
+}
+
+.active-combo {
+    display: block !important;
+}
+
+.link-active {
+    color: var(--default-orange) !important;
+}
+
 #fake-min-aside {
     font-family: 'Assistant';
     width: 95%;
@@ -75,7 +100,7 @@ body {
 
 #fake-container-body {
     overflow-y: scroll;
-    height: calc(100% - 80px);
+    height: calc(100vh - 80px);
 }
 
 #fake-container-body::-webkit-scrollbar {
