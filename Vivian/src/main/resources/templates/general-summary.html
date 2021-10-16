@@ -24,9 +24,7 @@
 
         <!-- <div th:replace="/fragments/gs-fragment :: gs"></div> -->
         
-        <div th:insert="${verUsuarios == 1} ? 
-        ~{fragments/usuarios :: usuarios} : ~{fragments/gs-fragment :: gs}">
-		</div>
+        <div th:insert="${verUsuarios == 1} ? ~{fragments/usuarios :: usuarios} : ~{fragments/gs-fragment :: gs}"></div>
     </div>
 </div>
 <!-- Management JS -->
@@ -35,22 +33,5 @@
 <!-- Jquery CDN -->
 <script th:src="@{/js/jquery-3.6.0.js}"></script>
 
-<script>
-    	$(document).ready(function() {
-    		let btnVerUsuarios = $("#verUsuario");
-    		
-    		const divContainer = $("#fake-min-body");
-    		
-    		
-    		if(btnVerUsuarios) {
-    			console.log("hola");
-    			
-    			//const divVerUsuario = $('<div th:replace="/fragments/usuarios :: usuarios"></div>');
-    			//divVerUsuario.innerHTML = `<div th:replace="/fragments/usuarios :: usuarios"></div>`;
-    			
-    			//divContainer.append(divVerUsuario);
-    		}
-    	});
-</script>
 </body>
 </html>

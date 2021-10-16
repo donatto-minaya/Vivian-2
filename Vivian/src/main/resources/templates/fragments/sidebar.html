@@ -1,5 +1,5 @@
 <div th:fragment="sidebar">
-    <div id="fake-aside">
+    <div id="fake-aside" class="active">
         <div id="fake-min-aside">
             <div class="min-container">
                 <div class="action-block">
@@ -38,7 +38,7 @@
                     </div>
 
                     <div class="link">
-                        <a id="delivery">Ver solicitudes de Delivery</a>
+                        <a onclick="mostrar('#delivery', '../delivery.html')">Ver solicitudes de Delivery</a>
                     </div>
                 </div>
 
@@ -113,6 +113,7 @@
     <script th:src="@{/js/swal.js}"></script>
 
     <script th:src="@{/js/sidebar.js}"></script>
+    
 
     <script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
 </div>

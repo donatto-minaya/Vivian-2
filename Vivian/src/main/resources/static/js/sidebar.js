@@ -1,4 +1,5 @@
 $(document).ready(function() {
+	
     $('#cerrarsesion').click(function(){
         Swal.fire({
             title: '¿Cerrar Sesión?',
@@ -19,17 +20,4 @@ $(document).ready(function() {
           $('#fake-aside').addClass('active');
       }
     });
-
-
-
-
-
-
-
-
-
-
-
-
-
 });

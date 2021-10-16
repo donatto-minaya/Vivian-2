@@ -22,12 +22,12 @@ function mostrar(id, archivo) {
 	});
 }
 
-$(document).ready(function() {
+/* $(document).ready(function() {
 
 	mostrar('#productos', 'products.html');
 	mostrar('#productos2', 'products.html');
 
-	mostrar('#delivery', 'delivery.html');
+	mostrar('#delivery', '../delivery.html');
 
 	mostrar('#datos-vivian', 'datos-vivian.html');
-});
+}); */
