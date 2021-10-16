@@ -24,7 +24,7 @@
                     </div>
                     <div class="block-form">
                         <ion-icon name="person-outline"></ion-icon>
-                        <input type="email" name="username" id="username" th:value="${email}" placeholder="Ingresa tu usuario o correo" minlength="4" maxlength="50" />
+                        <input type="email" name="username" id="username" placeholder="Ingresa tu usuario o correo" minlength="4" maxlength="50" />
                     </div>
     
                     <div class="block-form">
@@ -46,19 +46,8 @@
 
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            showErrorMsg();
-        });
+    <!--  Script de todos los metodos javascript  -->
+    <script th:src="@{/js/index.js}"></script>
 
-        function showErrorMsg(){
-            let msgError = document.querySelector("#errorMsg");
-            if (msgError){
-                setTimeout(function(){
-                    msgError.remove();
-                }, 2500);
-            }
-        }
-    </script>
 </body>
 </html>

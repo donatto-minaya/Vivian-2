@@ -6,9 +6,8 @@ import java.util.List;
 
 
 public interface UsuarioSpringService {
-    public List<UsuarioSpring> findAll();
-    UsuarioSpring findByEmailPassword(String email, String clave) throws Exception;
-    UsuarioSpring findByEmail(String email);
+    public List<UsuarioSpring> obtenerAdminUsuarios();
+    UsuarioSpring obtenerPorEmail(String email);
     public UsuarioSpring getById(Integer integer);
     public boolean deleteById(Integer integer);
     public <S extends UsuarioSpring> S save(S entity);

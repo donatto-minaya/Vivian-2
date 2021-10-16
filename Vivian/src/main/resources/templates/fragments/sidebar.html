@@ -1,0 +1,118 @@
+<div th:fragment="sidebar">
+    <div id="fake-aside">
+        <div id="fake-min-aside">
+            <div class="min-container">
+                <div class="action-block">
+                    <div class="icon">
+                        <ion-icon name="clipboard"></ion-icon>
+                    </div>
+
+                    <div class="link">
+                        <a href="../general-summary.html">Resumen General</a>
+                    </div>
+                </div>
+
+                <div class="action-block">
+                    <div class="icon">
+                        <ion-icon name="albums"></ion-icon>
+                    </div>
+
+                    <div class="link">
+                        <a id="registro-servicios">Ver Registro de Servicios</a>
+                    </div>
+                </div>
+
+                <div class="action-block">
+                    <div class="icon">
+                        <ion-icon name="cart"></ion-icon>
+                    </div>
+
+                    <div class="link">
+                        <a id="productos">Ver Productos</a>
+                    </div>
+                </div>
+
+                <div class="action-block">
+                    <div class="icon">
+                        <ion-icon name="bicycle"></ion-icon>
+                    </div>
+
+                    <div class="link">
+                        <a id="delivery">Ver solicitudes de Delivery</a>
+                    </div>
+                </div>
+
+                <div class="action-block">
+                    <div class="icon">
+                        <ion-icon name="restaurant"></ion-icon>
+                    </div>
+
+                    <div class="link">
+                        <a href="">Ver Reservaciones</a>
+                    </div>
+                </div>
+
+                <div class="action-block">
+                    <div class="icon">
+                        <ion-icon name="people"></ion-icon>
+                    </div>
+
+                    <div class="link">
+                        <a th:href="@{/adminusers}">Ver Usuarios</a>
+                    </div>
+                </div>
+
+                <div class="action-block">
+                    <div class="icon">
+                        <ion-icon name="chatbubbles"></ion-icon>
+                    </div>
+
+                    <div class="link">
+                        <a href="">Conversaciones</a>
+                    </div>
+                </div>
+
+                <div class="action-block">
+                    <div class="icon">
+                        <ion-icon name="analytics"></ion-icon>
+                    </div>
+
+                    <div class="link">
+                        <a href="">Nuestras métricas</a>
+                    </div>
+                </div>
+
+                <div class="action-block">
+                    <div class="icon">
+                        <ion-icon name="construct"></ion-icon>
+                    </div>
+
+                    <div class="link">
+                        <a id="datos-vivian">Datos de Vivian</a>
+                    </div>
+                </div>
+                <div class="action-block">
+                    <div class="icon">
+                        <ion-icon name="construct"></ion-icon>
+                    </div>
+
+                    <div class="link">
+                        <a id="cerrarsesion">Cerrar Sesion</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="min-container-icon" id="toggleMenu">
+                <ion-icon name="menu"></ion-icon>
+            </div>
+        </div>
+    </div>
+    <!-- Jquery CDN -->
+    <script th:src="@{/js/jquery-3.6.0.js}"></script>
+    <!-- Swal js -->
+    <script th:src="@{/js/swal.js}"></script>
+
+    <script th:src="@{/js/sidebar.js}"></script>
+
+    <script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
+</div>

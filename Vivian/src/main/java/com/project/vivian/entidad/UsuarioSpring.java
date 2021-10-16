@@ -42,6 +42,15 @@ public class UsuarioSpring {
     @Column(name = "activo", nullable = false)
     private Integer activo;
 
+    public String activoString(){
+        if (activo == 1){
+            return "Activo";
+        }else{
+            return "De baja";
+        }
+    }
+
+
     public Integer getActivo() {
         return activo;
     }

@@ -15,24 +15,29 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service("usuarioService")
 public class UsuarioSpringServiceImpl implements UsuarioSpringService{
 
+    @Autowired
+    UsuarioSpringDAO usuarioSpringDAO;
 
     @Override
-    public List<UsuarioSpring> findAll() {
-        return null;
+    public List<UsuarioSpring> obtenerAdminUsuarios() {
+        try {
+            List<UsuarioSpring> lista = usuarioSpringDAO.findAll();
+            return lista;
+        }catch (Exception ex){
+            System.out.println(ex.getMessage());
+            return null;
+        }
     }
 
     @Override
-    public UsuarioSpring findByEmailPassword(String email, String clave) throws Exception {
-        return null;
-    }
-
-    @Override
-    public UsuarioSpring findByEmail(String email) {
-        return null;
+    public UsuarioSpring obtenerPorEmail(String email) {
+        UsuarioSpring usuario = usuarioSpringDAO.findByUsername(email).orElseThrow(() -> new UsernameNotFoundException("No existe usuario"));
+        return usuario;
     }
 
     @Override

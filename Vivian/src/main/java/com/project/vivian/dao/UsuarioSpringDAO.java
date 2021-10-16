@@ -13,4 +13,5 @@ public interface UsuarioSpringDAO extends JpaRepository<UsuarioSpring,Integer> {
 //    UsuarioSpring findByEmailPassword(@Param("email") String email, @Param("clave") String clave);
 
     public Optional<UsuarioSpring> findByUsername(String username);
+
 }

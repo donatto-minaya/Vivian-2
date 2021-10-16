@@ -15,7 +15,7 @@ function mostrar(id, archivo) {
 	$(id).on('click', function() {
 		$('body, html').animate({
 			scrollTop : '0px'
-		}, 050);
+		}, 50);
 
 		$("#fake-container-body").load(archivo).hide().fadeIn();
 		return false;

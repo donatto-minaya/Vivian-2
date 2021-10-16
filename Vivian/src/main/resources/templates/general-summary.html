@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="author" content="DonattoMinaya AdrianMauro">
+    <meta name="description" content="Página administrativa de Vivian">
+    <meta name="keywords" content="Restaurante Recetas Comida">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" th:href="@{/img/corazon.jpg}" type="image/x-icon">
+    <link rel="stylesheet" th:href="@{/css/initial-progress.css}">
+    <!-- Swal -->
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script th:src="@{/js/jquery.min.js}"></script>
+    <title>Vivian &#124; Sala de Progreso</title>
+</head>
+<body>
+<div th:replace="/fragments/sidebar :: sidebar"></div>
+
+<!--ESTOS DIVS SON OBLIGATORIOS PARA UTILIZAR LOS FRAGMENTOS-->
+<div id="fake-body">
+    <div id="fake-min-body">
+
+        <div th:replace="/fragments/navbar :: navbar"></div>
+
+        <div id="fake-container-body">
+            <div class="structure">
+                <div class="simple-div-card">
+                    <div class="description">
+                        <div class="header-h3-github">
+                            Los productos más vendidos y solicitados
+                        </div>
+
+                        <div class="progress">
+                            <div class="products">
+                                <div class="prod">
+                                    <span>Producto:</span> <p>hola</p>
+                                </div>
+
+                                <div class="prod">
+                                    <span>Precio:</span> <p>hola</p>
+                                </div>
+
+                                <div class="prod">
+                                    <span>Última Venta:</span> <p>hola</p>
+                                </div>
+
+                                <div class="prod">
+                                    <span>Ganancias:</span> <p>hola</p>
+                                </div>
+                            </div>
+
+                            <div class="products">
+                                <div class="prod">
+                                    <span>Producto:</span> <p>hola</p>
+                                </div>
+
+                                <div class="prod">
+                                    <span>Precio:</span> <p>hola</p>
+                                </div>
+
+                                <div class="prod">
+                                    <span>Última Venta:</span> <p>hola</p>
+                                </div>
+
+                                <div class="prod">
+                                    <span>Ganancias:</span> <p>hola</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button id="productos2" class="ghostly">Ver completo</button>
+                    </div>
+                </div>
+
+                <div class="simple-div-card">
+                    <div class="description">
+                        <div class="header-h3-github">
+                            Reservaciones totales
+                        </div>
+
+                        <div class="progress">
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="simple-div-card">
+                    <div class="description">
+                        <div class="header-h3-github">
+                            Solicitudes de Delivery
+                        </div>
+
+                        <div class="progress">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="structure">
+                <div class="longest-div-card">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Management JS -->
+<script th:src="@{/js/management.js}"></script>
+</body>
+</html>

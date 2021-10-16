@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Users</title>
+    <link rel="stylesheet" th:href="@{/css/initial-progress.css}">
+    <!-- Swal -->
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script th:src="@{/js/jquery.min.js}"></script>
+</head>
+<body>
+<div th:replace="/fragments/sidebar :: sidebar"></div>
+
+<!--ESTOS DIVS SON OBLIGATORIOS PARA UTILIZAR LOS FRAGMENTOS-->
+<div id="fake-body">
+    <div id="fake-min-body">
+        <div th:replace="/fragments/navbar :: navbar"></div>
+        <br>
+        <h1>Mantenimiento Usuario</h1>
+        <br>
+        <div class="container" style="margin:0px;">
+            <a class="btn btn-primary mb-3" data-toggle="modal"
+               data-target="#formUsu" id="agregar">Agregar nuevo</a>
+        </div>
+
+        <table class="table" id="tUsuario">
+            <thead>
+            <tr>
+                <th class="text-center">ID</th>
+                <th class="text-center">DNI</th>
+                <th class="text-center">Nombres</th>
+                <th class="text-center">Apellidos</th>
+                <th class="text-center">Usuario</th>
+                <th class="text-center">Telefono</th>
+                <th class="text-center">Fecha Registro</th>
+                <th class="text-center">Tipo usuario</th>
+                <th class="text-center">Acciones</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="adminuser:${adminusers}">
+                <td th:text="${adminuser.id}"></td>
+                <td th:text="${adminuser.dni}"></td>
+                <td th:text="${adminuser.nombresUsuario}"></td>
+                <td th:text="${adminuser.apellidosUsuario}"></td>
+                <td th:text="${adminuser.username}"></td>
+                <td th:text="${adminuser.telefono}"></td>
+                <td th:text="${adminuser.fechaRegistro}"></td>
+                <td th:text="${adminuser.activoString()}"></td>
+                <td class="text-center"></td>
+            </tr>
+            </tbody>
+        </table>
+
+    </div>
+</div>
+
+<script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+
+<script th:src="@{/js/admin-users.js}"></script>
+
+</body>
+</html>
