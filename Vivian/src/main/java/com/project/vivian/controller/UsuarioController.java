@@ -1,6 +1,8 @@
 package com.project.vivian.controller;
 
+import com.project.vivian.entidad.Categoria;
 import com.project.vivian.entidad.UsuarioSpring;
+import com.project.vivian.service.CategoriaService;
 import com.project.vivian.service.UsuarioSpringService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -20,19 +22,23 @@ public class UsuarioController {
 
 	@Autowired
 	private UsuarioSpringService usuarioSpringService;
+
+	@Autowired
+	private CategoriaService categoriaService;
 	
 	public void obtenerDatosUsuario(Model model) {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		UsuarioSpring usuarioSpring = usuarioSpringService.obtenerPorEmail(auth.getName());
-		
 		model.addAttribute("nombreCompleto",usuarioSpring.getNombresUsuario() + " " + usuarioSpring.getApellidosUsuario());
 	}
 
 	// ENDPOINT PARA PROBAR EL SERVER
 	@GetMapping("/usuarios")
-	public String listar(Model model) {
+	public String listar(Model model) throws Exception {
 		List<UsuarioSpring> usuarios = usuarioSpringService.obtenerAdminUsuarios();
 		model.addAttribute("usuarios", usuarios);
+		List<Categoria> listaCategorias = categoriaService.obtenerCategorias();
+		model.addAttribute("categorias",listaCategorias);
 		return "pruebausuarios";
 	}
 
@@ -68,15 +74,27 @@ public class UsuarioController {
 
 	
 	@GetMapping(value="/adminusers")
-	public String adminUsers(Model model) {
+	public String adminUsers(Model model) throws Exception {
 		obtenerDatosUsuario(model);
-		
 		List<UsuarioSpring> listaAdminUsuarios = usuarioSpringService.obtenerAdminUsuarios();
+		List<Categoria> listaCategorias = categoriaService.obtenerCategorias();
+		model.addAttribute("categorias",listaCategorias);
 		model.addAttribute("adminusers",listaAdminUsuarios);
-		
 		codigo = 1;
-		
 		model.addAttribute("verUsuarios", codigo);
 		return "general-summary";
 	}
+
+	@PostMapping(value="/adminusers")
+	public String insertarAdminUser(Model model) throws Exception {
+		obtenerDatosUsuario(model);
+		List<UsuarioSpring> listaAdminUsuarios = usuarioSpringService.obtenerAdminUsuarios();
+		List<Categoria> listaCategorias = categoriaService.obtenerCategorias();
+		model.addAttribute("categorias",listaCategorias);
+		model.addAttribute("adminusers",listaAdminUsuarios);
+		codigo = 1;
+		model.addAttribute("verUsuarios", codigo);
+		return "general-summary";
+	}
+
 }

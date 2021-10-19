@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,8 +9,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" th:href="@{/img/corazon.jpg}" type="image/x-icon">
     <link rel="stylesheet" th:href="@{/css/initial-progress.css}">
-    <!-- Swal -->
-    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- Data Table CSS -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
     <script th:src="@{/js/jquery.min.js}"></script>
     <title>Vivian &#124; Sala de Progreso</title>
 </head>
@@ -24,14 +24,18 @@
 
         <!-- <div th:replace="/fragments/gs-fragment :: gs"></div> -->
         
-        <div th:insert="${verUsuarios == 1} ? ~{fragments/usuarios :: usuarios} : ~{fragments/gs-fragment :: gs}"></div>
+        <div th:insert="${verUsuarios == 1} ? ~{fragments/admin-users :: adminusers} : ~{fragments/gs-fragment :: gs}"></div>
     </div>
 </div>
+<!-- Swal -->
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <!-- Management JS -->
 <script th:src="@{/js/management.js}"></script>
-
 <!-- Jquery CDN -->
 <script th:src="@{/js/jquery-3.6.0.js}"></script>
-
+<!-- Jquery Validator -->
+<script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.min.js"></script>
+<!-- Data Table-->
+<script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
 </body>
 </html>

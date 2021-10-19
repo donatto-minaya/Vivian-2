@@ -24,13 +24,12 @@ public class UsuarioSpringServiceImpl implements UsuarioSpringService{
     UsuarioSpringDAO usuarioSpringDAO;
 
     @Override
-    public List<UsuarioSpring> obtenerAdminUsuarios() {
+    public List<UsuarioSpring> obtenerAdminUsuarios() throws Exception {
         try {
             List<UsuarioSpring> lista = usuarioSpringDAO.findAll();
             return lista;
         }catch (Exception ex){
-            System.out.println(ex.getMessage());
-            return null;
+            throw new Exception(ex.getMessage());
         }
     }
 

@@ -13,7 +13,7 @@ public class TipoServiceImpl implements TipoService {
     private TipoDAO tipoDAO;
 
     @Override
-    public List<Tipo> findAll() {
+    public List<Tipo> obtenerTipos() {
         return tipoDAO.findAll();
     }
 }

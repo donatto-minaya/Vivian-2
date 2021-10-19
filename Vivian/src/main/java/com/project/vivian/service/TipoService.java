@@ -6,5 +6,5 @@ import java.util.List;
 
 public interface TipoService {
 
-    public List<Tipo> findAll();
+    public List<Tipo> obtenerTipos();
 }

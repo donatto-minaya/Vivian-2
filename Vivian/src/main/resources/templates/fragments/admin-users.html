@@ -1,0 +1,84 @@
+<div th:fragment="adminusers">
+    <link rel="stylesheet" th:href="@{/css/libcss/own-modal.css}" href="../static/css/libcss/own-modal.css">
+    <div id="fake-container-body">
+        <br>
+        <h1>Mantenimiento Usuarios Administrador</h1>
+        <br>
+        <a class="btn-open-close-modal" id="agregarAdminUser">Agregar nuevo</a>
+        <!-- MODAL -->
+        <div class="modal-container">
+            <div class="modal-window-w3">
+                <a href="#" class="btn-close-modal">&times;</a>
+                <h1>AGREGAR USUARIO</h1>
+                <form method="post" th:action="@{/adminusers}" id="formAdminUser">
+                    <div class="mb-3">
+                        <label class="" id="labelId">ID:</label>
+                        <input type="text" class="" name="txtId" id="txtId" value="" placeholder="Ingrese el id de Usuario" readonly>
+                    </div>
+                    <div class="">
+                        <label class="">DNI:</label> <input
+                            type="text" class="" name="txtDni" id="txtDni" value="" placeholder="Ingresa el DNI">
+                    </div>
+                    <div class="">
+                        <label class="">Nombres:</label>
+                        <input type="text" class="" name="txtNombres" id="txtNombres" value="" placeholder="Ingresa los nombres">
+                    </div>
+                    <div class="">
+                        <label class="">Apellidos:</label>
+                        <input type="text" class="" name="txtApellidos" id="txtApellidos" value="" placeholder="Ingresa los apellidos">
+                    </div>
+                    <div class="">
+                        <label class="">Usuario:</label>
+                        <input type="text" class="" name="txtUsername" id="txtUsername" value="" placeholder="Ingresa el usuario">
+                    </div>
+                    <div class="">
+                        <label class="">Contraseña:</label>
+                        <input type="password" class="" name="txtPassword" id="txtPassword" value="" placeholder="Ingresa la contraseña">
+                    </div>
+                    <div class="">
+                        <label class="">Repita la contraseña:</label>
+                        <input type="password" class="" name="txtRepeatPassword" id="txtRepeatPassword" value="" placeholder="Repita la contraseña">
+                    </div>
+                    <div>
+                        <label class="">Teléfono:</label>
+                        <input type="text" class="" name="txtTel" id="txtTel" value="" placeholder="Ingresa el teléfono">
+                    </div>
+                    <button type="submit" class="" id="btnGuardarAdminUser" name="opcion" value="">Guardar</button>
+                </form>
+            </div>
+        </div>
+        <div id="table-admins">
+            <table class="table" id="tAdminUsuario">
+                <thead>
+                <tr>
+                    <th class="text-center">ID</th>
+                    <th class="text-center">DNI</th>
+                    <th class="text-center">Nombres</th>
+                    <th class="text-center">Apellidos</th>
+                    <th class="text-center">Usuario</th>
+                    <th class="text-center">Telefono</th>
+                    <th class="text-center">Fecha Registro</th>
+                    <th class="text-center">Estado</th>
+                    <th class="text-center">Acciones</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="adminuser:${adminusers}">
+                    <td th:text="${adminuser.id}"></td>
+                    <td th:text="${adminuser.dni}"></td>
+                    <td th:text="${adminuser.nombresUsuario}"></td>
+                    <td th:text="${adminuser.apellidosUsuario}"></td>
+                    <td th:text="${adminuser.username}"></td>
+                    <td th:text="${adminuser.telefono}"></td>
+                    <td th:text="${adminuser.fechaRegistro}"></td>
+                    <td th:text="${adminuser.estadoString()}"></td>
+                    <td class="text-center"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <script th:src="@{/js/admin-users.js}"></script>
+    <!-- Modal propio -->
+    <script th:src="@{/js/own-modal.js}" src="../static/js/own-modal.js"></script>
+</div>

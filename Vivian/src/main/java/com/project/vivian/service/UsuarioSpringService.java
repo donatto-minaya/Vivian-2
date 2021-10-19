@@ -6,7 +6,7 @@ import java.util.List;
 
 
 public interface UsuarioSpringService {
-    public List<UsuarioSpring> obtenerAdminUsuarios();
+    public List<UsuarioSpring> obtenerAdminUsuarios() throws Exception;
     UsuarioSpring obtenerPorEmail(String email);
     public UsuarioSpring getById(Integer integer);
     public boolean deleteById(Integer integer);

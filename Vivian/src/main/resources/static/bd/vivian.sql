@@ -66,7 +66,7 @@ create table if not exists usuario_spring (
     telefono char(9) not null,
     fechaRegistro date not null,
     idTipo int default 1 not null, -- tipo
-    activo bit default 1 not null
+    estado bit default 1 not null
 ) engine = InnoDB  default charset = utf8mb4 auto_increment 1;
 
 alter table usuario_spring add constraint pk_usuario_spring primary key(idUsuario);
@@ -79,7 +79,7 @@ alter table usuario_spring add constraint fk_Tipo_spring
 foreign key(idTipo) references Tipo(idTipo)
 on delete cascade on update cascade;
 
-insert into usuario_spring(idUsuario, dni, nombresUsuario, apellidosUsuario, username, password, telefono, fechaRegistro, idTipo, activo) values
+insert into usuario_spring(idUsuario, dni, nombresUsuario, apellidosUsuario, username, password, telefono, fechaRegistro, idTipo, estado) values
 	(1, 12312312, 'Donatto', 'Minaya', 'ottanod22@gmail.com', '$2a$10$vOuBScNDn3XXyBMQO30FZO50Rg/UPuoetvd.XW1iQ47nub9is7dpG', 913242570, '2021-04-01', 3,default);
 
 
@@ -129,20 +129,21 @@ insert into Mesa(nMesa, piso, capacidadPersonas) values
 -- -----------------------------------------------------
 create table if not exists Categoria (
   idCategoria int not null,
-  descripcionCategoria varchar(45) not null
+  descripcionCategoria varchar(45) not null,
+  estado bit default 1 not null
 ) engine = InnoDB default charset = utf8mb4;
 
 alter table categoria add constraint pk_categoria primary key(idCategoria);
 alter table Categoria modify column `idCategoria` int not null auto_increment;
 
-insert into Categoria(idCategoria, descripcionCategoria) values 
-	(1, 'Especial'),
-    (2, 'Bebida'),
-    (3, 'Postre'),
-	(4, 'Ensalada'),
-    (5, 'Bocadillo'),
-    (6, 'Sandwich'),
-    (7, 'Normal')
+insert into Categoria(idCategoria, descripcionCategoria, estado) values 
+	(1, 'Especial',1),
+    (2, 'Bebida',1),
+    (3, 'Postre',1),
+	(4, 'Ensalada',1),
+    (5, 'Bocadillo',1),
+    (6, 'Sandwich',1),
+    (7, 'Normal',1)
 ;
 
 -- -----------------------------------------------------

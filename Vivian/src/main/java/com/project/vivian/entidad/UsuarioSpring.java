@@ -39,24 +39,24 @@ public class UsuarioSpring {
     @JoinColumn(name = "idTipo", nullable = false)
     private Tipo idTipo;
 
-    @Column(name = "activo", nullable = false)
-    private Integer activo;
+    @Column(name = "estado", nullable = false)
+    private Integer estado;
 
-    public String activoString(){
-        if (activo == 1){
+    public String estadoString(){
+        if (estado == 1){
             return "Activo";
         }else{
-            return "De baja";
+            return "Inactivo";
         }
     }
 
 
-    public Integer getActivo() {
-        return activo;
+    public Integer getEstado() {
+        return estado;
     }
 
-    public void setActivo(Integer activo) {
-        this.activo = activo;
+    public void setEstado(Integer estado) {
+        this.estado = estado;
     }
 
     public Tipo getIdTipo() {

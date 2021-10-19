@@ -108,3 +108,7 @@ h1, h2, h3 {
 .icon:hover {
     box-shadow: 0 3px 5px -2px var(--default-shadow-gray);
 }
+
+label.error {
+    color: red;
+}
