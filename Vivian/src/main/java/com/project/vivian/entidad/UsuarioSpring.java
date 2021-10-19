@@ -1,7 +1,10 @@
 package com.project.vivian.entidad;
 
 import javax.persistence.*;
-import java.time.LocalDate;
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
+import java.time.format.DateTimeFormatter;
 
 @Table(name = "usuario_spring", indexes = {
         @Index(name = "uq_dni_spring", columnList = "dni", unique = true),
@@ -32,14 +35,14 @@ public class UsuarioSpring {
     @Column(name = "telefono", nullable = false, length = 9)
     private String telefono;
 
-    @Column(name = "fechaRegistro", nullable = false)
-    private LocalDate fechaRegistro;
+    @Column(name = "fechaRegistro")
+    private Instant fechaRegistro;
 
     @ManyToOne(optional = false)
-    @JoinColumn(name = "idTipo", nullable = false)
+    @JoinColumn(name = "idTipo")
     private Tipo idTipo;
 
-    @Column(name = "estado", nullable = false)
+    @Column(name = "estado")
     private Integer estado;
 
     public String estadoString(){
@@ -49,7 +52,10 @@ public class UsuarioSpring {
             return "Inactivo";
         }
     }
-
+    public String fechaString(){
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy").withZone(ZoneOffset.UTC);
+        return dtf.format(fechaRegistro);
+    }
 
     public Integer getEstado() {
         return estado;
@@ -67,11 +73,11 @@ public class UsuarioSpring {
         this.idTipo = idTipo;
     }
 
-    public LocalDate getFechaRegistro() {
+    public Instant getFechaRegistro() {
         return fechaRegistro;
     }
 
-    public void setFechaRegistro(LocalDate fechaRegistro) {
+    public void setFechaRegistro(Instant fechaRegistro) {
         this.fechaRegistro = fechaRegistro;
     }
 

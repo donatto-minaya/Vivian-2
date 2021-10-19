@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-@Repository
+@Repository("tipoDAO")
 public interface TipoDAO extends JpaRepository<Tipo, Integer> {
 
 

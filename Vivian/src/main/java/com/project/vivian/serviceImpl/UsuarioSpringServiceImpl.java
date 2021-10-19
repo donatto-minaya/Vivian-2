@@ -2,26 +2,30 @@ package com.project.vivian.serviceImpl;
 
 import com.project.vivian.dao.TipoDAO;
 import com.project.vivian.dao.UsuarioSpringDAO;
+import com.project.vivian.entidad.Tipo;
 import com.project.vivian.entidad.UsuarioSpring;
 import com.project.vivian.service.UsuarioSpringService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
-import java.util.Optional;
 
 @Service("usuarioService")
 public class UsuarioSpringServiceImpl implements UsuarioSpringService{
 
     @Autowired
     UsuarioSpringDAO usuarioSpringDAO;
+
+    @Autowired
+    TipoDAO tipoDAO;
+
+    @Autowired
+    BCryptPasswordEncoder passwordEncoder;
 
     @Override
     public List<UsuarioSpring> obtenerAdminUsuarios() throws Exception {
@@ -40,18 +44,30 @@ public class UsuarioSpringServiceImpl implements UsuarioSpringService{
     }
 
     @Override
-    public UsuarioSpring getById(Integer integer) {
+    public UsuarioSpring obtenerPorId(Integer integer) {
         return null;
     }
 
     @Override
-    public boolean deleteById(Integer integer) {
+    public boolean eliminarPorId(Integer integer) {
         return false;
     }
 
     @Override
-    public <S extends UsuarioSpring> S save(S entity) {
-        return null;
+    public UsuarioSpring crearUsuario(UsuarioSpring entity) throws Exception {
+        try {
+            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+            LocalDateTime now = LocalDateTime.now();
+            Tipo tipoAdmin = tipoDAO.getById(3);
+            entity.setIdTipo(tipoAdmin);
+            entity.setEstado(1);
+            entity.setFechaRegistro(now.toInstant(ZoneOffset.UTC));
+            entity.setPassword(passwordEncoder.encode(entity.getPassword()));
+            UsuarioSpring usuarioCreated = usuarioSpringDAO.save(entity);
+            return usuarioCreated;
+        }catch (Exception ex){
+            throw new Exception(ex.getMessage());
+        }
     }
 
     @Override

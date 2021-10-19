@@ -43,6 +43,27 @@ $(document).ready(function(){
         $("#labelId").hide();
     });
 
+    const XModal = $(".btn-close-modal");
+    const ldni = $("#txtDni");
+    const lnombres = $("#txtNombres");
+    const lapellidos = $("#txtApellidos");
+    const lusuario = $("#txtUsername");
+    const lpassword = $("#txtPassword");
+    const lrepeatpass = $("#txtRepeatPassword");
+    const ltel = $("#txtTel");
+
+    XModal.click(function (){
+        ldni.val("");
+        lnombres.val("");
+        lapellidos.val("");
+        lusuario.val("");
+        lpassword.val("");
+        lrepeatpass.val("");
+        ltel.val("");
+        $("label.error").remove();
+    });
+
+
     //// VALIDACION
     // METODO PARA VALIDAR SOLO LETRAS
     $.validator.addMethod("lettersonly", function(value, element) {
@@ -55,12 +76,21 @@ $(document).ready(function(){
 
     $("#formAdminUser").validate({
         rules:{
-            txtPassword: { required:true, minlength:4, maxlength:18},
+            dni: { required: true, minlength:8, maxlength:8, digits: true},
+            nombresUsuario: { required: true, minlength:2, maxlength:30, lettersonly: true},
+            apellidosUsuario: { required: true, minlength:4, maxlength:30, lettersonly: true},
+            telefono: { required: true, minlength:7, maxlength:9, digits: true},
+            username: { required: true, email: true},
+            password: { required:true, minlength:4, maxlength:18},
             txtRepeatPassword: { required:true, equalTo:"#txtPassword"}
         },
         messages:{
-
-            txtPassword: { required:"El campo es requerido", minlength:'Mínimo 4 caracteres', maxlength:'Máximo 18 caracteres'},
+            dni: { required:"El campo es requerido", minlength:'Mínimo 8 caracteres', maxlength:'Máximo 8 caracteres', digits: "Solo números"},
+            nombresUsuario: { required:"El campo es requerido", minlength:'Mínimo 2 caracteres', maxlength:'Máximo 30 caracteres', lettersonly: "Solo letras"},
+            apellidosUsuario: { required:"El campo es requerido", minlength:'Mínimo 4 caracteres', maxlength:'Máximo 30 caracteres', lettersonly: "Solo letras"},
+            telefono: { required:"El campo es requerido", minlength:'Mínimo 7 caracteres', maxlength:'Máximo 9 caracteres', digits: "Solo números"},
+            username: { required:"El campo es requerido", email: "Formato de email incorrecto"},
+            password: { required:"El campo es requerido", minlength:'Mínimo 4 caracteres', maxlength:'Máximo 18 caracteres'},
             txtRepeatPassword: { required: "El campo es requerido", equalTo: "Las contraseñas no coinciden"}
         }
     });

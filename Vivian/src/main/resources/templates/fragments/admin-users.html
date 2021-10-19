@@ -6,42 +6,42 @@
         <br>
         <a class="btn-open-close-modal" id="agregarAdminUser">Agregar nuevo</a>
         <!-- MODAL -->
-        <div class="modal-container">
+        <div class="modal-container modal-disable-close">
             <div class="modal-window-w3">
                 <a href="#" class="btn-close-modal">&times;</a>
                 <h1>AGREGAR USUARIO</h1>
-                <form method="post" th:action="@{/adminusers}" id="formAdminUser">
+                <form method="post" th:action="@{/adminusers}" th:object="${usuarioSpring}" id="formAdminUser">
                     <div class="mb-3">
                         <label class="" id="labelId">ID:</label>
-                        <input type="text" class="" name="txtId" id="txtId" value="" placeholder="Ingrese el id de Usuario" readonly>
+                        <input type="text" class="" name="id" id="txtId" value="" placeholder="Ingrese el id de Usuario" readonly>
                     </div>
                     <div class="">
                         <label class="">DNI:</label> <input
-                            type="text" class="" name="txtDni" id="txtDni" value="" placeholder="Ingresa el DNI">
+                            type="text" class="" name="dni" id="txtDni" value="" th:field="*{dni}" maxlength="8" placeholder="Ingresa el DNI">
                     </div>
                     <div class="">
                         <label class="">Nombres:</label>
-                        <input type="text" class="" name="txtNombres" id="txtNombres" value="" placeholder="Ingresa los nombres">
+                        <input type="text" class="" name="nombresUsuario" id="txtNombres" th:field="*{nombresUsuario}" value="" placeholder="Ingresa los nombres">
                     </div>
                     <div class="">
                         <label class="">Apellidos:</label>
-                        <input type="text" class="" name="txtApellidos" id="txtApellidos" value="" placeholder="Ingresa los apellidos">
+                        <input type="text" class="" name="apellidosUsuario" id="txtApellidos" th:field="*{apellidosUsuario}" value="" placeholder="Ingresa los apellidos">
+                    </div>
+                    <div>
+                        <label class="">Teléfono:</label>
+                        <input type="text" class="" name="telefono" id="txtTel" th:field="*{telefono}" value="" maxlength="9" placeholder="Ingresa el teléfono">
                     </div>
                     <div class="">
                         <label class="">Usuario:</label>
-                        <input type="text" class="" name="txtUsername" id="txtUsername" value="" placeholder="Ingresa el usuario">
+                        <input type="email" class="" name="username" id="txtUsername" th:field="*{username}" value="" placeholder="Ingresa el usuario">
                     </div>
                     <div class="">
                         <label class="">Contraseña:</label>
-                        <input type="password" class="" name="txtPassword" id="txtPassword" value="" placeholder="Ingresa la contraseña">
+                        <input type="password" class="" name="password" id="txtPassword" th:field="*{password}" value="" placeholder="Ingresa la contraseña">
                     </div>
                     <div class="">
                         <label class="">Repita la contraseña:</label>
                         <input type="password" class="" name="txtRepeatPassword" id="txtRepeatPassword" value="" placeholder="Repita la contraseña">
-                    </div>
-                    <div>
-                        <label class="">Teléfono:</label>
-                        <input type="text" class="" name="txtTel" id="txtTel" value="" placeholder="Ingresa el teléfono">
                     </div>
                     <button type="submit" class="" id="btnGuardarAdminUser" name="opcion" value="">Guardar</button>
                 </form>
@@ -70,7 +70,7 @@
                     <td th:text="${adminuser.apellidosUsuario}"></td>
                     <td th:text="${adminuser.username}"></td>
                     <td th:text="${adminuser.telefono}"></td>
-                    <td th:text="${adminuser.fechaRegistro}"></td>
+                    <td th:text="${adminuser.fechaString()}"></td>
                     <td th:text="${adminuser.estadoString()}"></td>
                     <td class="text-center"></td>
                 </tr>

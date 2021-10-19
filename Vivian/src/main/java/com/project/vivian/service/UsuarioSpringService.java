@@ -8,8 +8,8 @@ import java.util.List;
 public interface UsuarioSpringService {
     public List<UsuarioSpring> obtenerAdminUsuarios() throws Exception;
     UsuarioSpring obtenerPorEmail(String email);
-    public UsuarioSpring getById(Integer integer);
-    public boolean deleteById(Integer integer);
-    public <S extends UsuarioSpring> S save(S entity);
+    public UsuarioSpring obtenerPorId(Integer integer);
+    public boolean eliminarPorId(Integer integer);
+    public UsuarioSpring crearUsuario(UsuarioSpring entity) throws Exception;
     public <S extends UsuarioSpring> S update(Integer integer, S entity);
 }

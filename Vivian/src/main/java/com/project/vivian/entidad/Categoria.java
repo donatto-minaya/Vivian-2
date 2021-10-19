@@ -16,7 +16,7 @@ public class Categoria {
     @Column(name = "estado", nullable = false)
     private Integer estado;
 
-    public String activoString(){
+    public String estadoString(){
         if (estado == 1){
             return "Habilitado";
         }else{

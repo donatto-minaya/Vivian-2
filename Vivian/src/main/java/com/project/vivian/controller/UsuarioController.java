@@ -1,12 +1,15 @@
 package com.project.vivian.controller;
 
 import com.project.vivian.entidad.Categoria;
+import com.project.vivian.entidad.Tipo;
 import com.project.vivian.entidad.UsuarioSpring;
 import com.project.vivian.service.CategoriaService;
+import com.project.vivian.service.TipoService;
 import com.project.vivian.service.UsuarioSpringService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -77,8 +80,7 @@ public class UsuarioController {
 	public String adminUsers(Model model) throws Exception {
 		obtenerDatosUsuario(model);
 		List<UsuarioSpring> listaAdminUsuarios = usuarioSpringService.obtenerAdminUsuarios();
-		List<Categoria> listaCategorias = categoriaService.obtenerCategorias();
-		model.addAttribute("categorias",listaCategorias);
+		model.addAttribute("usuarioSpring",new UsuarioSpring());
 		model.addAttribute("adminusers",listaAdminUsuarios);
 		codigo = 1;
 		model.addAttribute("verUsuarios", codigo);
@@ -86,15 +88,16 @@ public class UsuarioController {
 	}
 
 	@PostMapping(value="/adminusers")
-	public String insertarAdminUser(Model model) throws Exception {
-		obtenerDatosUsuario(model);
-		List<UsuarioSpring> listaAdminUsuarios = usuarioSpringService.obtenerAdminUsuarios();
-		List<Categoria> listaCategorias = categoriaService.obtenerCategorias();
-		model.addAttribute("categorias",listaCategorias);
-		model.addAttribute("adminusers",listaAdminUsuarios);
-		codigo = 1;
-		model.addAttribute("verUsuarios", codigo);
-		return "general-summary";
+	public String insertarAdminUser(UsuarioSpring usuarioSpring, Model model) throws Exception {
+		try{
+			usuarioSpringService.crearUsuario(usuarioSpring);
+			model.addAttribute("msgInsert","Usuario ingresado correctamente");
+			System.out.println("Usuario ingresado correctamente");
+		}catch (Exception ex){
+			model.addAttribute("msgInsert",ex.getMessage());
+			System.out.println(ex.getMessage());
+		}
+		return "redirect:/adminusers";
 	}
 
 }

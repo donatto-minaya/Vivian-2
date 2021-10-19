@@ -6,11 +6,8 @@ import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
-@Repository
+@Repository("usuarioSpringDAO")
 public interface UsuarioSpringDAO extends JpaRepository<UsuarioSpring,Integer> {
-
-//    @Query(value = "{call vUsuarioSpring(:email, :clave)}",nativeQuery = true)
-//    UsuarioSpring findByEmailPassword(@Param("email") String email, @Param("clave") String clave);
 
     public Optional<UsuarioSpring> findByUsername(String username);
 
