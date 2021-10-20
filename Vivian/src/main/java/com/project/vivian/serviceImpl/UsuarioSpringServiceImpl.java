@@ -6,7 +6,6 @@ import com.project.vivian.entidad.Tipo;
 import com.project.vivian.entidad.UsuarioSpring;
 import com.project.vivian.service.UsuarioSpringService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +13,7 @@ import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Optional;
 
 @Service("usuarioService")
 public class UsuarioSpringServiceImpl implements UsuarioSpringService{
@@ -44,8 +44,9 @@ public class UsuarioSpringServiceImpl implements UsuarioSpringService{
     }
 
     @Override
-    public UsuarioSpring obtenerPorId(Integer integer) {
-        return null;
+    public Optional<UsuarioSpring> obtenerPorId(Integer integer) {
+        Optional<UsuarioSpring> usuarioSpring = usuarioSpringDAO.findById(integer);
+        return usuarioSpring;
     }
 
     @Override
@@ -66,7 +67,7 @@ public class UsuarioSpringServiceImpl implements UsuarioSpringService{
     }
 
     @Override
-    public UsuarioSpring crearUsuario(UsuarioSpring entity) throws Exception {
+    public UsuarioSpring crearAdminUsuario(UsuarioSpring entity) throws Exception {
         try {
             DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
             LocalDateTime now = LocalDateTime.now();
@@ -82,12 +83,12 @@ public class UsuarioSpringServiceImpl implements UsuarioSpringService{
     }
 
     @Override
-    public <S extends UsuarioSpring> S update(Integer integer, S entity) {
-        return null;
+    public Integer actualizarAdminUsuario(Integer id, String dni, String nombresUsuario,String apellidosUsuario, String username, String telefono, Integer estado) throws Exception {
+       try{
+           return usuarioSpringDAO.updateWithOutPass(id,dni,nombresUsuario,apellidosUsuario,username,telefono,estado);
+       }catch (Exception ex){
+           return 0;
+       }
     }
-
-//    @Autowired
-
-//
 
 }

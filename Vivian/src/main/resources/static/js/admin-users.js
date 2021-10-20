@@ -1,10 +1,19 @@
 $(document).ready(function(){
 
+    // METODO PARA MOSTRAR EL MENSAJE GUARDADO EN EL LOCALSTORAGE AL RECARGAR LA PAGINA LUEGO DEL AJAX
     if (localStorage.getItem("Success")) {
         toastr.success(localStorage.getItem("Success"));
         localStorage.clear();
+    } else if (localStorage.getItem("Error")){
+        toastr.success(localStorage.getItem("Error"));
+        localStorage.clear();
     }
 
+    // AL INCIAR LA APLICACION EL INPUT Y LABEL DEL ID DE USUARIO NO SE MOSTRARAN EN EL MODAL/FORMULARIO
+    $("#txtId").hide();
+    $("#labelId").hide();
+
+    // OBJETO PARA PONER EL DATA TABLE EN ESPANIOL
     let idioma_espanol={
         "sProcessing":     "Procesando...",
         "sLengthMenu":     "Mostrar _MENU_ registros",
@@ -32,6 +41,7 @@ $(document).ready(function(){
         }
     }
 
+    // CREA EL DATA TABLE CON BOTONES EDITAR Y ELIMINAR A TRAVES DEL ID DE LA TABLA EN EL HTML
     let tabla = $('#tAdminUsuario').DataTable({
         columnDefs: [
             {  targets: 8,
@@ -43,11 +53,12 @@ $(document).ready(function(){
         language: idioma_espanol
     });
 
+    // METODO PARA SETEAR EL VALUE "AGREGAR" AL BOTON GUARDAR AL DARLE CLICK EN "Agregar Nuevo" PARA LUEGO UTILIZAR ESTE VALUE EN EL AJAX
     $("#agregarAdminUser").click(function (){
-        $("#txtId").hide();
-        $("#labelId").hide();
+        $('#btnGuardarAdminUser').val("agregar");
     });
 
+    // VARIABLES DE LOS TODOS LOS INPUTS Y COMBOBOXES DEL FORMULARIO. ADEMAS DE LA "X" PARA CERRAR EL MODAL
     const XModal = $(".btn-close-modal");
     const idni = $("#txtDni");
     const inombres = $("#txtNombres");
@@ -56,7 +67,10 @@ $(document).ready(function(){
     const ipassword = $("#txtPassword");
     const irepeatpass = $("#txtRepeatPassword");
     const itel = $("#txtTel");
+    const cboEstado = $("#txtEstado");
+    const iid = $("#txtId");
 
+    // METODO PARA LIMPIAR EL FORMULARIO(inputs y mensajes de errores) AL DARLE CLICK A LA "X" DEL MODAL (cerrar modal)
     XModal.click(function (){
         idni.val("");
         inombres.val("");
@@ -65,27 +79,36 @@ $(document).ready(function(){
         ipassword.val("");
         irepeatpass.val("");
         itel.val("");
+        cboEstado.val(1);
         $("label.error").remove();
     });
 
+    // METODO PARA LLENAR EL FORMULARIO CON LOS DATOS DEL REGISTRO A EDITAR... PARA ABRIR EL MODAL Y PARA
+    // SETEAR EL VALUE "editar" AL BOTON GUARDAR PARA POSTERIORMENTE USARLO EN AJAX
     $('#tAdminUsuario tbody').on('click', '.editar', function () {
         $("label.error").remove();
         var id = $(this).attr("id").match(/\d+/)[0];
         var data = $('#tAdminUsuario').DataTable().row( id ).data();
+        $("#lpassword").hide();
+        $("#txtPassword").hide();
+        $("#lrepeatpassword").hide();
+        $("#txtRepeatPassword").hide();
+        iid.val([data[0]]);
         idni.val(data[1]);
         inombres.val(data[2]);
         iapellidos.val(data[3]);
         iusuario.val(data[4]);
         itel.val(data[5]);
-        console.log(data[7]);
         switch (data[7])
         {
-            case "Activo":  $("#txtEstado").val(1); break;
-            default:  $("#txtEstado").val(0);
+            case "Activo":  cboEstado.val(1); break;
+            default:  cboEstado.val(0);
         }
         openModal();
+        $('#btnGuardarAdminUser').val("editar");
     });
 
+    // METODO PARA MOSTRAR UNA ALERTA PARA POSTERIORMENTE ELIMINAR UN REGISTRO
     $('#tAdminUsuario tbody').on('click', '.eliminar', function () {
         var id = $(this).attr("id").match(/\d+/)[0];
         var data = $('#tAdminUsuario').DataTable().row( id ).data();
@@ -106,7 +129,7 @@ $(document).ready(function(){
         })
     });
 
-    // --------- VALIDACION ----------
+    // ----------------------- VALIDACION --------------------------------
     // METODO PARA VALIDAR SOLO LETRAS
     $.validator.addMethod("lettersonly", function(value, element) {
         return this.optional(element) || /^[a-z\s]+$/i.test(value);
@@ -116,6 +139,7 @@ $(document).ready(function(){
         return this.optional(element) || value != param;
     }, "Seleccione un valor diferente");
 
+    // METODO PARA LAS VALIDACIONES Y SUS RESPECTIVOS MENSAJES
     $("#formAdminUser").validate({
         rules:{
             dni: { required: true, minlength:8, maxlength:8, digits: true},
@@ -136,46 +160,68 @@ $(document).ready(function(){
             txtRepeatPassword: { required: "El campo es requerido", equalTo: "Las contraseñas no coinciden"}
         }
     });
+    //---------------------------------------------------------------------
+
+    // METODO PARA: SI EL FORMULARIO ES VALIDO, GUARDAR O EDITAR A TRAVES DE AJAX DEPENDIENDO DEL VALUE("agregar" o "editar") DEL BOTON GUARDAR
     $('#btnGuardarAdminUser').on('click',function(){
         if($('#formAdminUser').valid() == false){
             return false;
         }else{
-            let adminuser = {
-                "dni": $("#txtDni").val(),
-                "nombresUsuario": $("#txtNombres").val(),
-                "apellidosUsuario": $("#txtApellidos").val(),
-                "telefono": $("#txtTel").val(),
-                "username": $("#txtUsername").val(),
-                "password": $("#txtPassword").val(),
-            }
-
-            $.ajax({
-                type: 'POST',
-                url: '/adminusers',
-                data: {
-                    "dni": $("#txtDni").val(),
-                    "nombresUsuario": $("#txtNombres").val(),
-                    "apellidosUsuario": $("#txtApellidos").val(),
-                    "telefono": $("#txtTel").val(),
-                    "username": $("#txtUsername").val(),
-                    "password": $("#txtPassword").val(),
-                    "estado":$("#txtEstado").val()
-                },
-                success: function (data){
-                    if (data.estado === 1){
-                        localStorage.setItem("Success",data.mensaje);
-                        parent.location.href = "/adminusers";
-                    } else{
-                        toastr.warning(data.mensaje)
+            // SI EL VALUE ES agregar INGRESA UN NUEVO USUARIO (POST)
+            if ($('#btnGuardarAdminUser').val() === "agregar"){
+                $.ajax({
+                    type: 'POST',
+                    url: '/adminusers',
+                    data: {
+                        "dni": $("#txtDni").val(),
+                        "nombresUsuario": $("#txtNombres").val(),
+                        "apellidosUsuario": $("#txtApellidos").val(),
+                        "telefono": $("#txtTel").val(),
+                        "username": $("#txtUsername").val(),
+                        "password": $("#txtPassword").val(),
+                        "estado":$("#txtEstado").val()
+                    },
+                    success: function (data){
+                        if (data.estado === 1){
+                            localStorage.setItem("Success",data.mensaje);
+                            parent.location.href = "/adminusers";
+                        } else{
+                            toastr.warning(data.mensaje)
+                        }
+                    },
+                    error: function (data){
+                        toastr.error(data.responseJSON.mensaje);
                     }
-                },
-                error: function (data){
-                    toastr.error(data.responseJSON.mensaje);
-                }
-            })
+                })
+                // SI EL VALUE ES editar ACTUALIZA UN USUARIO YA EXISTENTE
+            } else if ($('#btnGuardarAdminUser').val() === "editar"){
+                $.ajax({
+                    type: 'PUT',
+                    url: '/adminusers',
+                    data: {
+                        "id":$("#txtId").val(),
+                        "dni": $("#txtDni").val(),
+                        "nombresUsuario": $("#txtNombres").val(),
+                        "apellidosUsuario": $("#txtApellidos").val(),
+                        "telefono": $("#txtTel").val(),
+                        "username": $("#txtUsername").val(),
+                        "estado":$("#txtEstado").val()
+                    },
+                    success: function (data){
+                        if (data.estado === 1){
+                            localStorage.setItem("Success",data.mensaje);
+                            parent.location.href = "/adminusers";
+                        } else {
+                            toastr.warning(data.mensaje);
+                        }
+                    },
+                    error: function (data){
+                        toastr.error(data.responseJSON.mensaje);
+                    }
+                })
+            }
         }
     });
-    // --------------------------------------------------------------------------------------
 
 
 

@@ -259,3 +259,15 @@ begin
     from Usuario_spring where email = thisEmail and clave = thisClave;
 end %
 
+Delimiter %
+drop procedure if exists Vivian.ModificarUsuario %
+create procedure ModificarUsuario (thisId int, thisDni char(8), thisNombresUsuario varchar(45), thisApellidosUsuario varchar(45), thisUsername varchar(100), thisTelefono char(9), thisEstado int, out valido int)
+begin
+	update vivian.usuario_spring set dni = thisDni, nombresUsuario = thisNombresUsuario, apellidosUsuario = thisApellidosUsuario, 
+    username = thisUsername, telefono = thisTelefono, estado = thisEstado
+    where idUsuario = thisId;
+    set valido = 1;
+    select valido;
+end %
+
+

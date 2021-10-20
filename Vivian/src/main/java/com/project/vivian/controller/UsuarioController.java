@@ -1,18 +1,13 @@
 package com.project.vivian.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.project.vivian.entidad.*;
 import com.project.vivian.service.CategoriaService;
-import com.project.vivian.service.TipoService;
 import com.project.vivian.service.UsuarioSpringService;
-import com.sun.net.httpserver.Authenticator;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,9 +15,8 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+import java.util.Optional;
 
 @Controller
 @RequestMapping
@@ -33,9 +27,6 @@ public class UsuarioController {
 
 	@Autowired
 	private CategoriaService categoriaService;
-
-	@Autowired
-	private ObjectMapper mapper;
 	
 	public void obtenerDatosUsuario(Model model) {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -101,15 +92,15 @@ public class UsuarioController {
 		try{
 			UsuarioSpring usuarioEmail = usuarioSpringService.obtenerPorEmail(usuarioSpring.getUsername());
 			if (usuarioEmail != null){
-				confirmacion.setEstado(ResponseEstado.ERROR_APLICACION);
+				confirmacion.setEstado(ResponseEstado.ERROR_NEGOCIO);
 				confirmacion.setMensaje("El usuario ya existe.");
 			} else {
 				UsuarioSpring usuarioDni = usuarioSpringService.obtenerPorDni(usuarioSpring.getDni());
 				if (usuarioDni != null){
-					confirmacion.setEstado(ResponseEstado.ERROR_APLICACION);
+					confirmacion.setEstado(ResponseEstado.ERROR_NEGOCIO);
 					confirmacion.setMensaje("El DNI ya existe.");
 				} else {
-					UsuarioSpring usuarioCreated = usuarioSpringService.crearUsuario(usuarioSpring);
+					UsuarioSpring usuarioCreated = usuarioSpringService.crearAdminUsuario(usuarioSpring);
 					if (usuarioCreated != null){
 						confirmacion.setEstado(ResponseEstado.OK);
 						confirmacion.setMensaje("Usuario ingresado correctamente.");
@@ -119,28 +110,94 @@ public class UsuarioController {
 			return ResponseEntity.accepted().body(confirmacion);
 		}catch (Exception ex){
 			System.out.println(ex.getMessage());
-			confirmacion.setEstado(ResponseEstado.ERROR_NEGOCIO);
-			confirmacion.setMensaje("Error en el negocio.");
+			confirmacion.setEstado(ResponseEstado.ERROR_APLICACION);
+			confirmacion.setMensaje("Error en el servidor.");
 			return ResponseEntity.badRequest().body(confirmacion);
 		}
 	}
 
 	@DeleteMapping(value="/adminusers")
-	public ResponseEntity<Confirmacion> adminUsers(Model model, @RequestParam Integer id) throws Exception {
+	public ResponseEntity<Confirmacion> deleteAdminUser(Model model, @RequestParam Integer id) throws Exception {
 		Confirmacion confirmacion = new Confirmacion();
 		try{
 			if (usuarioSpringService.eliminarPorId(id)){
 				confirmacion.setEstado(ResponseEstado.OK);
 				confirmacion.setMensaje("Usuario eliminado correctamente.");
 			} else {
-				confirmacion.setEstado(ResponseEstado.ERROR_APLICACION);
+				confirmacion.setEstado(ResponseEstado.ERROR_NEGOCIO);
 				confirmacion.setMensaje("Error al eliminar el usuario.");
 			}
 			return ResponseEntity.accepted().body(confirmacion);
 		}catch (Exception ex){
 			System.out.println(ex.getMessage());
-			confirmacion.setEstado(ResponseEstado.ERROR_NEGOCIO);
-			confirmacion.setMensaje("Error en el negocio.");
+			confirmacion.setEstado(ResponseEstado.ERROR_APLICACION);
+			confirmacion.setMensaje("Error en el servidor.");
+			return ResponseEntity.badRequest().body(confirmacion);
+		}
+	}
+
+	@PutMapping(value="/adminusers")
+	public ResponseEntity<Confirmacion> updateAdminUser(Model model, UsuarioSpring usuarioSpring) throws Exception {
+		Confirmacion confirmacion = new Confirmacion();
+		try{
+			UsuarioSpring searchEmail = usuarioSpringService.obtenerPorEmail(usuarioSpring.getUsername());
+			UsuarioSpring searchDni = usuarioSpringService.obtenerPorDni(usuarioSpring.getDni());
+			Optional<UsuarioSpring> usuarioActualizar = usuarioSpringService.obtenerPorId(usuarioSpring.getId());
+
+			if (searchEmail == null && searchDni == null){
+				Integer valido = usuarioSpringService.actualizarAdminUsuario(usuarioSpring.getId(), usuarioSpring.getDni(),
+						usuarioSpring.getNombresUsuario(), usuarioSpring.getApellidosUsuario(), usuarioSpring.getUsername(), usuarioSpring.getTelefono(), usuarioSpring.getEstado());
+				if (valido == 1){
+					confirmacion.setEstado(ResponseEstado.OK);
+					confirmacion.setMensaje("Usuario actualizado correctamente.");
+				}
+			} else if (searchEmail == null && searchDni != null){
+				if (searchDni.getId() == usuarioActualizar.get().getId()){
+					Integer valido = usuarioSpringService.actualizarAdminUsuario(usuarioSpring.getId(), usuarioSpring.getDni(),
+							usuarioSpring.getNombresUsuario(), usuarioSpring.getApellidosUsuario(), usuarioSpring.getUsername(), usuarioSpring.getTelefono(), usuarioSpring.getEstado());
+					if (valido == 1){
+						confirmacion.setEstado(ResponseEstado.OK);
+						confirmacion.setMensaje("Usuario actualizado correctamente.");
+					}
+				} else {
+					confirmacion.setEstado(ResponseEstado.ERROR_NEGOCIO);
+					confirmacion.setMensaje("El DNI ya existe.");
+				}
+			} else if (searchEmail != null && searchDni == null){
+				if (searchEmail.getId() == usuarioActualizar.get().getId()){
+					Integer valido = usuarioSpringService.actualizarAdminUsuario(usuarioSpring.getId(), usuarioSpring.getDni(),
+							usuarioSpring.getNombresUsuario(), usuarioSpring.getApellidosUsuario(), usuarioSpring.getUsername(), usuarioSpring.getTelefono(), usuarioSpring.getEstado());
+					if (valido == 1){
+						confirmacion.setEstado(ResponseEstado.OK);
+						confirmacion.setMensaje("Usuario actualizado correctamente.");
+					}
+				} else {
+					confirmacion.setEstado(ResponseEstado.ERROR_NEGOCIO);
+					confirmacion.setMensaje("El Usuario ya existe.");
+				}
+			} else {
+				if (searchEmail.getId() == usuarioActualizar.get().getId()){
+					if (searchDni.getId() == usuarioActualizar.get().getId()){
+						Integer valido = usuarioSpringService.actualizarAdminUsuario(usuarioSpring.getId(), usuarioSpring.getDni(),
+								usuarioSpring.getNombresUsuario(), usuarioSpring.getApellidosUsuario(), usuarioSpring.getUsername(), usuarioSpring.getTelefono(), usuarioSpring.getEstado());
+						if (valido == 1){
+							confirmacion.setEstado(ResponseEstado.OK);
+							confirmacion.setMensaje("Usuario actualizado correctamente.");
+						}
+					} else {
+						confirmacion.setEstado(ResponseEstado.ERROR_NEGOCIO);
+						confirmacion.setMensaje("El DNI ya existe.");
+					}
+				} else {
+					confirmacion.setEstado(ResponseEstado.ERROR_NEGOCIO);
+					confirmacion.setMensaje("El Usuario ya existe.");
+				}
+			}
+			return ResponseEntity.accepted().body(confirmacion);
+		}catch (Exception ex){
+			System.out.println(ex.getMessage());
+			confirmacion.setEstado(ResponseEstado.ERROR_APLICACION);
+			confirmacion.setMensaje("Error en el servidor.");
 			return ResponseEntity.badRequest().body(confirmacion);
 		}
 	}

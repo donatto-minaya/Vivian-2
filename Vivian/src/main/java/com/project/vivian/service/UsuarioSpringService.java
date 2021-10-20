@@ -1,16 +1,18 @@
 package com.project.vivian.service;
 
 import com.project.vivian.entidad.UsuarioSpring;
+import org.springframework.data.repository.query.Param;
 
 import java.util.List;
+import java.util.Optional;
 
 
 public interface UsuarioSpringService {
     public List<UsuarioSpring> obtenerAdminUsuarios() throws Exception;
-    public UsuarioSpring crearUsuario(UsuarioSpring entity) throws Exception;
+    public UsuarioSpring crearAdminUsuario(UsuarioSpring entity) throws Exception;
     UsuarioSpring obtenerPorEmail(String email);
-    public UsuarioSpring obtenerPorId(Integer integer);
+    public Optional<UsuarioSpring> obtenerPorId(Integer integer);
     public UsuarioSpring obtenerPorDni(String dni) throws Exception;
     public boolean eliminarPorId(Integer integer);
-    public <S extends UsuarioSpring> S update(Integer integer, S entity);
+    public Integer actualizarAdminUsuario(Integer id, String dni, String nombresUsuario,String apellidosUsuario, String username, String telefono, Integer estado) throws Exception;
 }
