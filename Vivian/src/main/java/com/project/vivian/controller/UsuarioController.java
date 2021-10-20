@@ -1,12 +1,15 @@
 package com.project.vivian.controller;
 
-import com.project.vivian.entidad.Categoria;
-import com.project.vivian.entidad.Tipo;
-import com.project.vivian.entidad.UsuarioSpring;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
+import com.project.vivian.entidad.*;
 import com.project.vivian.service.CategoriaService;
 import com.project.vivian.service.TipoService;
 import com.project.vivian.service.UsuarioSpringService;
+import com.sun.net.httpserver.Authenticator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -17,7 +20,9 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping
@@ -28,6 +33,9 @@ public class UsuarioController {
 
 	@Autowired
 	private CategoriaService categoriaService;
+
+	@Autowired
+	private ObjectMapper mapper;
 	
 	public void obtenerDatosUsuario(Model model) {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -88,16 +96,53 @@ public class UsuarioController {
 	}
 
 	@PostMapping(value="/adminusers")
-	public String insertarAdminUser(UsuarioSpring usuarioSpring, Model model) throws Exception {
+	public ResponseEntity<Confirmacion> insertarAdminUser(UsuarioSpring usuarioSpring, Model model) throws Exception {
+		Confirmacion confirmacion = new Confirmacion();
 		try{
-			usuarioSpringService.crearUsuario(usuarioSpring);
-			model.addAttribute("msgInsert","Usuario ingresado correctamente");
-			System.out.println("Usuario ingresado correctamente");
+			UsuarioSpring usuarioEmail = usuarioSpringService.obtenerPorEmail(usuarioSpring.getUsername());
+			if (usuarioEmail != null){
+				confirmacion.setEstado(ResponseEstado.ERROR_APLICACION);
+				confirmacion.setMensaje("El usuario ya existe.");
+			} else {
+				UsuarioSpring usuarioDni = usuarioSpringService.obtenerPorDni(usuarioSpring.getDni());
+				if (usuarioDni != null){
+					confirmacion.setEstado(ResponseEstado.ERROR_APLICACION);
+					confirmacion.setMensaje("El DNI ya existe.");
+				} else {
+					UsuarioSpring usuarioCreated = usuarioSpringService.crearUsuario(usuarioSpring);
+					if (usuarioCreated != null){
+						confirmacion.setEstado(ResponseEstado.OK);
+						confirmacion.setMensaje("Usuario ingresado correctamente.");
+					}
+				}
+			}
+			return ResponseEntity.accepted().body(confirmacion);
 		}catch (Exception ex){
-			model.addAttribute("msgInsert",ex.getMessage());
 			System.out.println(ex.getMessage());
+			confirmacion.setEstado(ResponseEstado.ERROR_NEGOCIO);
+			confirmacion.setMensaje("Error en el negocio.");
+			return ResponseEntity.badRequest().body(confirmacion);
 		}
-		return "redirect:/adminusers";
+	}
+
+	@DeleteMapping(value="/adminusers")
+	public ResponseEntity<Confirmacion> adminUsers(Model model, @RequestParam Integer id) throws Exception {
+		Confirmacion confirmacion = new Confirmacion();
+		try{
+			if (usuarioSpringService.eliminarPorId(id)){
+				confirmacion.setEstado(ResponseEstado.OK);
+				confirmacion.setMensaje("Usuario eliminado correctamente.");
+			} else {
+				confirmacion.setEstado(ResponseEstado.ERROR_APLICACION);
+				confirmacion.setMensaje("Error al eliminar el usuario.");
+			}
+			return ResponseEntity.accepted().body(confirmacion);
+		}catch (Exception ex){
+			System.out.println(ex.getMessage());
+			confirmacion.setEstado(ResponseEstado.ERROR_NEGOCIO);
+			confirmacion.setMensaje("Error en el negocio.");
+			return ResponseEntity.badRequest().body(confirmacion);
+		}
 	}
 
 }

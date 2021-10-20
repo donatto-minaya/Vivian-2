@@ -66,7 +66,7 @@ create table if not exists usuario_spring (
     telefono char(9) not null,
     fechaRegistro datetime default now(),
     idTipo int default 3, -- tipo
-    estado bit default 1 
+    estado int default 1 
 ) engine = InnoDB  default charset = utf8mb4 auto_increment 1;
 
 alter table usuario_spring add constraint pk_usuario_spring primary key(idUsuario);

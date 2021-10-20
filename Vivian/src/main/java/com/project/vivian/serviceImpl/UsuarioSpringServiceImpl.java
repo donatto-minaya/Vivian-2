@@ -39,7 +39,7 @@ public class UsuarioSpringServiceImpl implements UsuarioSpringService{
 
     @Override
     public UsuarioSpring obtenerPorEmail(String email) {
-        UsuarioSpring usuario = usuarioSpringDAO.findByUsername(email).orElseThrow(() -> new UsernameNotFoundException("No existe usuario"));
+        UsuarioSpring usuario = usuarioSpringDAO.findByUsername(email).orElse(null);
         return usuario;
     }
 
@@ -49,8 +49,20 @@ public class UsuarioSpringServiceImpl implements UsuarioSpringService{
     }
 
     @Override
+    public UsuarioSpring obtenerPorDni(String dni) throws Exception {
+        UsuarioSpring usuario = usuarioSpringDAO.findByDni(dni).orElse(null);
+        return usuario;
+    }
+
+    @Override
     public boolean eliminarPorId(Integer integer) {
-        return false;
+        try{
+            usuarioSpringDAO.deleteById(integer);
+            return true;
+        }catch (Exception ex){
+            return false;
+        }
+
     }
 
     @Override
@@ -60,7 +72,6 @@ public class UsuarioSpringServiceImpl implements UsuarioSpringService{
             LocalDateTime now = LocalDateTime.now();
             Tipo tipoAdmin = tipoDAO.getById(3);
             entity.setIdTipo(tipoAdmin);
-            entity.setEstado(1);
             entity.setFechaRegistro(now.toInstant(ZoneOffset.UTC));
             entity.setPassword(passwordEncoder.encode(entity.getPassword()));
             UsuarioSpring usuarioCreated = usuarioSpringDAO.save(entity);

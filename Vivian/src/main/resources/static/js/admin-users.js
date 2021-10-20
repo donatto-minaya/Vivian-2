@@ -1,5 +1,10 @@
 $(document).ready(function(){
 
+    if (localStorage.getItem("Success")) {
+        toastr.success(localStorage.getItem("Success"));
+        localStorage.clear();
+    }
+
     let idioma_espanol={
         "sProcessing":     "Procesando...",
         "sLengthMenu":     "Mostrar _MENU_ registros",
@@ -31,7 +36,7 @@ $(document).ready(function(){
         columnDefs: [
             {  targets: 8,
                 render: function (data, type, row, meta) {
-                    return '<button style="margin-right:5px;" type="button" data-toggle="modal" data-target="#formCat" class="btn btn-warning editar" id=n-"' + meta.row + '">Editar<button type="button" class="btn btn-danger eliminar" id=s-"' + meta.row + '">Eliminar</button>';
+                    return '<button style="margin-right:5px;" type="button" class="editar" id=n-"' + meta.row + '">Editar</button><button type="button" class="eliminar" id=s-"' + meta.row + '">Eliminar</button>';
                 }
             }
         ],
@@ -44,32 +49,69 @@ $(document).ready(function(){
     });
 
     const XModal = $(".btn-close-modal");
-    const ldni = $("#txtDni");
-    const lnombres = $("#txtNombres");
-    const lapellidos = $("#txtApellidos");
-    const lusuario = $("#txtUsername");
-    const lpassword = $("#txtPassword");
-    const lrepeatpass = $("#txtRepeatPassword");
-    const ltel = $("#txtTel");
+    const idni = $("#txtDni");
+    const inombres = $("#txtNombres");
+    const iapellidos = $("#txtApellidos");
+    const iusuario = $("#txtUsername");
+    const ipassword = $("#txtPassword");
+    const irepeatpass = $("#txtRepeatPassword");
+    const itel = $("#txtTel");
 
     XModal.click(function (){
-        ldni.val("");
-        lnombres.val("");
-        lapellidos.val("");
-        lusuario.val("");
-        lpassword.val("");
-        lrepeatpass.val("");
-        ltel.val("");
+        idni.val("");
+        inombres.val("");
+        iapellidos.val("");
+        iusuario.val("");
+        ipassword.val("");
+        irepeatpass.val("");
+        itel.val("");
         $("label.error").remove();
     });
 
+    $('#tAdminUsuario tbody').on('click', '.editar', function () {
+        $("label.error").remove();
+        var id = $(this).attr("id").match(/\d+/)[0];
+        var data = $('#tAdminUsuario').DataTable().row( id ).data();
+        idni.val(data[1]);
+        inombres.val(data[2]);
+        iapellidos.val(data[3]);
+        iusuario.val(data[4]);
+        itel.val(data[5]);
+        console.log(data[7]);
+        switch (data[7])
+        {
+            case "Activo":  $("#txtEstado").val(1); break;
+            default:  $("#txtEstado").val(0);
+        }
+        openModal();
+    });
 
-    //// VALIDACION
+    $('#tAdminUsuario tbody').on('click', '.eliminar', function () {
+        var id = $(this).attr("id").match(/\d+/)[0];
+        var data = $('#tAdminUsuario').DataTable().row( id ).data();
+        if(!confirm('Desea Eliminar?'))return false;
+        $.ajax({
+            type: 'DELETE',
+            url: '/adminusers',
+            data: {
+                "id":data[0],
+            },success: function (data){
+                if (data.estado === 1){
+                    localStorage.setItem("Success",data.mensaje);
+                    parent.location.href="/adminusers";
+                }else{
+                    toastr.error(data.mensaje);
+                }
+            }
+        })
+    });
+
+    // --------- VALIDACION ----------
     // METODO PARA VALIDAR SOLO LETRAS
     $.validator.addMethod("lettersonly", function(value, element) {
         return this.optional(element) || /^[a-z\s]+$/i.test(value);
     }, "El campo solo permite el ingreso de letras");
-
+    // METODO PARA VALIDAR VALORES IGUALES
     $.validator.addMethod("valueNotEquals", function(value, element, param) {
         return this.optional(element) || value != param;
     }, "Seleccione un valor diferente");
@@ -98,8 +140,43 @@ $(document).ready(function(){
         if($('#formAdminUser').valid() == false){
             return false;
         }else{
-            $("#formAdminUser").submit();
+            let adminuser = {
+                "dni": $("#txtDni").val(),
+                "nombresUsuario": $("#txtNombres").val(),
+                "apellidosUsuario": $("#txtApellidos").val(),
+                "telefono": $("#txtTel").val(),
+                "username": $("#txtUsername").val(),
+                "password": $("#txtPassword").val(),
+            }
+
+            $.ajax({
+                type: 'POST',
+                url: '/adminusers',
+                data: {
+                    "dni": $("#txtDni").val(),
+                    "nombresUsuario": $("#txtNombres").val(),
+                    "apellidosUsuario": $("#txtApellidos").val(),
+                    "telefono": $("#txtTel").val(),
+                    "username": $("#txtUsername").val(),
+                    "password": $("#txtPassword").val(),
+                    "estado":$("#txtEstado").val()
+                },
+                success: function (data){
+                    if (data.estado === 1){
+                        localStorage.setItem("Success",data.mensaje);
+                        parent.location.href = "/adminusers";
+                    } else{
+                        toastr.warning(data.mensaje)
+                    }
+                },
+                error: function (data){
+                    toastr.error(data.responseJSON.mensaje);
+                }
+            })
         }
     });
-    /////
+    // --------------------------------------------------------------------------------------
+
+
+
 });

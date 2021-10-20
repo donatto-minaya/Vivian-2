@@ -1,11 +1,11 @@
-const myModal = document.querySelector('.modal-container')
+let myModal = document.querySelector('.modal-container');
 let modalWindow;
-const modalWindow2 = document.querySelector('.modal-window-w2');
-const modalWindow3 = document.querySelector('.modal-window-w3');
-const modalWindow5 = document.querySelector('.modal-window-w5');
-const modalWindow7 = document.querySelector('.modal-window-w7');
-const btnOpenModal = document.querySelector('.btn-open-close-modal');
-const btnCloseModal = document.querySelector(".btn-close-modal");
+let modalWindow2 = document.querySelector('.modal-window-w2');
+let modalWindow3 = document.querySelector('.modal-window-w3');
+let modalWindow5 = document.querySelector('.modal-window-w5');
+let modalWindow7 = document.querySelector('.modal-window-w7');
+let btnOpenModal = document.querySelector('.btn-open-modal');
+let btnCloseModal = document.querySelector(".btn-close-modal");
 if (modalWindow2){
   modalWindow = modalWindow2;
 } else if (modalWindow3){
@@ -34,6 +34,10 @@ btnCloseModal.addEventListener('click', function( event ) {
 });
 
 btnOpenModal.addEventListener('click', function( event ) {
+  openModal();
+});
+
+function openModal(){
   modalWindow.classList.add("bounce-in-modal");
   myModal.style.display = "block";
-});                      
+}

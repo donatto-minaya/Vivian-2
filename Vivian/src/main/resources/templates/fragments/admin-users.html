@@ -4,7 +4,7 @@
         <br>
         <h1>Mantenimiento Usuarios Administrador</h1>
         <br>
-        <a class="btn-open-close-modal" id="agregarAdminUser">Agregar nuevo</a>
+        <a class="btn-open-modal" id="agregarAdminUser">Agregar nuevo</a>
         <!-- MODAL -->
         <div class="modal-container modal-disable-close">
             <div class="modal-window-w3">
@@ -43,7 +43,14 @@
                         <label class="">Repita la contraseña:</label>
                         <input type="password" class="" name="txtRepeatPassword" id="txtRepeatPassword" value="" placeholder="Repita la contraseña">
                     </div>
-                    <button type="submit" class="" id="btnGuardarAdminUser" name="opcion" value="">Guardar</button>
+                    <div class="">
+                        <label class="">Estado:</label>
+                        <select name="txtEstado" id="txtEstado" th:field="*{estado}">
+                            <option value="1" selected>Activo</option>
+                            <option value="0">Inactivo</option>
+                        </select>
+                    </div>
+                    <button type="button" class="" id="btnGuardarAdminUser" name="opcion" value="">Guardar</button>
                 </form>
             </div>
         </div>
