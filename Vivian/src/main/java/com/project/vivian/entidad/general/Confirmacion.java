@@ -1,4 +1,4 @@
-package com.project.vivian.entidad;
+package com.project.vivian.entidad.general;
 
 public class Confirmacion {
     private int estado;

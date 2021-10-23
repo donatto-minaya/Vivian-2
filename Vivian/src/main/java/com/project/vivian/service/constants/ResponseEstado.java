@@ -1,4 +1,4 @@
-package com.project.vivian.entidad;
+package com.project.vivian.service.constants;
 
 public class ResponseEstado {
     public static final int OK = 1;

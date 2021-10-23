@@ -1,9 +1,10 @@
 package com.project.vivian.controller;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.project.vivian.entidad.*;
+import com.project.vivian.entidad.general.Confirmacion;
 import com.project.vivian.service.CategoriaService;
 import com.project.vivian.service.UsuarioSpringService;
+import com.project.vivian.service.constants.ResponseEstado;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
