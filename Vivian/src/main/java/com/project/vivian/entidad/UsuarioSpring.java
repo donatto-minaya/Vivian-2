@@ -5,7 +5,7 @@ import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
-
+//wdwdwdwdwdwdwdw
 @Table(name = "usuario_spring", indexes = {
         @Index(name = "uq_dni_spring", columnList = "dni", unique = true),
         @Index(name = "uq_username_spring", columnList = "username", unique = true)
