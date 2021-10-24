@@ -10,6 +10,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Assistant:wght@200&display=swap'); /* Assistant -> Para parrafos */
 
 :root {
+    --red-dark: #ea2c1a;
+}
+
+:root {
+    --default-purple: #373295;
     --default-white: #f2f2f2;
     --default-black: #404040;
     --default-blue: #1B3C59;
@@ -25,7 +30,7 @@
 /* the same color but more clear */
 :root {
     --shadow-clear: #d9d9d9;
-    --red-clear: #fcd8d5;
+    --red-clear: #fde9e7;
     --white-clear: #fafafa;
     --orange-clear: #ffc999;
     --yellow-clear: #ffff80;

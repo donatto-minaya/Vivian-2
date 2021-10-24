@@ -97,6 +97,21 @@ input:focus:valid {
     padding: 1em 0.75em;
     font-weight: bold;
     background-color: var(--red-clear);
-    color: var(--default-red);
+    color: var(--red-dark);
     font-family: 'Catamaran';
+}
+
+#forgot-password {
+    margin-top: -1em;
+}
+
+.block-form > a {
+    font-size: 14px;
+    color: var(--default-purple);
+    font-family: 'Assistant';
+    font-weight: bold;
+}
+
+.block-form > a:hover {
+    text-decoration: underline;
 }
