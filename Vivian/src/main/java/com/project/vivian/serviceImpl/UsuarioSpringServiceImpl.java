@@ -63,7 +63,6 @@ public class UsuarioSpringServiceImpl implements UsuarioSpringService{
         }catch (Exception ex){
             return false;
         }
-
     }
 
     @Override

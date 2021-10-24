@@ -1,8 +1,5 @@
-package com.project.vivian.serviceImpl;
+package com.project.vivian.service.util;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.Properties;
 
 import javax.mail.Message;
@@ -11,18 +8,18 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
- 
 
 
-public class EmailServiceImpl {
+
+public class UtilMail {
 	
-	public EmailServiceImpl() {
+	public UtilMail() {
 
 		
 	}
 
 	
-public void EnviarEmail(String destinatario, String asunto, String cuerpo) {
+	public void EnviarEmail(String destinatario, String asunto, String cuerpo) {
 
 	    // Esto es lo que va delante de @gmail.com en tu cuenta de correo. Es el remitente también.
 	    String remitente = "raizCorreo";  //Para la dirección nomcuenta@gmail.com

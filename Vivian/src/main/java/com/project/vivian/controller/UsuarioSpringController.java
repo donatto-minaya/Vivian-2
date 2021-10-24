@@ -43,7 +43,7 @@ public class UsuarioSpringController {
 	}
 
 	@GetMapping({"/","/login"})
-	public String login(HttpServletRequest request, HttpServletResponse response) {
+	public String login() {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		if (auth.getName().equals("anonymousUser")){
 			return "index";
@@ -82,7 +82,7 @@ public class UsuarioSpringController {
 	}
 
 	@PostMapping(value="/adminusers")
-	public ResponseEntity<Confirmacion> insertarAdminUser(UsuarioSpring usuarioSpring, Model model) throws Exception {
+	public ResponseEntity<Confirmacion> insertarAdminUser(UsuarioSpring usuarioSpring) throws Exception {
 		Confirmacion confirmacion = new Confirmacion();
 		try{
 			UsuarioSpring usuarioEmail = usuarioSpringService.obtenerPorEmail(usuarioSpring.getUsername());
@@ -112,7 +112,7 @@ public class UsuarioSpringController {
 	}
 
 	@DeleteMapping(value="/adminusers")
-	public ResponseEntity<Confirmacion> deleteAdminUser(Model model, @RequestParam Integer id) throws Exception {
+	public ResponseEntity<Confirmacion> deleteAdminUser(@RequestParam Integer id) throws Exception {
 		Confirmacion confirmacion = new Confirmacion();
 		try{
 			if (usuarioSpringService.eliminarPorId(id)){
@@ -132,7 +132,7 @@ public class UsuarioSpringController {
 	}
 
 	@PutMapping(value="/adminusers")
-	public ResponseEntity<Confirmacion> updateAdminUser(Model model, UsuarioSpring usuarioSpring) throws Exception {
+	public ResponseEntity<Confirmacion> updateAdminUser(UsuarioSpring usuarioSpring) throws Exception {
 		Confirmacion confirmacion = new Confirmacion();
 		try{
 			UsuarioSpring searchEmail = usuarioSpringService.obtenerPorEmail(usuarioSpring.getUsername());

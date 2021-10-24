@@ -10,7 +10,7 @@
                         <div class="modal-window-w3">
                             <a href="#" class="btn-close-modal">&times;</a>
                             <h1>AGREGAR USUARIO</h1>
-                            <form method="post" th:action="@{/customerusers}" th:object="${usuario}">
+                            <form method="post" th:action="@{/customerusers}" th:object="${usuario}" id="formCustomerUser">
                                 <div class="mb-3">
                                     <label class="" id="labelId">ID:</label>
                                     <input type="text" class="" name="id" id="txtId" value=""
@@ -38,12 +38,12 @@
                                 </div>
                                 <div class="">
                                     <label class="">Usuario:</label>
-                                    <input type="email" class="" name="username" id="txtUsername"
+                                    <input type="email" class="" name="email" id="txtEmail"
                                            th:field="*{email}" value="" placeholder="Ingresa el usuario">
                                 </div>
                                 <div class="">
-                                    <label class="" id="lpassword">Contraseña:</label>
-                                    <input type="password" class="" name="password" id="txtPassword"
+                                    <label class="" id="lclave">Contraseña:</label>
+                                    <input type="password" class="" name="clave" id="txtClave"
                                            th:field="*{clave}" value="" placeholder="Ingresa la contraseña">
                                 </div>
                                 <div class="">

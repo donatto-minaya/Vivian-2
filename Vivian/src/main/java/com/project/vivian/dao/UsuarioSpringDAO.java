@@ -16,7 +16,7 @@ public interface UsuarioSpringDAO extends JpaRepository<UsuarioSpring,Integer> {
 
     public Optional<UsuarioSpring> findByDni(String dni);
 
-    @Query(value = "{call ModificarUsuario(:id, :dni, :nombresUsuario, :apellidosUsuario, :username, :telefono, :estado, @val)}", nativeQuery = true)
+    @Query(value = "{call ModificarUsuarioSpring(:id, :dni, :nombresUsuario, :apellidosUsuario, :username, :telefono, :estado, @val)}", nativeQuery = true)
     public Integer updateWithOutPass(@Param("id") Integer id, @Param("dni") String dni, @Param("nombresUsuario") String nombresUsuario,
                                            @Param("apellidosUsuario") String apellidosUsuario, @Param("username") String username, @Param("telefono") String telefono,
                                            @Param("estado") Integer estado);

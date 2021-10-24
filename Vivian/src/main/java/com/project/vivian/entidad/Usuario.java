@@ -34,7 +34,7 @@ public class Usuario {
     @Column(name = "telefono", nullable = false, length = 9)
     private String telefono;
 
-    @Column(name = "fechaRegistro", nullable = false)
+    @Column(name = "fechaRegistro")
     private Instant fechaRegistro;
 
     @ManyToOne(optional = false)

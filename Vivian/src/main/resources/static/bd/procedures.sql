@@ -157,12 +157,12 @@ Delimiter %
 drop procedure if exists Vivian.AgregarUsuario %
 create procedure AgregarUsuario
 	(thisDni char(8), thisNombres varchar(45), thisApellidos varchar(45), thisCorreo varchar(100), 
-    thisClave varchar(30), thisTelefono char(9), thisIdTipo int, out estado int)
+    thisClave varchar(30), thisTelefono char(9), thisIdTipo int, thisEstado int, out valido int)
 begin
 	insert into Usuario(idUsuario, dni, nombresUsuario, apellidosUsuario, email, clave, telefono, fechaRegistro, idTipo) values
     (null, thisDni, thisNombres, thisApellidos, thisCorreo, aes_encrypt(thisClave, 'rumble'), thisTelefono, curdate(), if(isnull(thisIdTipo), 1, thisIdTipo));
-    set estado = 1;
-    select estado;
+    set valido = 1;
+    select valido;
 end %
 
 -- -----------------------------------------------------
@@ -262,8 +262,8 @@ begin
 end %
 
 Delimiter %
-drop procedure if exists Vivian.ModificarUsuario %
-create procedure ModificarUsuario (thisId int, thisDni char(8), thisNombresUsuario varchar(45), thisApellidosUsuario varchar(45), thisUsername varchar(100), thisTelefono char(9), thisEstado int, out valido int)
+drop procedure if exists Vivian.ModificarUsuarioSpring %
+create procedure ModificarUsuarioSpring (thisId int, thisDni char(8), thisNombresUsuario varchar(45), thisApellidosUsuario varchar(45), thisUsername varchar(100), thisTelefono char(9), thisEstado int, out valido int)
 begin
 	update vivian.usuario_spring set dni = thisDni, nombresUsuario = thisNombresUsuario, apellidosUsuario = thisApellidosUsuario, 
     username = thisUsername, telefono = thisTelefono, estado = thisEstado
@@ -272,11 +272,15 @@ begin
     select valido;
 end %
 
-Delimiter /
-drop procedure if exists Vivian.ListarUsuariosSinClave /
-create procedure ListarUsuariosSinClave()
+Delimiter %
+drop procedure if exists Vivian.ModificarUsuario %
+create procedure ModificarUsuario (thisId int, thisDni char(8), thisNombresUsuario varchar(45), thisApellidosUsuario varchar(45), thisEmail varchar(100), thisTelefono char(9), thisEstado int, out valido int)
 begin
-	select idUsuario, dni, nombresUsuario, apellidosUsuario, email, telefono, fechaRegistro, idTipo, estado from usuario;
-end /
+	update vivian.usuario set dni = thisDni, nombresUsuario = thisNombresUsuario, apellidosUsuario = thisApellidosUsuario, 
+    email = thisEmail, telefono = thisTelefono, estado = thisEstado
+    where idUsuario = thisId;
+    set valido = 1;
+    select valido;
+end %
 
 
