@@ -32,7 +32,7 @@ create table if not exists Usuario (
     telefono char(9) not null,
     fechaRegistro date not null,
     idTipo int default 1 not null, -- tipo
-    activo bit default 1 not null
+    estado bit default 1 not null
 ) engine = InnoDB  default charset = utf8mb4 auto_increment 1;
 
 alter table Usuario add constraint pk_usuario primary key(idUsuario);
@@ -45,7 +45,7 @@ alter table Usuario add constraint fk_Tipo
 foreign key(idTipo) references Tipo(idTipo)
 on delete cascade on update cascade;
 
-insert into Usuario(idUsuario, dni, nombresUsuario, apellidosUsuario, email, clave, telefono, fechaRegistro, idTipo, activo) values
+insert into Usuario(idUsuario, dni, nombresUsuario, apellidosUsuario, email, clave, telefono, fechaRegistro, idTipo, estado) values
 	(1, 12312312, 'Donatto', 'Minaya', 'ottanod22@gmail.com', aes_encrypt('donatto22', 'rumble'), 913242570, '2021-04-01', 3,default),
     (2, 93766295, 'Gerson', 'Murguia', 'gerson@gmail.com', aes_encrypt('murguiaGerson', 'rumble'), 926537582, '2021-04-02', 3,default),
 	(3, 12345678, 'Miriam', 'Lorem', 'miriam123@gmail.com', aes_encrypt('miriamL12345', 'rumble'), 987654321, '2021-05-10', default,default),
@@ -88,16 +88,17 @@ insert into usuario_spring(idUsuario, dni, nombresUsuario, apellidosUsuario, use
 -- -----------------------------------------------------
 create table if not exists Turno (
 	idTurno varchar(30) not null,
-    descripcion varchar(35) not null
+    descripcion varchar(35) not null,
+    horario varchar(35) not null
 ) engine = InnoDB default charset = utf8mb4;
 
 alter table Turno add constraint pk_turno primary key(idTurno);
 alter table Turno add constraint uq_descripcion unique(descripcion);
 
-insert into Turno (idTurno, descripcion) values
-	('Mañana', '07:30am - 11:30am'),
-    ('Tarde', '12:00pm - 6:30pm'),
-    ('Noche', '7:00pm - 11:30pm')
+insert into Turno (idTurno, descripcion, horario) values
+	(1,'Mañana', '07:30am - 11:30am'),
+    (2,'Tarde', '12:00pm - 6:30pm'),
+    (3,'Noche', '7:00pm - 11:30pm')
 ;
 
 -- -----------------------------------------------------
@@ -177,10 +178,10 @@ foreign key(idTurno) references Turno(idTurno)
 on delete cascade on update cascade;
 
 insert into Reserva(idReserva, idUsuario, nMesa, piso, fechaReservacion, idTurno) values
-	(1, 3, 5, 1, '2021-06-10', 'Tarde'),
-    (2, 3, 3, 1, '2021-06-15', 'Noche'),
-    (3, 5, 6, 2, '2022-01-01', 'Mañana'),
-    (4, 4, 1, 1, '2021-12-25', 'Noche')
+	(1, 3, 5, 1, '2021-06-10', 2),
+    (2, 3, 3, 1, '2021-06-15', 3),
+    (3, 5, 6, 2, '2022-01-01', 1),
+    (4, 4, 1, 1, '2021-12-25', 3)
 ;
 
 -- -----------------------------------------------------

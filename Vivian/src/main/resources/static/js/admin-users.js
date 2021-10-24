@@ -1,5 +1,17 @@
 $(document).ready(function(){
 
+    // VARIABLES DE LOS TODOS LOS INPUTS Y COMBOBOXES DEL FORMULARIO. ADEMAS DE LA "X" PARA CERRAR EL MODAL
+    const XModal = $(".btn-close-modal");
+    const idni = $("#txtDni");
+    const inombres = $("#txtNombres");
+    const iapellidos = $("#txtApellidos");
+    const iusuario = $("#txtUsername");
+    const ipassword = $("#txtPassword");
+    const irepeatpass = $("#txtRepeatPassword");
+    const itel = $("#txtTel");
+    const cboEstado = $("#txtEstado");
+    const iid = $("#txtId");
+
     // METODO PARA MOSTRAR EL MENSAJE GUARDADO EN EL LOCALSTORAGE AL RECARGAR LA PAGINA LUEGO DEL AJAX
     if (localStorage.getItem("Success")) {
         toastr.success(localStorage.getItem("Success"));
@@ -10,7 +22,7 @@ $(document).ready(function(){
     }
 
     // AL INCIAR LA APLICACION EL INPUT Y LABEL DEL ID DE USUARIO NO SE MOSTRARAN EN EL MODAL/FORMULARIO
-    $("#txtId").hide();
+    iid.hide();
     $("#labelId").hide();
 
     // OBJETO PARA PONER EL DATA TABLE EN ESPANIOL
@@ -56,19 +68,11 @@ $(document).ready(function(){
     // METODO PARA SETEAR EL VALUE "AGREGAR" AL BOTON GUARDAR AL DARLE CLICK EN "Agregar Nuevo" PARA LUEGO UTILIZAR ESTE VALUE EN EL AJAX
     $("#agregarAdminUser").click(function (){
         $('#btnGuardarAdminUser').val("agregar");
+        $("#lpassword").show();
+        $("#txtPassword").show();
+        $("#lrepeatpassword").show();
+        $("#txtRepeatPassword").show();
     });
-
-    // VARIABLES DE LOS TODOS LOS INPUTS Y COMBOBOXES DEL FORMULARIO. ADEMAS DE LA "X" PARA CERRAR EL MODAL
-    const XModal = $(".btn-close-modal");
-    const idni = $("#txtDni");
-    const inombres = $("#txtNombres");
-    const iapellidos = $("#txtApellidos");
-    const iusuario = $("#txtUsername");
-    const ipassword = $("#txtPassword");
-    const irepeatpass = $("#txtRepeatPassword");
-    const itel = $("#txtTel");
-    const cboEstado = $("#txtEstado");
-    const iid = $("#txtId");
 
     // METODO PARA LIMPIAR EL FORMULARIO(inputs y mensajes de errores) AL DARLE CLICK A LA "X" DEL MODAL (cerrar modal)
     XModal.click(function (){

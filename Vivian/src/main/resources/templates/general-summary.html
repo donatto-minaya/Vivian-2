@@ -24,9 +24,17 @@
     <div id="fake-min-body">
         <div th:replace="/fragments/navbar :: navbar"></div>
 
-        <!-- <div th:replace="/fragments/gs-fragment :: gs"></div> -->
-        
-        <div th:insert="${verUsuarios == 1} ? ~{fragments/admin-users :: adminusers} : ~{fragments/gs-fragment :: gs}"></div>
+        <div th:block th:if="${verFragmento == 0}">
+            <div th:insert="fragments/gs-fragment :: gs" />
+        </div>
+        <div th:block th:if="${verFragmento == 1}">
+            <div th:insert="fragments/admin-users :: adminusers" />
+        </div>
+        <div th:block th:if="${verFragmento == 2}">
+            <div th:insert="fragments/customer-users :: customerusers" />
+        </div>
+
+
     </div>
 </div>
 <!-- Swal -->

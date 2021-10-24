@@ -149,7 +149,7 @@ Delimiter %
 drop procedure if exists Vivian.vUsuario %
 create procedure vUsuario (thisEmail varchar(100), thisClave varchar(20))
 begin
-	select idUsuario, dni, nombresUsuario, apellidosUsuario, email, aes_decrypt(clave, 'rumble') clave, telefono, fechaRegistro, idTipo, activo 
+	select idUsuario, dni, nombresUsuario, apellidosUsuario, email, aes_decrypt(clave, 'rumble') clave, telefono, fechaRegistro, idTipo, estado 
     from Usuario where email = thisEmail and clave = aes_encrypt(thisClave, 'rumble');
 end %
 
@@ -157,10 +157,12 @@ Delimiter %
 drop procedure if exists Vivian.AgregarUsuario %
 create procedure AgregarUsuario
 	(thisDni char(8), thisNombres varchar(45), thisApellidos varchar(45), thisCorreo varchar(100), 
-    thisClave varchar(30), thisTelefono char(9), thisIdTipo int)
+    thisClave varchar(30), thisTelefono char(9), thisIdTipo int, out estado int)
 begin
 	insert into Usuario(idUsuario, dni, nombresUsuario, apellidosUsuario, email, clave, telefono, fechaRegistro, idTipo) values
     (null, thisDni, thisNombres, thisApellidos, thisCorreo, aes_encrypt(thisClave, 'rumble'), thisTelefono, curdate(), if(isnull(thisIdTipo), 1, thisIdTipo));
+    set estado = 1;
+    select estado;
 end %
 
 -- -----------------------------------------------------
@@ -248,7 +250,7 @@ Delimiter /
 drop procedure if exists Vivian.ListarUsuarios /
 create procedure ListarUsuarios()
 begin
-	select idUsuario, dni, nombresUsuario, apellidosUsuario, email, clave, telefono, fechaRegistro, idTipo, activo from usuario;
+	select idUsuario, dni, nombresUsuario, apellidosUsuario, email, clave, telefono, fechaRegistro, idTipo, estado from usuario;
 end /
 
 Delimiter %
@@ -269,5 +271,12 @@ begin
     set valido = 1;
     select valido;
 end %
+
+Delimiter /
+drop procedure if exists Vivian.ListarUsuariosSinClave /
+create procedure ListarUsuariosSinClave()
+begin
+	select idUsuario, dni, nombresUsuario, apellidosUsuario, email, telefono, fechaRegistro, idTipo, estado from usuario;
+end /
 
 
