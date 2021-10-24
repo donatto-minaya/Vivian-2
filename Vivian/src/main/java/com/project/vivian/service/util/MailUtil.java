@@ -11,9 +11,9 @@ import javax.mail.internet.MimeMessage;
 
 
 
-public class UtilMail {
+public class MailUtil {
 	
-	public UtilMail() {
+	public MailUtil() {
 
 		
 	}
@@ -22,8 +22,8 @@ public class UtilMail {
 	public void EnviarEmail(String destinatario, String asunto, String cuerpo) {
 
 	    // Esto es lo que va delante de @gmail.com en tu cuenta de correo. Es el remitente también.
-	    String remitente = "raizCorreo";  //Para la dirección nomcuenta@gmail.com
-	    String clave = "password";  //Para la dirección nomcuenta@gmail.com
+	    String remitente = "enviaremailprueba@gmail.com";  //Para la dirección nomcuenta@gmail.com
+	    String clave = "aplicacionesweb";  //Para la dirección nomcuenta@gmail.com
 
 	    Properties props = System.getProperties();
 	    props.put("mail.smtp.host", "smtp.gmail.com");  //El servidor SMTP de Google

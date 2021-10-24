@@ -66,7 +66,8 @@ create table if not exists usuario_spring (
     telefono char(9) not null,
     fechaRegistro datetime default now(),
     idTipo int default 3, -- tipo
-    estado int default 1 
+    estado int default 1,
+    flgresetpassword int
 ) engine = InnoDB  default charset = utf8mb4 auto_increment 1;
 
 alter table usuario_spring add constraint pk_usuario_spring primary key(idUsuario);
@@ -79,8 +80,8 @@ alter table usuario_spring add constraint fk_Tipo_spring
 foreign key(idTipo) references Tipo(idTipo)
 on delete cascade on update cascade;
 
-insert into usuario_spring(idUsuario, dni, nombresUsuario, apellidosUsuario, username, password, telefono, fechaRegistro, idTipo, estado) values
-	(1, 12312312, 'Donatto', 'Minaya', 'ottanod22@gmail.com', '$2a$10$vOuBScNDn3XXyBMQO30FZO50Rg/UPuoetvd.XW1iQ47nub9is7dpG', 913242570, '2021-04-01 10:40:00', 3,default);
+insert into usuario_spring(idUsuario, dni, nombresUsuario, apellidosUsuario, username, password, telefono, fechaRegistro, idTipo, estado, flgresetpassword) values
+	(1, 12312312, 'Donatto', 'Minaya', 'ottanod22@gmail.com', '$2a$10$vOuBScNDn3XXyBMQO30FZO50Rg/UPuoetvd.XW1iQ47nub9is7dpG', 913242570, '2021-04-01 10:40:00', 3,default,1);
 
 
 -- -----------------------------------------------------

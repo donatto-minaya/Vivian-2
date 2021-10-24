@@ -7,6 +7,8 @@ import com.project.vivian.service.UsuarioService;
 import com.project.vivian.service.constants.ResponseEstado;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -23,8 +25,15 @@ public class UsuarioController {
 
     private int codigo = 2;
 
+    public void obtenerDatosUsuario(Model model) throws Exception {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        Optional<Usuario> usuarioSpring = usuarioService.obtenerPorEmail(auth.getName());
+        model.addAttribute("nombreCompleto",usuarioSpring.get().getNombresUsuario() + " " + usuarioSpring.get().getApellidosUsuario());
+    }
+
     @GetMapping("")
     public String listar(Model model) throws Exception {
+        obtenerDatosUsuario(model);
         List<Usuario> usuarios = usuarioService.obtenerCustomerUsuarios();
         model.addAttribute("usuario",new Usuario());
         model.addAttribute("customerusers", usuarios);

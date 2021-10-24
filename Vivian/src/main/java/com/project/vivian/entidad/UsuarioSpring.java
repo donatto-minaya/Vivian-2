@@ -45,6 +45,9 @@ public class UsuarioSpring {
     @Column(name = "estado")
     private Integer estado;
 
+    @Column(name = "flgresetpassword")
+    private Integer flgresetpassword = 0;
+
     public String estadoString(){
         if (estado == 1){
             return "Activo";
@@ -135,5 +138,13 @@ public class UsuarioSpring {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public Integer getFlgresetpassword() {
+        return flgresetpassword;
+    }
+
+    public void setFlgresetpassword(Integer flgresetpassword) {
+        this.flgresetpassword = flgresetpassword;
     }
 }

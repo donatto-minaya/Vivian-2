@@ -286,4 +286,24 @@ begin
     select valido;
 end %
 
+Delimiter %
+drop procedure if exists Vivian.ModificarResetPassword %
+create procedure ModificarResetPassword (thisId int, thisFlg int, out valido int)
+begin
+	update vivian.usuario_spring set flgresetpassword = thisFlg 
+    where idUsuario = thisId;
+    set valido = 1;
+    select valido;
+end %
+
+Delimiter %
+drop procedure if exists Vivian.ModificarPasswordOlvidada %
+create procedure ModificarPasswordOlvidada (thisId int, thisPass varchar(255), out valido int)
+begin
+	update vivian.usuario_spring set password = thisPass 
+    where idUsuario = thisId;
+    set valido = 1;
+    select valido;
+end %
+
 

@@ -38,9 +38,8 @@ public class UsuarioSpringServiceImpl implements UsuarioSpringService{
     }
 
     @Override
-    public UsuarioSpring obtenerPorEmail(String email) {
-        UsuarioSpring usuario = usuarioSpringDAO.findByUsername(email).orElse(null);
-        return usuario;
+    public Optional<UsuarioSpring> obtenerPorEmail(String email) {
+        return usuarioSpringDAO.findByUsername(email);
     }
 
     @Override
@@ -88,6 +87,25 @@ public class UsuarioSpringServiceImpl implements UsuarioSpringService{
        }catch (Exception ex){
            return 0;
        }
+    }
+
+    @Override
+    public Integer actualizarFlgResetPassword(Integer id, Integer flgReset) throws Exception {
+        try{
+            return usuarioSpringDAO.updateFlgResetPassword(id, flgReset);
+        }catch (Exception ex){
+            return 0;
+        }
+    }
+
+    @Override
+    public Integer actualizarPassOlvidada(Integer id, String pass) throws Exception {
+        try {
+            String passEncoded = passwordEncoder.encode(pass);
+            return usuarioSpringDAO.updateForgottenPass(id, passEncoded);
+        }catch (Exception ex){
+            throw new Exception(ex.getMessage());
+        }
     }
 
 }
