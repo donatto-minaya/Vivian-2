@@ -16,9 +16,11 @@ create procedure listarReservas(codigo int)
 Delimiter ||
 drop procedure if exists Vivian.mostrarReservas ||
 create procedure mostrarReservas(thisUsuario int)
-	begin
-		select * from Reserva where idUsuario = thisUsuario;
-	end ||
+begin
+	select r.idReserva, r.idUsuario, r.nMesa, r.piso, r.fechaReservacion, r.idTurno, t.descripcion from Reserva r
+	join turno t on t.idTurno = r.idTurno
+	where idUsuario = thisUsuario;
+end ||
 
 
 Delimiter ||
@@ -140,7 +142,8 @@ Delimiter ||
 drop procedure if exists Vivian.delReserva ||
 create procedure delReserva(cod int)
 	begin
-		delete from Reserva where idReserva = cod;
+		update mesa set estado = 0 where nmesa = (select nmesa from reserva where idReserva = cod);
+		delete from Reserva where idReserva = cod;        
     end ||
 -- -----------------------------------------------------
 ## Procedimientos de Usuario

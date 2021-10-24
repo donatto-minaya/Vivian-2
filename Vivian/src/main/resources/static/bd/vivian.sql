@@ -107,22 +107,23 @@ insert into Turno (idTurno, descripcion, horario) values
 create table if not exists Mesa (
 	nMesa int not null,
     piso char(1) not null,
-    capacidadPersonas int not null
+    capacidadPersonas int not null,
+    estado int
 ) engine = InnoDB default charset = utf8mb4;
 
 alter table Mesa add constraint pk_mesa primary key(nMesa);
 alter table Mesa modify column `nMesa` int not null auto_increment;
 
-insert into Mesa(nMesa, piso, capacidadPersonas) values
-	(1, 1, 5),
-    (2, 1, 5),
-    (3, 1, 4),
-	(4, 1, 2),
-    (5, 1, 6),
-    (6, 2, 2),
-    (7, 2, 5),
-    (8, 2, 3),
-    (9, 2, 3)
+insert into Mesa(nMesa, piso, capacidadPersonas, estado) values
+	(1, 1, 5, 0),
+    (2, 1, 5, 0),
+    (3, 1, 4, 0),
+	(4, 1, 2, 0),
+    (5, 1, 6, 0),
+    (6, 2, 2, 0),
+    (7, 2, 5, 0),
+    (8, 2, 3, 0),
+    (9, 2, 3, 0)
 ;
 
 -- -----------------------------------------------------
