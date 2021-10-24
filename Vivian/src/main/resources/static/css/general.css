@@ -24,6 +24,8 @@
 
 /* the same color but more clear */
 :root {
+    --shadow-clear: #d9d9d9;
+    --red-clear: #fcd8d5;
     --white-clear: #fafafa;
     --orange-clear: #ffc999;
     --yellow-clear: #ffff80;

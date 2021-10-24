@@ -22,7 +22,7 @@ button {
 }
 
 button.principal {
-    border: 0;
+    border: 1px solid var(--default-pink);
     color: var(--default-white);
     background-color: var(--default-pink);
 }

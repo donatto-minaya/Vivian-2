@@ -7,6 +7,7 @@
     <meta name="description" content="Página administrativa de Vivian">
     <meta name="keywords" content="Restaurante Recetas Comida">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" th:href="@{/img/corazon.jpg}" type="image/x-icon">
     <link rel="stylesheet" th:href="@{/css/initial-progress.css}" href="../static/css/initial-progress.css">
     <link rel="stylesheet" th:href="@{/css/index.css}" href="../static/css/index.css">
     <title>Bienvenido a Vivian!</title>
@@ -31,15 +32,19 @@
                         <ion-icon name="lock-closed-outline"></ion-icon>
                         <input type="password" name="password" id="password" placeholder="Tu contraseña" minlength="4" maxlength="20" />
                     </div>
-
+                    
+                    <div class="block-form">
+                        <div id="errorMsg" th:if="${param.error}" class="">
+                            Usuario y/o contraseña inválido.
+                        </div>
+                    </div>
     
                     <div class="block-form">
                         <button type="submit" class="principal">INGRESAR</button>
                     </div>
+                    
                 </form>
-                <div id="errorMsg" th:if="${param.error}" class="">
-                    Usuario y/o contraseña inválido.
-                </div>
+                
             </div>
         </div>
     </div>

@@ -89,3 +89,14 @@ input:focus:valid {
     border-color: var(--default-green);
     box-shadow: 0 0 10px var(--default-green);
 }
+
+#errorMsg {
+    box-shadow: 3px 0px 0px 0px inset var(--default-red);
+    border-radius: 0 4px 4px 0;
+    width: 40%;
+    padding: 1em 0.75em;
+    font-weight: bold;
+    background-color: var(--red-clear);
+    color: var(--default-red);
+    font-family: 'Catamaran';
+}
