@@ -8,49 +8,69 @@
         <!-- MODAL -->
         <div class="modal-container modal-disable-close">
             <div class="modal-window-w3">
-                <a href="#" class="btn-close-modal">&times;</a>
-                <h1>AGREGAR USUARIO</h1>
+                <a href="#" class="btn-close-modal btn principal" blue>
+                    <ion-icon name="close"></ion-icon>
+                </a>
+                
+                <div class="header-h2-github">
+                    Nuevo Usuario Administrador
+                </div>
+
                 <form method="post" th:action="@{/adminusers}" th:object="${usuarioSpring}" id="formAdminUser">
                     <div class="mb-3">
                         <label class="" id="labelId">ID:</label>
                         <input type="text" class="" name="id" id="txtId" value="" placeholder="Ingrese el id de Usuario" readonly>
                     </div>
-                    <div class="">
-                        <label class="">DNI:</label> 
-                        <input type="text" class="" name="dni" id="txtDni" value="" th:field="*{dni}" maxlength="8" placeholder="Ingresa el DNI">
+
+                    <div class="fake-form">
+                        <div class="block-modal">
+                            <ion-icon name="apps"></ion-icon>
+                            <input type="text" class="" name="dni" id="txtDni" value="" th:field="*{dni}" maxlength="8" placeholder="Ingresa el DNI">
+                        </div>
+    
+                        <div class="block-modal">
+                            <ion-icon name="person"></ion-icon>
+                            <input type="text" class="" name="nombresUsuario" id="txtNombres" th:field="*{nombresUsuario}" value="" placeholder="Ingresa los nombres">
+                        </div>
+    
+                        <div class="block-modal">
+                            <ion-icon name="person"></ion-icon>
+                            <input type="text" class="" name="apellidosUsuario" id="txtApellidos" th:field="*{apellidosUsuario}" value="" placeholder="Ingresa los apellidos">
+                        </div>
+    
+                        <div class="block-modal">
+                            <ion-icon name="call"></ion-icon>
+                            <input type="text" class="" name="telefono" id="txtTel" th:field="*{telefono}" value="" maxlength="9" placeholder="Ingresa el teléfono">
+                        </div>
+    
+                        <div class="block-modal">
+                            <ion-icon name="contact"></ion-icon>
+                            <input type="email" class="" name="username" id="txtUsername" th:field="*{username}" value="" placeholder="Ingresa el usuario">
+                        </div>
+    
+                        <div class="block-modal">
+                            <ion-icon name="lock"></ion-icon>
+                            <input type="password" class="" name="password" id="txtPassword" th:field="*{password}" value="" placeholder="Ingresa la contraseña">
+                        </div>
+    
+                        <div class="block-modal">
+                            <ion-icon name="repeat"></ion-icon>
+                            <input type="password" class="" name="txtRepeatPassword" id="txtRepeatPassword" value="" placeholder="Repita la contraseña">
+                        </div>
+    
+                        <div class="block-modal">
+                            <ion-icon name="switch"></ion-icon>
+                            <select name="txtEstado" id="txtEstado" th:field="*{estado}">
+                                <option value="1" selected>Activo</option>
+                                <option value="0">Inactivo</option>
+                            </select>
+                        </div>
                     </div>
-                    <div class="">
-                        <label class="">Nombres:</label>
-                        <input type="text" class="" name="nombresUsuario" id="txtNombres" th:field="*{nombresUsuario}" value="" placeholder="Ingresa los nombres">
+
+                    <div class="actions-form">
+                        <button type="button" class="principal" id="btnGuardarAdminUser" name="opcion" value="" blue>Guardar</button>
+                        <button type="reset" class="ghostly" id="btnGuardarAdminUser">Resetear</button>
                     </div>
-                    <div class="">
-                        <label class="">Apellidos:</label>
-                        <input type="text" class="" name="apellidosUsuario" id="txtApellidos" th:field="*{apellidosUsuario}" value="" placeholder="Ingresa los apellidos">
-                    </div>
-                    <div>
-                        <label class="">Teléfono:</label>
-                        <input type="text" class="" name="telefono" id="txtTel" th:field="*{telefono}" value="" maxlength="9" placeholder="Ingresa el teléfono">
-                    </div>
-                    <div class="">
-                        <label class="">Usuario:</label>
-                        <input type="email" class="" name="username" id="txtUsername" th:field="*{username}" value="" placeholder="Ingresa el usuario">
-                    </div>
-                    <div class="">
-                        <label class="" id="lpassword">Contraseña:</label>
-                        <input type="password" class="" name="password" id="txtPassword" th:field="*{password}" value="" placeholder="Ingresa la contraseña">
-                    </div>
-                    <div class="">
-                        <label class="" id="lrepeatpassword">Repita la contraseña:</label>
-                        <input type="password" class="" name="txtRepeatPassword" id="txtRepeatPassword" value="" placeholder="Repita la contraseña">
-                    </div>
-                    <div class="">
-                        <label class="">Estado:</label>
-                        <select name="txtEstado" id="txtEstado" th:field="*{estado}">
-                            <option value="1" selected>Activo</option>
-                            <option value="0">Inactivo</option>
-                        </select>
-                    </div>
-                    <button type="button" class="" id="btnGuardarAdminUser" name="opcion" value="">Guardar</button>
                 </form>
             </div>
         </div>

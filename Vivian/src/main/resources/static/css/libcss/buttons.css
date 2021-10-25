@@ -6,7 +6,7 @@
     --black-ghostly: #808080; /* hover */
 }
 
-button {
+button, .btn {
     font-family: 'Assistant' !important;
     padding: 0.5em 1em;
     outline: none;
@@ -21,10 +21,21 @@ button {
     transition-duration: .2s;
 }
 
-button.principal {
+button.principal, .btn.principal {
     border: 1px solid var(--default-pink);
     color: var(--default-white);
     background-color: var(--default-pink);
+}
+
+button.principal[blue] {
+    border: 1px solid var(--default-purple);
+    color: var(--default-white);
+    background-color: var(--default-purple);
+}
+
+button.principal[blue]:hover {
+    border: 1px solid var(--default-blue);
+    background-color: var(--default-blue);
 }
 
 button.principal:hover {
