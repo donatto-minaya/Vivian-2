@@ -7,6 +7,12 @@ Administrative application for Vivian employees
 - Database: MySql
 - Topic: Restaurant
 
+### Implementations
+- Ionicons
+- JQuery
+- Chart.js
+- Aos.js
+
 ## Application images
 
 ### Login
