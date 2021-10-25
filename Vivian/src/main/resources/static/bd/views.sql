@@ -68,6 +68,6 @@ begin
     
     # Mesas
     if thisCodigo = 4 then
-		select * from mesa;
+		select * from mesa where estado = 0;
 	end if;
 end $$

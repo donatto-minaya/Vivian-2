@@ -17,7 +17,7 @@ Delimiter ||
 drop procedure if exists Vivian.mostrarReservas ||
 create procedure mostrarReservas(thisUsuario int)
 begin
-	select r.idReserva, r.idUsuario, r.nMesa, r.piso, r.fechaReservacion, r.idTurno, t.descripcion from Reserva r
+	select r.idReserva, r.idUsuario, r.nMesa, r.piso, r.fechaReservacion, r.idTurno, t.descripcion as descripcion_turno from Reserva r
 	join turno t on t.idTurno = r.idTurno
 	where idUsuario = thisUsuario;
 end ||
@@ -40,9 +40,12 @@ create procedure AgregarReservacion(thisCliente int, thisNumeroMesa int, thisFec
         declare piso2 int;
                
         set piso2 = (select piso from Mesa where nMesa = thisNumeroMesa group by piso);
-    
+        
+		update Mesa set estado = 1 where nMesa = thisNumeroMesa;
+        
 		insert into Reserva(idReserva, idUsuario, nMesa, piso, fechaReservacion, idTurno) 
         values (null, thisCliente, thisNumeroMesa, piso2, thisFecha, thisTurno);
+        
     end ||
 
 

@@ -46,8 +46,8 @@ foreign key(idTipo) references Tipo(idTipo)
 on delete cascade on update cascade;
 
 insert into Usuario(idUsuario, dni, nombresUsuario, apellidosUsuario, email, clave, telefono, fechaRegistro, idTipo, estado) values
-	(1, 12312312, 'Donatto', 'Minaya', 'ottanod22@gmail.com', aes_encrypt('donatto22', 'rumble'), 913242570, '2021-04-01', 3,default),
-    (2, 93766295, 'Gerson', 'Murguia', 'gerson@gmail.com', aes_encrypt('murguiaGerson', 'rumble'), 926537582, '2021-04-02', 3,default),
+	(1, 12312312, 'Donatto', 'Minaya', 'ottanod22@gmail.com', aes_encrypt('donatto22', 'rumble'), 913242570, '2021-04-01', default,default),
+    (2, 93766295, 'Gerson', 'Murguia', 'gerson@gmail.com', aes_encrypt('murguiaGerson', 'rumble'), 926537582, '2021-04-02', default,default),
 	(3, 12345678, 'Miriam', 'Lorem', 'miriam123@gmail.com', aes_encrypt('miriamL12345', 'rumble'), 987654321, '2021-05-10', default,default),
     (4, 23456789, 'Lidia', 'Ramirez', 'lidia_ram@gmail.com', aes_encrypt('lidia25', 'rumble'), 912345678, '2021-05-13', default,default),
     (5, 96817492, 'Juan', 'Escobar', 'e_juan@gmail.com', aes_encrypt('JuanEscobar', 'rumble'), 927811323, '2021-04-10', default,default)
