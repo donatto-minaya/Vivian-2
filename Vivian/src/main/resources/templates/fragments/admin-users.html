@@ -1,5 +1,4 @@
 <div th:fragment="adminusers">
-    <link rel="stylesheet" th:href="@{/css/libcss/own-modal.css}" href="../static/css/libcss/own-modal.css">
     <div id="fake-container-body">
         <br>
         <h1>Mantenimiento Usuarios Administrador</h1>
@@ -8,7 +7,7 @@
         <!-- MODAL -->
         <div class="modal-container modal-disable-close">
             <div class="modal-window-w3">
-                <a href="#" class="btn-close-modal btn principal" blue>
+                <a href="#" class="btn-close-modal">
                     <ion-icon name="close"></ion-icon>
                 </a>
                 
@@ -74,19 +73,19 @@
                 </form>
             </div>
         </div>
-        <div id="table-admins">
+        <div id="table-admins" class="table-crud">
             <table class="table" id="tAdminUsuario">
                 <thead>
                 <tr>
-                    <th class="text-center">ID</th>
-                    <th class="text-center">DNI</th>
-                    <th class="text-center">Nombres</th>
-                    <th class="text-center">Apellidos</th>
-                    <th class="text-center">Usuario</th>
-                    <th class="text-center">Telefono</th>
-                    <th class="text-center">Fecha Registro</th>
-                    <th class="text-center">Estado</th>
-                    <th class="text-center">Acciones</th>
+                    <th>ID</th>
+                    <th>DNI</th>
+                    <th>Nombres</th>
+                    <th>Apellidos</th>
+                    <th>Usuario</th>
+                    <th>Telefono</th>
+                    <th>Fecha Registro</th>
+                    <th>Estado</th>
+                    <th>Acciones</th>
                 </tr>
                 </thead>
                 <tbody>

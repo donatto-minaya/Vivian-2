@@ -6,7 +6,7 @@
     --black-ghostly: #808080; /* hover */
 }
 
-button, .btn {
+button {
     font-family: 'Assistant' !important;
     padding: 0.5em 1em;
     outline: none;

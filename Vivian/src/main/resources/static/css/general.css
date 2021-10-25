@@ -4,6 +4,8 @@
 @import url(libcss/headers-markdown-github.css);
 @import url(libcss/div-cards.css);
 @import url(libcss/swal.css);
+@import url(libcss/own-modal.css);
+@import url(libcss/tables-crud.css);
 
 /* Fonts used */
 @import url('https://fonts.googleapis.com/css2?family=Catamaran:wght@100&display=swap'); /* Catamaran -> Para titulos */
