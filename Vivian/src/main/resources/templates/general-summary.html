@@ -34,15 +34,15 @@
 			<div th:block th:if="${verFragmento == 2}">
 				<div th:insert="fragments/customer-users :: customerusers" />
 			</div>
-
+			<div th:block th:if="${verFragmento == 3}">
+				<div th:insert="fragments/reservas :: reservas" />
+			</div>
 			<div th:block th:if="${verFragmento == 4}">
 				<div th:insert="fragments/turno :: turnos" />
 			</div>
-
 			<div th:block th:if="${verFragmento == 5}">
 				<div th:insert="fragments/categories-product :: categoriesproduct" />
 			</div>
-
 
 		</div>
 	</div>
@@ -56,6 +56,7 @@
 		src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
 	<!--Toastr JS-->
 	<script th:src="@{/js/toastr.js}"></script>
-
+	<!--Ion Icons-->
+	<script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
 </body>
 </html>

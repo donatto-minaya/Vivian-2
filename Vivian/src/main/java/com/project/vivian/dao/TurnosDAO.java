@@ -12,7 +12,7 @@ public interface TurnosDAO extends JpaRepository<Turno, Integer> {
 	    @Query(value = "{call AgregarTurno(:id, :descripcion, :horario, @val)}", nativeQuery = true)
 	    public Integer saveTurno(@Param("id") String id, @Param("descripcion") String descripcion, @Param("horario") String horario);
 	    
-	    @Query(value = "{call ObtenerUltimoId(@val)}", nativeQuery = true)
+	    @Query(value = "{call ObtenerUltimoIdTurno(@val)}", nativeQuery = true)
 	    public String obtenerUltimoId();
 	    
 	    @Query(value = "{call EliminarTurnoPorId(:id, @val)}", nativeQuery = true)

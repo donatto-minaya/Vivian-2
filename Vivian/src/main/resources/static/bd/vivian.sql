@@ -116,15 +116,15 @@ alter table Mesa add constraint pk_mesa primary key(nMesa);
 alter table Mesa modify column `nMesa` int not null auto_increment;
 
 insert into Mesa(nMesa, piso, capacidadPersonas, estado) values
-	(1, 1, 5, 0),
-    (2, 1, 5, 0),
-    (3, 1, 4, 0),
-	(4, 1, 2, 0),
-    (5, 1, 6, 0),
-    (6, 2, 2, 0),
-    (7, 2, 5, 0),
-    (8, 2, 3, 0),
-    (9, 2, 3, 0)
+	(1, 1, 5, 1),
+    (2, 1, 5, 1),
+    (3, 1, 4, 1),
+	(4, 1, 2, 1),
+    (5, 1, 6, 1),
+    (6, 2, 2, 1),
+    (7, 2, 5, 1),
+    (8, 2, 3, 1),
+    (9, 2, 3, 1)
 ;
 
 -- -----------------------------------------------------

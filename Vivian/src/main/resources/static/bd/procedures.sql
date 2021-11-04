@@ -308,5 +308,89 @@ begin
     set valido = 1;
     select valido;
 end %
+-- -----------------------------------------------------
+## Procedimientos de Reserva
+-- -----------------------------------------------------
+
+Delimiter ||
+drop procedure if exists Vivian.listarMesasActivas ||
+create procedure listarMesasActivas()
+	begin
+		select * from Mesa  where estado = 1;
+    end ||
+
+
+-- -----------------------------------------------------
+## Procedimientos de Categoria
+-- -----------------------------------------------------
+
+Delimiter %
+drop procedure if exists Vivian.ModificarCategoria %
+create procedure ModificarCategoria
+	(thisId integer,descripcion varchar(45), out valido int)
+begin
+	update vivian.categoria
+		set descripcionCategoria = descripcion
+    where idCategoria= thisId;
+    set valido = 1;
+    select valido;
+end %
+
+
+Delimiter %
+drop procedure if exists Vivian.ModificarCategoria %
+create procedure ModificarCategoria
+	(thisId integer,descripcion varchar(45), out valido int)
+begin
+	update vivian.categoria
+		set descripcionCategoria = descripcion
+    where idCategoria= thisId;
+    set valido = 1;
+    select valido;
+end %
+
+
+Delimiter /
+drop procedure if exists Vivian.EliminarCategoria /
+create procedure EliminarCategoria(thisCodigo int, out valido int)
+begin
+	delete from  vivian.categoria
+    where idCategoria = thisCodigo;
+    set valido=1;
+    select valido;
+end /
+
+
+-- -----------------------------------------------------
+## Procedimientos de Turno
+-- -----------------------------------------------------
+
+Delimiter /
+drop procedure if exists Vivian.AgregarTurno /
+create procedure AgregarTurno(thisCodigo varchar(30),descripcion varchar(35), horario varchar(35),out valido int)
+begin
+	INSERT INTO Turno (idTurno,descripcion,horario) VALUES (thisCodigo,descripcion,horario);
+    SET valido = 1;
+    SELECT valido;
+END;
+
+Delimiter /
+drop procedure if exists Vivian.ObtenerUltimoIdTurno /
+create procedure ObtenerUltimoIdTurno(out id varchar(30))
+begin
+    SET id = (SELECT  idTurno+1 FROM Turno order by idTurno DESC LIMIT 1);
+    SELECT id;
+END;
+
+
+Delimiter /
+drop procedure if exists Vivian.EliminarTurnoPorId /
+create procedure EliminarTurnoPorId(id int, out valido int)
+begin
+    DELETE FROM turno WHERE idTurno=id;
+    set valido =1;
+    SELECT valido;
+END;
+
 
 
