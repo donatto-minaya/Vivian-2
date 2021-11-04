@@ -14,21 +14,21 @@ public class Categoria {
     private String descripcionCategoria;
 
     @Column(name = "estado", nullable = false)
-    private Integer estado;
+    private boolean estado;//posible error
 
     public String estadoString(){
-        if (estado == 1){
-            return "Habilitado";
+        if (estado){
+            return "Activo";
         }else{
-            return "Deshabilitado";
+            return "Inactivo";
         }
     }
 
-    public Integer getEstado() {
+    public boolean getEstado() {
         return estado;
     }
 
-    public void setEstado(Integer estado) {
+    public void setEstado(boolean estado) {
         this.estado = estado;
     }
 

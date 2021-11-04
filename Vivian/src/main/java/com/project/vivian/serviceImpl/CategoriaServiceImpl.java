@@ -22,4 +22,31 @@ public class CategoriaServiceImpl implements CategoriaService {
             throw new Exception(ex.getMessage());
         }
     }
+
+	@Override
+	public Categoria actualizarCategoria(Categoria categoria) throws Exception {
+		try {
+            return categoriaDAO.save(categoria);
+        }catch (Exception ex){
+            throw new Exception(ex.getMessage());
+        }
+	}
+
+	@Override
+	public int eliminarCategoria(int id) throws Exception {
+		try {
+            return categoriaDAO.deleteWithId(id);
+        }catch (Exception ex){
+            throw new Exception(ex.getMessage());
+        }
+	}
+
+	@Override
+	public Categoria agregarCategoria(Categoria categoria) throws Exception {
+		try {
+            return categoriaDAO.save(categoria);
+        }catch (Exception ex){
+            throw new Exception(ex.getMessage());
+        }
+	}
 }
