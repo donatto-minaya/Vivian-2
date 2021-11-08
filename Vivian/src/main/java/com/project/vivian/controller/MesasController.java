@@ -26,7 +26,7 @@ public class MesasController {
 	@Autowired
 	private MesaService mesaService;
 
-	private int codigo = 6;
+	private int codigo = 5;
 
 	@GetMapping("")
 	public String listar(Model model) throws Exception {
@@ -45,8 +45,8 @@ public class MesasController {
 		try {
 			Mesa mesa = new ObjectMapper().readValue(json, Mesa.class);
 			mesaService.crearMesa(mesa);
-			confirmacion.setEstado(1);
-			confirmacion.setMensaje("Se guardo correctamente");
+			confirmacion.setEstado(ResponseEstado.OK);
+			confirmacion.setMensaje("Mesa ingresada correctamente.");
 
 			return ResponseEntity.accepted().body(confirmacion);
 		} catch (Exception ex) {
@@ -64,8 +64,8 @@ public class MesasController {
 			Mesa mesa = new ObjectMapper().readValue(json, Mesa.class);
 
 			mesaService.actualizarMesa(mesa);
-			confirmacion.setEstado(1);
-			confirmacion.setMensaje("Actualizado correctamente");
+			confirmacion.setEstado(ResponseEstado.OK);
+			confirmacion.setMensaje("Mesa actualizada correctamente.");
 
 			return ResponseEntity.accepted().body(confirmacion);
 		} catch (Exception ex) {
@@ -84,7 +84,7 @@ public class MesasController {
 		try {
 			if (mesaService.eliminarPorId(mesa)) {
 				confirmacion.setEstado(ResponseEstado.OK);
-				confirmacion.setMensaje("Usuario eliminado correctamente.");
+				confirmacion.setMensaje("Mesa eliminada correctamente.");
 			} else {
 				confirmacion.setEstado(ResponseEstado.ERROR_NEGOCIO);
 				confirmacion.setMensaje("Error al eliminar la mesa.");

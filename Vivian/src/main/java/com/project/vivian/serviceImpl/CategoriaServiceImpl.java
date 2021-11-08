@@ -41,7 +41,16 @@ public class CategoriaServiceImpl implements CategoriaService {
         }
 	}
 
-	@Override
+    @Override
+    public List<Categoria> obtenerCategoriasActivas() throws Exception {
+        try {
+            return categoriaDAO.getAllActive();
+        }catch (Exception ex){
+            throw new Exception(ex.getMessage());
+        }
+    }
+
+    @Override
 	public Categoria agregarCategoria(Categoria categoria) throws Exception {
 		try {
             return categoriaDAO.save(categoria);

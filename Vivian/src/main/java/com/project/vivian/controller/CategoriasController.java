@@ -25,7 +25,7 @@ public class CategoriasController {
 	@Autowired
 	private CategoriaService categoriaService;
 
-	private int codigo = 5;
+	private int codigo = 6;
 
 	@GetMapping("")
 	public String listar(Model model) throws Exception {
@@ -62,7 +62,7 @@ public class CategoriasController {
 			categoriaService.actualizarCategoria(categoria);
 
 			confirmacion.setEstado(ResponseEstado.OK);
-			confirmacion.setMensaje("Categoria actualizada " + categoria.getDescripcionCategoria());
+			confirmacion.setMensaje("Categoria actualizada correctamente" );
 
 			return ResponseEntity.accepted().body(confirmacion);
 		} catch (Exception ex) {

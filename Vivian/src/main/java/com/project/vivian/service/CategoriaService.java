@@ -11,5 +11,6 @@ public interface CategoriaService {
     public List<Categoria> obtenerCategorias() throws Exception;
     public Categoria actualizarCategoria(Categoria categoria) throws Exception;
     public int eliminarCategoria(int id) throws Exception;
+    public List<Categoria> obtenerCategoriasActivas() throws Exception;
     
 }

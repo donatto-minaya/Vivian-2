@@ -38,15 +38,17 @@
 				<div th:insert="fragments/reservas :: reservas" />
 			</div>
 			<div th:block th:if="${verFragmento == 4}">
-				<div th:insert="fragments/turno :: turnos" />
+				<div th:insert="fragments/producto :: producto" />
 			</div>
 			<div th:block th:if="${verFragmento == 5}">
-				<div th:insert="fragments/categories-product :: categoriesproduct" />
-			</div>
-			<div th:block th:if="${verFragmento == 6}">
 				<div th:insert="fragments/mesas :: mesas" />
 			</div>
-
+			<div th:block th:if="${verFragmento == 6}">
+				<div th:insert="fragments/categories-product :: categoriesproduct" />
+			</div>
+			<div th:block th:if="${verFragmento == 7}">
+				<div th:insert="fragments/turno :: turnos" />
+			</div>
 		</div>
 	</div>
 	<!-- Swal -->

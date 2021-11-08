@@ -26,7 +26,7 @@ public class TurnosController {
 	@Autowired
 	private UsuarioService usuarioService;
 
-	private int codigo = 4;
+	private int codigo = 7;
 
 	public void obtenerDatosUsuario(Model model) throws Exception {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();

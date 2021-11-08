@@ -217,12 +217,13 @@ insert into Moneda(moneda, descripcion) values
 -- -----------------------------------------------------
 create table if not exists Producto (
 	idProducto int not null,
-    moneda varchar(30) not null, -- Moneda
+    moneda varchar(30), -- Moneda
     nombreProducto varchar(40) not null, 
     precio double not null,
     idCategoria int not null, -- categoria
     stock int null,
-    reparto int not null
+    reparto int not null,
+    estado int
 ) engine = InnoDB default charset = utf8mb4;
 
 -- pk_producto
@@ -239,7 +240,7 @@ alter table Producto add constraint fk_moneda
 foreign key(moneda) references Moneda(moneda)
 on delete cascade on update cascade;
 
-insert into Producto(idProducto, moneda, nombreProducto, precio, idCategoria, stock, reparto) values 
+insert into Producto(idProducto, moneda, nombreProducto, precio, idCategoria, stock, reparto, estado) values 
 /*
 	(1, 'Especial')
     (2, 'Bebida')
@@ -249,24 +250,24 @@ insert into Producto(idProducto, moneda, nombreProducto, precio, idCategoria, st
     (7, 'Sandwich')
     (8, 'Normal')
 */
-	(1, 'Euro' ,'Serendipity Sundae', 25000, 1, 2, 1),
-    (2, 'Soles', 'Pollo a la Brasa', 62, 1, 13, 4),
-    (3, 'Euro', 'Zillion Dollar Frittata', 1000, 1, 5, 2),
-    (4, 'Yen', 'Ramen', 655, 7, 10, 1),
-    (5, 'Soles', 'Ceviche', 9, 7, 20, 5),
-    (6, 'Euro', 'Sandía negra Denzuke', 5600, 1, 1, 1),
-    (7, 'Soles', 'Ensalada Popeye', 20, 4, 20, 2),
-    (8, 'Soles', 'Hamburguesa Royal Chesse', 12, 7, 15, 1),
-    (9, 'Dolar', 'Cerveza 7 Vidas', 2, 2, 34, 1),
-    (10, 'Soles', 'Spagethi Carbonara', 45, 7, 7, 1),
-    (11, 'Euro', 'Cocktel 27', 3200, 1, 3, 5),
-    (12, 'Dolar', 'Sopa de Soja', 10, 7, 12, 1),
-    (13, 'Soles', 'Pollo Tandoori', 27, 7, 4, 1),
-    (14, 'Dolar', 'Azafrán', 2700, 1, 3, 1),
-    (15, 'Euro', 'Kellab de Resaca', 1200, 1, 6, 1),
-    (16, 'Soles', 'Langosgta al Ajillo', 129, 1, 3, 1),
-    (17, 'Soles', 'Enchilada', 15, 7, 13, 1),
-    (18, 'Dolar', 'Whisky Macallan 750ml', 230, 2, 7, 5)
+	(1, 'Euro' ,'Serendipity Sundae', 25000, 1, 2, 1, 1),
+    (2, 'Soles', 'Pollo a la Brasa', 62, 1, 13, 4, 1),
+    (3, 'Euro', 'Zillion Dollar Frittata', 1000, 1, 5, 2, 1),
+    (4, 'Yen', 'Ramen', 655, 7, 10, 1, 1),
+    (5, 'Soles', 'Ceviche', 9, 7, 20, 5, 1),
+    (6, 'Euro', 'Sandía negra Denzuke', 5600, 1, 1, 1, 1),
+    (7, 'Soles', 'Ensalada Popeye', 20, 4, 20, 2, 1),
+    (8, 'Soles', 'Hamburguesa Royal Chesse', 12, 7, 15, 1, 1),
+    (9, 'Dolar', 'Cerveza 7 Vidas', 2, 2, 34, 1, 1),
+    (10, 'Soles', 'Spagethi Carbonara', 45, 7, 7, 1, 1),
+    (11, 'Euro', 'Cocktel 27', 3200, 1, 3, 5, 1),
+    (12, 'Dolar', 'Sopa de Soja', 10, 7, 12, 1, 1),
+    (13, 'Soles', 'Pollo Tandoori', 27, 7, 4, 1, 1),
+    (14, 'Dolar', 'Azafrán', 2700, 1, 3, 1, 1),
+    (15, 'Euro', 'Kellab de Resaca', 1200, 1, 6, 1, 1),
+    (16, 'Soles', 'Langosgta al Ajillo', 129, 1, 3, 1, 1),
+    (17, 'Soles', 'Enchilada', 15, 7, 13, 1, 1),
+    (18, 'Dolar', 'Whisky Macallan 750ml', 230, 2, 7, 5, 1)
 ;
 
 -- -----------------------------------------------------

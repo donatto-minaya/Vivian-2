@@ -18,9 +18,39 @@
     z-index: 1;
 }
 
+.modal-window-w2 {
+    background-color: var(--default-white);
+    width: 20%;
+    margin: 5em auto;
+    padding: 2em;
+    position: relative;
+    padding-top: 3em;
+    border-radius: 12px;
+}
+
 .modal-window-w3 {
     background-color: var(--default-white);
     width: 500px;
+    margin: 5em auto;
+    padding: 2em;
+    position: relative;
+    padding-top: 3em;
+    border-radius: 12px;
+}
+
+.modal-window-w5 {
+    background-color: var(--default-white);
+    width: 50%;
+    margin: 5em auto;
+    padding: 2em;
+    position: relative;
+    padding-top: 3em;
+    border-radius: 12px;
+}
+
+.modal-window-w7 {
+    background-color: var(--default-white);
+    width: 70%;
     margin: 5em auto;
     padding: 2em;
     position: relative;
