@@ -318,6 +318,21 @@ create procedure listarMesasActivas()
 	begin
 		select * from Mesa  where estado = 1;
     end ||
+    
+Delimiter ||
+drop procedure if exists Vivian.ExisteCruceReserva ||
+create procedure ExisteCruceReserva(inFechaReservacion date, inTurno varchar(20), inNMesa int, out existe boolean)
+	begin
+		DECLARE contador int;
+		SET contador = (SELECT COUNT(idReserva) FROM vivian.reserva WHERE nMesa = inNMesa AND fechaReservacion=inFechaReservacion AND idTurno=inTurno);
+        IF contador>0 THEN
+				SET existe= true;
+				SELECT 1;
+        ELSE
+				SET existe= false;
+				SELECT 0;
+		END IF;
+    end ||
 
 
 -- -----------------------------------------------------

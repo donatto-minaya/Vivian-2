@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.project.vivian.entidad.Mesa;
 import com.project.vivian.entidad.Reserva;
 import com.project.vivian.entidad.Usuario;
+import com.project.vivian.entidad.UsuarioSpring;
 import com.project.vivian.entidad.general.Confirmacion;
 import com.project.vivian.service.MesaService;
 import com.project.vivian.service.ReservacionesService;
@@ -26,7 +27,7 @@ public class ReservasController {
 
 	@Autowired
 	private ReservacionesService reservacionesService;
-	
+
 	@Autowired
 	private MesaService mesaService;
 
@@ -47,7 +48,7 @@ public class ReservasController {
 
 		List<Reserva> reservas = reservacionesService.obtenerReservaciones();
 		List<Mesa> mesas = mesaService.listarMesasActivas();
-		
+
 		model.addAttribute("reserva", new Reserva());
 		model.addAttribute("mesas", mesas);
 		model.addAttribute("reservas", reservas);
@@ -59,12 +60,26 @@ public class ReservasController {
 	public ResponseEntity<Confirmacion> insertarReserva(@RequestParam String json) throws Exception {
 		Confirmacion confirmacion = new Confirmacion();
 		try {
+
 			Reserva reserva = new ObjectMapper().readValue(json, Reserva.class);
-			String dni = reserva.getUsuario().getDni();
-			reserva.setUsuario(usuarioService.obtenerPorDni(dni).get());
-			reservacionesService.crearReserva(reserva);
-			confirmacion.setEstado(1);
-			confirmacion.setMensaje("Se guardo correctamente");
+			Optional<Usuario> usuarioPorDni = usuarioService.obtenerPorDni(reserva.getUsuario().getDni());
+
+			if (!usuarioPorDni.isEmpty()) {
+
+				if (!reservacionesService.existeCruceReserva(reserva)) {
+					String dni = reserva.getUsuario().getDni();
+					reserva.setUsuario(usuarioPorDni.get());
+					reservacionesService.crearReserva(reserva);
+					confirmacion.setEstado(1);
+					confirmacion.setMensaje("Se guardo correctamente.");
+				} else {
+					confirmacion.setEstado(0);
+					confirmacion.setMensaje("Ya existe una reserva.");
+				}
+			} else {
+				confirmacion.setEstado(0);
+				confirmacion.setMensaje("El usuario con dicho DNI no existe.");
+			}
 
 			return ResponseEntity.accepted().body(confirmacion);
 		} catch (Exception ex) {
@@ -79,13 +94,26 @@ public class ReservasController {
 	public ResponseEntity<Confirmacion> updateReserva(String json) throws Exception {
 		Confirmacion confirmacion = new Confirmacion();
 		try {
-			Reserva reserva = new ObjectMapper().readValue(json, Reserva.class);
-			String dni = reserva.getUsuario().getDni();
-			reserva.setUsuario(usuarioService.obtenerPorDni(dni).get());
 
-			reservacionesService.actualizarReserva(reserva);
-			confirmacion.setEstado(1);
-			confirmacion.setMensaje("Actualizado correctamente");
+			Reserva reserva = new ObjectMapper().readValue(json, Reserva.class);
+			Optional<Usuario> usuarioPorDni = usuarioService.obtenerPorDni(reserva.getUsuario().getDni());
+
+			if (!usuarioPorDni.isEmpty()) {
+
+				if (!reservacionesService.existeCruceReserva(reserva)) {
+					String dni = reserva.getUsuario().getDni();
+					reserva.setUsuario(usuarioPorDni.get());
+					reservacionesService.actualizarReserva(reserva);
+					confirmacion.setEstado(1);
+					confirmacion.setMensaje("Actualizado correctamente");
+				} else {
+					confirmacion.setEstado(0);
+					confirmacion.setMensaje("Ya existe una reserva.");
+				}
+			} else {
+				confirmacion.setEstado(0);
+				confirmacion.setMensaje("El usuario con dicho DNI no existe.");
+			}
 
 			return ResponseEntity.accepted().body(confirmacion);
 		} catch (Exception ex) {

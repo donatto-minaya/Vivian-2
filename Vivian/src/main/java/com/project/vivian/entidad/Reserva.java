@@ -5,32 +5,34 @@ import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
+import java.util.Calendar;
 import java.util.Date;
+
 //wdwdwdwdwdwdwdw
 @Table(name = "Reserva")
 @Entity
 public class Reserva {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "idReserva", nullable = false)
-    private Integer idReserva;
-    
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "idUsuario")
-    private Usuario usuario;
-    
-    @Column(name = "nMesa", nullable = false)
-    private Integer nMesa;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "idReserva", nullable = false)
+	private Integer idReserva;
 
-    @Column(name = "piso", nullable = false, length = 1)
-    private char piso;
+	@ManyToOne(optional = false)
+	@JoinColumn(name = "idUsuario")
+	private Usuario usuario;
 
-    @Column(name = "fechaReservacion")
-    private Date fechaReservacion;
+	@Column(name = "nMesa", nullable = false)
+	private Integer nMesa;
 
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "idTurno")
-    private Turno turno;
+	@Column(name = "piso", nullable = false, length = 1)
+	private char piso;
+
+	@Column(name = "fechaReservacion")
+	private Date fechaReservacion;
+
+	@ManyToOne(optional = false)
+	@JoinColumn(name = "idTurno")
+	private Turno turno;
 
 	public Integer getIdReserva() {
 		return idReserva;
@@ -69,6 +71,12 @@ public class Reserva {
 	}
 
 	public void setFechaReservacion(Date fechaReservacion) {
+System.out.println(">>FECHA : > " +fechaReservacion.toString());
+		Calendar c = Calendar.getInstance(); 
+		c.setTime(fechaReservacion); 
+		c.add(Calendar.DATE, 1);
+		fechaReservacion = c.getTime();
+System.out.println(">>FECHA +1: > " +fechaReservacion.toString());		
 		this.fechaReservacion = fechaReservacion;
 	}
 
@@ -79,31 +87,30 @@ public class Reserva {
 	public void setTurno(Turno idTurno) {
 		this.turno = idTurno;
 	}
-    
-    public String fechaString(){
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy").withZone(ZoneOffset.UTC);
-        return dtf.format(fechaReservacion.toInstant());
-    }
-    
-    public String obtenerPiso(){
-    	String descripcion="";
-    	switch (piso) {
-		case '0':descripcion="1er Piso";
+
+	public String fechaString() {
+		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy").withZone(ZoneOffset.UTC);
+		return dtf.format(fechaReservacion.toInstant());
+	}
+
+	public String obtenerPiso() {
+		String descripcion = "";
+		switch (piso) {
+		case '1':
+			descripcion = "1er Piso";
 			break;
-		case '1':descripcion="2do Piso";
-		break;
-		case '2':descripcion="3er Piso";
-		break;
+		case '2':
+			descripcion = "2do Piso";
+			break;
 		default:
 			break;
 		}
-        return descripcion;
-    }
+		return descripcion;
+	}
 
+	public Reserva() {
+		usuario = new Usuario();
+		turno = new Turno();
 
-    public Reserva() {
-    	usuario=new Usuario();
-    	turno=new Turno();
-    	
-    }
+	}
 }

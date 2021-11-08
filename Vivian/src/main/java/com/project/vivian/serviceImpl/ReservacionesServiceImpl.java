@@ -8,6 +8,7 @@ import com.project.vivian.service.ReservacionesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -72,6 +73,18 @@ public class ReservacionesServiceImpl implements ReservacionesService {
 			return false;
 		}
 
+	}
+
+	@Override
+	public boolean existeCruceReserva(Reserva reserva) throws Exception {
+		boolean existeCruce=false;
+		try {
+			System.out.println(">>> "+ reserva.getFechaReservacion() + "  "+ reserva.getTurno().getId() + "   " + reserva.getnMesa());
+			existeCruce=reservacionesDAO.ExisteCruceReserva(reserva.getFechaReservacion(), reserva.getTurno().getId(), reserva.getnMesa());
+			return existeCruce;
+		}catch (Exception e) {
+			return false;
+		}
 	}
 
 }
