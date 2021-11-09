@@ -36,6 +36,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/customerusers").authenticated()
                 .antMatchers("/turno").authenticated()
                 .antMatchers("/categoria").authenticated()
+                .antMatchers("/pedido/**").authenticated()
+                .antMatchers("/producto").authenticated()
                 .antMatchers("/mesas").authenticated()
                 .antMatchers("/reserva").authenticated()
                 .antMatchers("/recuperation").permitAll()

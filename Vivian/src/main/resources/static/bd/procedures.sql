@@ -409,3 +409,25 @@ END;
 
 
 
+-- -----------------------------------------------------
+## Procedimientos para Pedido
+-- -----------------------------------------------------
+Delimiter /
+drop procedure if exists Vivian.AgregarPagoSpring /
+create procedure AgregarPagoSpring(thisMonto varchar(45),out lastId int)
+begin
+	INSERT INTO Pago(monto) VALUES (thisMonto);
+    SET lastId = last_insert_id();
+    SELECT lastId;
+END;
+
+
+Delimiter /
+drop procedure if exists Vivian.VerDetallePedido /
+create procedure VerDetallePedido(thisId int)
+begin
+	select *  from detalles_pedido where idPedido = thisId;
+END; /
+
+
+

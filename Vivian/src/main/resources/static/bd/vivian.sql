@@ -193,7 +193,7 @@ CREATE TABLE `pago` (
   `idPago` int NOT NULL AUTO_INCREMENT,
   `monto` varchar(40) NOT NULL,
   PRIMARY KEY (`idPago`)
-) ENGINE=InnoDB AUTO_INCREMENT=1010 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- -----------------------------------------------------
 ## Tabla Moneda

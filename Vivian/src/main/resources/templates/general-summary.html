@@ -49,6 +49,12 @@
 			<div th:block th:if="${verFragmento == 7}">
 				<div th:insert="fragments/turno :: turnos" />
 			</div>
+			<div th:block th:if="${verFragmento == 8}">
+				<div th:insert="fragments/pedido :: pedido" />
+			</div>
+			<div th:block th:if="${verFragmento == 9}">
+				<div th:insert="fragments/detalles-pedido :: detalles-pedido" />
+			</div>
 		</div>
 	</div>
 	<!-- Swal -->
