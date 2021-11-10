@@ -26,7 +26,7 @@ body {
     width: 100%;
 }
 
-#fake-combo {
+.fake-combo {
     margin-inline-start: 2em;
     padding-left: 1em;
     box-shadow: -2px 0 0;

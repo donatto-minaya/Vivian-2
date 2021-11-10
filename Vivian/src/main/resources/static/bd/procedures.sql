@@ -431,3 +431,54 @@ END; /
 
 
 
+-- -----------------------------------------------------
+## Procedimientos para Reportes Productos
+-- -----------------------------------------------------
+Delimiter /
+drop procedure if exists Vivian.ReporteCantidadProductosVendidosPorMeses /
+create procedure ReporteCantidadProductosVendidosPorMeses()
+begin
+	select sum(dp.cantidad)
+	from Pedido pe join detalles_pedido dp on pe.idPedido = dp.idPedido
+	join Producto pro on pro.idProducto = dp.idProducto
+	group by month(pe.fechaCompra)
+	order by month(pe.fechaCompra);
+END; /
+
+Delimiter /
+drop procedure if exists Vivian.ReporteTopProductosIngresos /
+create procedure ReporteTopProductosIngresos()
+begin
+	select pro.nombreProducto, sum(dp.precioTotal)
+from Pedido pe join detalles_pedido dp on pe.idPedido = dp.idPedido
+join Producto pro on pro.idProducto = dp.idProducto
+group by pro.idProducto
+order by sum(dp.precioTotal) desc
+limit 5;
+END; /
+
+Delimiter /
+drop procedure if exists Vivian.ReporteTopProductosVendidosPorMes /
+create procedure ReporteTopProductosVendidosPorMes(thisMes int)
+begin
+	select pro.nombreProducto, sum(dp.cantidad)
+	from Pedido pe join detalles_pedido dp on pe.idPedido = dp.idPedido
+	join Producto pro on pro.idProducto = dp.idProducto
+	where month(pe.fechaCompra) = thisMes
+	group by pro.idProducto
+	order by sum(dp.cantidad) desc;
+END; /
+
+
+Delimiter /
+drop procedure if exists Vivian.ReporteTopCategoriasVendidasPorMes /
+create procedure ReporteTopCategoriasVendidasPorMes(thisMes int)
+begin
+	select ca.descripcionCategoria, sum(dp.cantidad)
+	from Pedido pe join detalles_pedido dp on pe.idPedido = dp.idPedido
+	join Producto pro on pro.idProducto = dp.idProducto
+    join Categoria ca on ca.idCategoria = pro.idCategoria
+	where month(pe.fechaCompra) = thisMes
+	group by ca.descripcionCategoria
+	order by sum(dp.cantidad) desc;
+END; /

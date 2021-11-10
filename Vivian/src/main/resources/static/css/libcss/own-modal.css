@@ -162,3 +162,13 @@ form .actions-form {
     color: white;
     background-color: var(--default-blue);
 }
+
+.own-select{
+    outline: none;
+    border-radius: 4px;
+    background-color: var(--default-white);
+    width: 50%;
+    padding: .5em 1em;
+    margin: 1em;
+    border: 1px solid var(--default-shadow-gray);
+}

@@ -25,7 +25,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception{
         String[] resources = new String[]{
-                "/include/**","/css/**","/icons/**","/img/**","/js/**","/layer/**","/css/libcss/**"
+                "/include/**","/css/**","/icons/**","/img/**","/js/**", "/js/reportes/**", "/layer/**","/css/libcss/**"
         };
 
         http
@@ -37,7 +37,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/turno").authenticated()
                 .antMatchers("/categoria").authenticated()
                 .antMatchers("/pedido/**").authenticated()
-                .antMatchers("/producto").authenticated()
+                .antMatchers("/producto/**").authenticated()
                 .antMatchers("/mesas").authenticated()
                 .antMatchers("/reserva").authenticated()
                 .antMatchers("/recuperation").permitAll()

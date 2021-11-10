@@ -22,12 +22,22 @@ $(document).ready(function() {
     });
 
     $('#mantenimientos').click(function (){
-        if ($('#fake-combo').hasClass('active-combo')){
-            $('#fake-combo').removeClass('active-combo');
+        if ($('.fake-combo.mantenimientos').hasClass('active-combo')){
+            $('.fake-combo.mantenimientos').removeClass('active-combo');
         }else{
-            $('#fake-combo').addClass('active-combo');
+            $('.fake-combo.mantenimientos').addClass('active-combo');
         }
 
         document.getElementById(this.id).classList.toggle('link-active');
-      });
+    });
+
+    $('#reportes-detalles').click(function (){
+        if ($('.fake-combo.reportes').hasClass('active-combo')){
+            $('.fake-combo.reportes').removeClass('active-combo');
+        }else{
+            $('.fake-combo.reportes').addClass('active-combo');
+        }
+
+        document.getElementById(this.id).classList.toggle('link-active');
+    });
 });

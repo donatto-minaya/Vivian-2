@@ -7,12 +7,15 @@ import com.project.vivian.entidad.general.Confirmacion;
 import com.project.vivian.service.CategoriaService;
 import com.project.vivian.service.ProductoService;
 import com.project.vivian.service.constants.ResponseEstado;
+import org.dom4j.rule.Mode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 @Controller
@@ -30,6 +33,7 @@ public class ProductoController {
     @GetMapping("")
     public String listar(Model model) throws Exception {
 
+        codigo = 4;
         List<Producto> productos = productoService.obtenerProductos();
         List<Categoria> categorias = categoriaService.obtenerCategoriasActivas();
         model.addAttribute("producto", new Producto());
@@ -93,6 +97,65 @@ public class ProductoController {
             confirmacion.setEstado(ResponseEstado.ERROR_APLICACION);
             confirmacion.setMensaje(ex.getMessage());
             return ResponseEntity.badRequest().body(confirmacion);
+        }
+    }
+
+    @GetMapping("/reportes")
+    public String reportesProducto(Model model){
+        codigo = 10;
+        model.addAttribute("verFragmento",codigo);
+        return "general-summary";
+    }
+
+    @GetMapping("/reportes/cantidad")
+    public ResponseEntity<Object[]> reportesCantidadProducto(Model model) throws Exception {
+
+        Object[] cantidadProductosVendidosPorMesData = new Object[]{};
+        try {
+            cantidadProductosVendidosPorMesData = productoService.reporteCantidadProductosVentidadPorMes();
+            return ResponseEntity.accepted().body(cantidadProductosVendidosPorMesData);
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+            return ResponseEntity.badRequest().body(cantidadProductosVendidosPorMesData);
+        }
+    }
+
+    @GetMapping("/reportes/ingresos")
+    public ResponseEntity<Object[]> reportesTopIngresosProducto(Model model) throws Exception {
+
+        Object[] topIngresosProducto = new Object[]{};
+        try {
+            topIngresosProducto = productoService.reporteProductoConMasIngresos();
+            return ResponseEntity.accepted().body(topIngresosProducto);
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+            return ResponseEntity.badRequest().body(topIngresosProducto);
+        }
+    }
+
+    @GetMapping("/reportes/ingresosxmes")
+    public ResponseEntity<Object[]> reportesTopIngresosProductoPorMes(@RequestParam Integer mes, Model model) throws Exception {
+
+        Object[] topIngresosProductoPorMes = new Object[]{};
+        try {
+            topIngresosProductoPorMes = productoService.reporteProductoConMasIngresosPorMes(mes);
+            return ResponseEntity.accepted().body(topIngresosProductoPorMes);
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+            return ResponseEntity.badRequest().body(topIngresosProductoPorMes);
+        }
+    }
+
+    @GetMapping("/reportes/categoriasxmes")
+    public ResponseEntity<Object[]> reportesTopCategoriasVendidasPorMes(@RequestParam Integer mes, Model model) throws Exception {
+
+        Object[] topCategoriasVendidasPorMes = new Object[]{};
+        try {
+            topCategoriasVendidasPorMes = productoService.reporteCategoriasVendidasPorMes(mes);
+            return ResponseEntity.accepted().body(topCategoriasVendidasPorMes);
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+            return ResponseEntity.badRequest().body(topCategoriasVendidasPorMes);
         }
     }
 
