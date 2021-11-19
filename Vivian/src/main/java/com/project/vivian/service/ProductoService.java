@@ -16,5 +16,6 @@ public interface ProductoService {
     public Object[] reporteProductoConMasIngresos() throws Exception;
     public Object[] reporteProductoConMasIngresosPorMes(Integer mes) throws Exception;
     public Object[] reporteCategoriasVendidasPorMes(Integer mes) throws Exception;
+    public Object[] obtenerDataParaGeneralSummary() throws Exception;
 
 }

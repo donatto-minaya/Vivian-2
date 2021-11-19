@@ -199,10 +199,7 @@ body {
     margin: 1em 0;
 }
 
-.products span {
-    font-weight: bold;
-}
-
 .products p {
     display: inline;
+    font-weight: bold;
 }

@@ -51,3 +51,8 @@ button.ghostly {
 button.ghostly:hover {
     border-color: var(--black-ghostly);
 }
+
+button.gs:hover{
+    background-color: #4674a4 !important;
+    color: white!important;
+}

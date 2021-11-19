@@ -159,4 +159,17 @@ public class ProductoController {
         }
     }
 
+    @GetMapping("/reportes/gs")
+    public ResponseEntity<Object[]> dataParaGeneralSummary(Model model) throws Exception {
+
+        Object[] dataParaGeneralSummary = new Object[]{};
+        try {
+            dataParaGeneralSummary = productoService.obtenerDataParaGeneralSummary();
+            return ResponseEntity.accepted().body(dataParaGeneralSummary);
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+            return ResponseEntity.badRequest().body(dataParaGeneralSummary);
+        }
+    }
+
 }

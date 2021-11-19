@@ -87,4 +87,13 @@ public class ProductoServiceImpl implements ProductoService {
             throw new Exception(ex.getMessage());
         }
     }
+
+    @Override
+    public Object[] obtenerDataParaGeneralSummary() throws Exception {
+        try{
+            return productoDAO.getDataforGeneralSummary();
+        }catch (Exception ex){
+            throw new Exception(ex.getMessage());
+        }
+    }
 }

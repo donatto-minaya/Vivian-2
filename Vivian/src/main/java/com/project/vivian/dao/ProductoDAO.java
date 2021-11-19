@@ -24,4 +24,7 @@ public interface ProductoDAO extends JpaRepository<Producto, Integer> {
     @Query(value = "{call ReporteTopCategoriasVendidasPorMes(:mes)}", nativeQuery = true)
     public Object[] getReportQuantitySoldCategoriesPerMonth(@Param("mes") Integer mes);
 
+    @Query(value = "{call ReportesProductoGeneralSummary()}", nativeQuery = true)
+    public Object[] getDataforGeneralSummary();
+
 }

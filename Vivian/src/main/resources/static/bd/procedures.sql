@@ -482,3 +482,21 @@ begin
 	group by ca.descripcionCategoria
 	order by sum(dp.cantidad) desc;
 END; /
+
+
+Delimiter /
+drop procedure if exists Vivian.ReportesProductoGeneralSummary /
+create procedure ReportesProductoGeneralSummary()
+begin
+	select pro.nombreProducto, pro.precio, sum(dp.precioTotal),
+	(select date_format(ped.fechaCompra,'%d-%m-%Y') from pedido ped 
+	join detalles_pedido dpd on ped.idPedido = dpd.idPedido 
+	join producto prod on prod.idProducto = dpd.idProducto where dpd.idProducto = dp.idProducto
+	order by ped.fechaCompra desc
+	limit 1) as ultima_venta
+	from Pedido pe join detalles_pedido dp on pe.idPedido = dp.idPedido
+	join Producto pro on pro.idProducto = dp.idProducto
+	group by 1
+	order by sum(dp.cantidad) desc
+	limit 2;
+END; /
